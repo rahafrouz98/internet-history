@@ -1,0 +1,40 @@
+﻿"Internet use by province and age group 1 2 3 4"
+"Frequency: Occasional"
+"Table: 22-10-0135-01"
+"Release date: 2023-07-20"
+"Geography: Canada, Province or territory"
+""
+""
+
+"Internet use from any location 3 4","Internet use",,
+"Age group","Total, 15 years and over",,
+"Geography","2018","2020","2022"
+,"Percent",,
+"Canada","91.3","92.3","94.5"
+"Newfoundland and Labrador","86.0","89.8","91.7"
+"Prince Edward Island","88.5","91.3","92.6"
+"Nova Scotia","88.5","90.8","91.9"
+"New Brunswick","89.2","90.7","90.9"
+"Quebec","88.0","87.1","92.2"
+"Ontario","92.2","94.1","95.5"
+"Manitoba","91.2","91.3","92.6"
+"Saskatchewan","89.9","91.4","93.7"
+"Alberta","94.1","95.2","95.2"
+"British Columbia","94.0","94.2","96.9"
+
+Symbol legend:
+A, data quality: excellent
+
+
+
+
+Footnotes:
+1,"The target population is all persons 15 years of age and older living in the ten provinces of Canada. It excludes full-time (residing for more than six months) residents of institutions."
+2,"The Canadian Internet Use Survey was redesigned in 2018 and its findings should not be compared with those from previous surveys. There may be minor changes in the question wording, notes, inclusions and exclusions between iterations. Refer to the questionnaires when making comparisons between cycles."
+3,"The Internet use indicator includes the personal use of Internet during the past three months from any location, it excludes business and school-related use."
+4,"Percentage of Canadians."
+
+
+
+"How to cite: Statistics Canada. Table 22-10-0135-01  Internet use by province and age group"
+https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=2210013501

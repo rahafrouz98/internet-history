@@ -1,0 +1,41 @@
+﻿"Archived - Internet use by age group, household income and geography, inactive 1 2 3 4 5"
+"Frequency: Occasional"
+"Table: 27-10-0015-01 (formerly CANSIM 358-0152)"
+"Release date: 2021-06-22"
+"Geography: Canada, Province or territory, Census metropolitan area, Census metropolitan area part"
+""
+""
+
+"Age group","Total, individuals aged 16 years and over",
+"Household income quartile 6 7","Total, household income quartiles",
+"Location of use 1","Internet use from any location",
+"Geography","2010","2012"
+,"Percent",
+"Canada","80.3","83.4"
+"Newfoundland and Labrador","72.9","76.9"
+"Prince Edward Island","75.2","80.3"
+"Nova Scotia","78.8","79.3"
+"New Brunswick","69.9","77.0"
+"Quebec","75.9","80.7"
+"Ontario","81.2","84.4"
+"Manitoba","78.8","83.2"
+"Saskatchewan","79.7","82.4"
+"Alberta","83.9","85.3"
+"British Columbia","85.9","86.8"
+
+
+
+
+Footnotes:
+1,"Percentage of all individuals aged 16 years old and over who responded to have used the Internet for personal non business use in the past twelve months from any location."
+2,"The Canadian Internet Use Survey was redesigned in 2010 and its findings should not be compared with those from previous surveys."
+3,"The 2010 and 2012 series of Canadian Internet use tables replace the archived series of tables from 2005 to 2009."
+4,"Households are divided into quartiles or four equal groups based on household income, each representing 25% of the income distribution."
+5,"On June 22, 2021 this table was archived and replaced by table 22-10-0135."
+6,"For the 2010 data, the lowest quartile is defined as less than or equal to $30,000, the second quartile is from $30,000 to $50,000, the third quartile is from $50,000 to $87,000 and the highest quartile is $87,000 or higher. In order to obtain equal weighted counts in each category, cases with incomes equal to the category cut-offs were randomly assigned to one of the two categories on either side of the cut-off."
+7,"For the 2012 data, the lowest quartile is defined as less than or equal to $30,000, the second quartile is from $30,000 to $55,000, the third quartile is from $55,000 to $94,000 and the highest quartile is $94,000 or higher. In order to obtain equal weighted counts in each category, cases with incomes equal to the category cut-offs were randomly assigned to one of the two categories on either side of the cut-off."
+
+
+
+"How to cite: Statistics Canada. Table 27-10-0015-01  Internet use by age group, household income and geography, inactive"
+https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=2710001501
