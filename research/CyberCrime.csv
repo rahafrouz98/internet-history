@@ -1,0 +1,64 @@
+﻿"Police-reported cybercrime, by cyber-related violation, number of incidents and year to date total, preliminary quarterly data, Canada and regions 1"
+"Frequency: Annual"
+"Table: 35-10-0153-01"
+"Release date: 2026-01-15"
+"Geography: Canada, Geographical region of Canada"
+""
+""
+
+"Geography","Canada 2",,,,,,,,,,,,,,,
+"Statistics","Quarterly data 3 4 5",,,,,,,,"Year to date data 4 5 6",,,,,,,
+"Calendar quarter","Q1 7 8",,"Q2 7 8",,"Q3 7 8",,"Q4 7 8",,"Q1 7 8",,"Q2 7 8",,"Q3 7 8",,"Q4 7 8",
+"Cyber-related violation","2024","2025","2024","2025","2024","2025","2024","2025","2024","2025","2024","2025","2024","2025","2024","2025"
+,"Number",,,,,,,,,,,,,,,
+"Total, all violations","20,438","19,925","18,827","18,480","18,151","18,128","18,881","..","20,438","19,925","41,162","40,437","62,919","62,485","85,502",".."
+"Invitation to sexual touching","30","48","37","37","24","24","31","..","30","48","72","90","108","135","149",".."
+"Sexual exploitation","5","4","5","10","x","10","4","..","5","4","11","17","15","33","22",".."
+"Luring a child via a computer 9","546","849","666","818","787","738","732","..","546","849","1,241","1,688","2,078","2,474","2,882",".."
+"Voyeurism","54","58","32","53","41","41","34","..","54","58","92","120","149","176","203",".."
+"Non-consensual distribution of intimate images","256","296","247","257","171","229","250","..","256","296","540","592","765","902","1,076",".."
+"Extortion","1,147","1,141","1,118","1,097","1,437","1,132","1,273","..","1,147","1,141","2,398","2,339","4,095","3,729","5,775",".."
+"Criminal harassment","543","661","536","638","567","697","611","..","543","661","1,163","1,384","1,856","2,269","2,689",".."
+"Indecent/Harassing communications","1,230","1,404","1,309","1,420","1,256","1,490","1,407","..","1,230","1,404","2,664","2,946","4,202","4,755","6,016",".."
+"Uttering threats","1,015","1,189","921","1,097","929","1,074","1,143","..","1,015","1,189","2,042","2,402","3,233","3,728","4,676",".."
+"Other violent violations","93","122","66","108","95","87","108","..","93","122","176","250","307","366","433",".."
+"Fraud","9,853","9,469","9,719","9,042","9,128","8,794","9,363","..","9,853","9,469","20,504","19,635","31,589","30,457","42,442",".."
+"Identity theft","174","230","233","221","179","211","247","..","174","230","427","486","655","732","930",".."
+"Identity fraud","973","1,021","904","1,005","769","1,123","884","..","973","1,021","1,966","2,143","2,977","3,512","4,075",".."
+"Mischief","75","74","61","62","64","71","75","..","75","74","142","141","214","228","301",".."
+"Other non-violent violations","66","45","52","43","38","42","66","..","66","45","127","106","178","172","279",".."
+"Fail to comply with order","252","323","251","304","261","300","269","..","252","323","532","665","846","1,017","1,172",".."
+"Indecent acts","9","9","9","3","7","5","6","..","9","9","18","13","25","18","31",".."
+"Child sexual abuse and exploitation material","299","369","164","411","393","312","437","..","299","369","519","844","1,011","1,308","1,617",".."
+"Making or distribution of child sexual abuse and exploitation material 10","3,616","2,377","2,304","1,603","1,771","1,507","1,713","..","3,616","2,377","6,110","4,055","7,937","5,645","9,793",".."
+"Corrupting morals","x","5","x","4","x","6","x","..","x","5","3","10","5","16","6",".."
+"Breach of probation","45","41","41","58","58","54","50","..","45","41","88","108","153","180","215",".."
+"Utter threats to property or animal","35","47","41","55","66","41","63","..","35","47","79","108","151","161","231",".."
+"Offences against the person and reputation (Part VIII Criminal Code)","0","0","0","0","0","0","0","..","0","0","0","0","0","0","0",".."
+"Other Criminal Code","115","129","106","125","92","130","105","..","115","129","238","273","346","436","456",".."
+"Other violations 11","5","14","4","9","14","10","9","..","5","14","10","22","24","36","33",".."
+
+Symbol legend:
+.., not available for a specific reference period
+x, suppressed to meet the confidentiality requirements of the Statistics Act
+
+
+
+
+Footnotes:
+1,"A criminal incident may be comprised of multiple violations of the law. For the analysis of cyber-related violations, one distinct violation within the incident was identified as the 'cybercrime violation'. The cybercrime violation represents the specific criminal violation within an incident in which a computer or the internet was the target of the crime, or the instrument used to commit the crime. For the majority of incidents, the cybercrime violation and the most serious violation were the same."
+2,"Canadian Forces Military Police Group (CF MP Gp) are excluded."
+3,"Preliminary quarterly data represent incidents reported to police between the start and end of each calendar quarter (Q1 – January 1 to March 31; Q2 – April 1 to June 30; Q3 – July 1 to September 30; Q4 – October 1 to December 31)."
+4,"Percentage change values have not been calculated as there may be variations in the number of police services reporting from one period to the next which could result in false comparisons between quarters."
+5,"Selected data at the regional level have been suppressed due to small counts and to protect confidentiality."
+6,"Year to date data are cumulative and represent incidents reported to police between the start of the calendar year (January 1st) and the end of each calendar quarter (for example, ‘Q2- Year-to-Date’ includes incidents reported between January 1st and June 30th)."
+7,"Data coverage for preliminary police-reported data varies monthly. Preliminary data was reported by police services covering between 91% and 99% of the population of Canada. Monthly data may be incomplete due to ongoing police investigations or delays in data entry. Official annual police-reported data are available in July each year. For official published annual statistics on hate crime and cybercrime, see the following online data tables: 35-10-0066, 35-10-0067, 35-10-0191, 35-10-0001, 35-10-0002."
+8,"These are preliminary data and are expected to differ from final official annual results released in the summer each year. They reflect all microdata monthly submissions received from police services prior to the date the data were finalized for release. As a result, some months may be incomplete. Once data for a quarter are released, they are not retroactively updated. Therefore, year-to-date data may not equal the total of the most recently released quarter and the previous quarter’s year-to-date total."
+9,"The category "Luring a child via a computer" also includes the UCR code 1371 "Agreement or Arrangement- sexual offences against a child"."
+10,"Counts for making or distribution of child sexual abuse and exploitation material are affected by the number of cases coming to the attention of Royal Canadian Mounted Police (RCMP) detachments in British Columbia through a partnership with the British Columbia Integrated Child Exploitation Unit (BC ICE Unit) and the National Child Exploitation Crime Centre (NCECC). The counts may vary from quarter to quarter due to the timing of file sharing between the NCECC, BC ICE Unit and RCMP detachments."
+11,""Other violations" consists of non-Criminal code offences, including traffic violations, drug violations, and other federal statute violations."
+
+
+
+"How to cite: Statistics Canada. Table 35-10-0153-01  Police-reported cybercrime, by cyber-related violation, number of incidents and year to date total, preliminary quarterly data, Canada and regions"
+https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=3510015301
