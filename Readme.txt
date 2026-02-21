@@ -3,6 +3,7 @@ for the server setup:
 2-install npm packages
 3-npm init
 4-npm install express 
-
+5-npm install cors
+6-npm install vis-timeline
 
 

@@ -58,7 +58,7 @@ async function getCoordinateForInternetUse(geo, ageGroup)
         }
         //for "Internet use from any location" which is the second member of the coordinate
         else if (dimensionElement["dimensionNameEn"] == "Internet use from any location")
-            dimension += ("1.")
+            dimension += ("1.") //the second dimension of the cube has only one member.
         else if (dimensionElement["dimensionNameEn"] == "Age group")
         {
             for(let memberElement of dimensionElement["member"])
@@ -75,9 +75,117 @@ async function getCoordinateForInternetUse(geo, ageGroup)
     return dimension;
 }
 
+//this function is used to extract the coordinated of the cube PID:35100153(Cyber crime in Canada) based on brovided filters
+async function getCoordinateForCyberCrime(geo, violation, statistic, calendarQuarter)
+{
+    if (!PIDs)
+    {
+        await fetchPIDs()
+    }
+    let PID = PIDs["cyberCrime"]
+    if (!metadata[PID])
+    {
+         await fetchMetadata()
+    }
+    
+    let dimension = ""
 
+    for (let dimensionElement of metadata[PID][0]["object"]["dimension"])
+    {
+        if (dimensionElement["dimensionNameEn"] == "Geography")
+        {
+            for(let memberElement of dimensionElement["member"])
+            {
+                if (memberElement["memberNameEn"] == geo)
+                {
+                    dimension += (memberElement["memberId"] + '.');
+                    break;
+                }
+            }
+        }
+        else if (dimensionElement["dimensionNameEn"] == "Cyber-related violation")
+        {
+            for(let memberElement of dimensionElement["member"])
+            {
+                if (memberElement["memberNameEn"] == violation)
+                {
+                    dimension += memberElement["memberId"] + '.';
+                    break;
+                }
+            }
+        }
+        else if (dimensionElement["dimensionNameEn"] == "Statistics")
+        {
+            for(let memberElement of dimensionElement["member"])
+            {
+                if (memberElement["memberNameEn"] == statistic)
+                {
+                    dimension += memberElement["memberId"] + '.';
+                    break;
+                }
+            }
+        }
+        else if (dimensionElement["dimensionNameEn"] == "Calendar quarter")
+        {
+            for(let memberElement of dimensionElement["member"])
+            {
+                if (memberElement["memberNameEn"] == calendarQuarter)
+                {
+                    dimension += memberElement["memberId"] + '.';
+                    break;
+                }
+            }
+        }
+    }
+    dimension += "0.0.0.0.0.0"
+    return dimension;
+}
 
-export {getCoordinateForInternetUse, PIDs}
+//This function is used to extract the coordinated of the cube PID:21100234(E-commerce sales in Canada) based on brovided filters
+async function getCoordinateForECommerce(geo, industry, salesType)
+{
+    if (!PIDs)
+    {
+        await fetchPIDs()
+    }
+    let PID = PIDs["eCommerce"]
+    if (!metadata[PID])
+    {
+         await fetchMetadata()
+    }
+    
+    let dimension = "1." //the first dimension is geography and e-commerce cube has only one dimension for the geography which is Canada.
+
+    for (let dimensionElement of metadata[PID][0]["object"]["dimension"])
+    {
+        if (dimensionElement["dimensionNameEn"] == "North American Industry Classification System (NAICS)")
+        {
+            for(let memberElement of dimensionElement["member"])
+            {
+                if (memberElement["memberNameEn"] == industry)
+                {
+                    dimension += memberElement["memberId"] + '.';
+                    break;
+                }
+            }
+        }
+        else if (dimensionElement["dimensionNameEn"] == "Sales")
+        {
+            for(let memberElement of dimensionElement["member"])
+            {
+                if (memberElement["memberNameEn"] == salesType)
+                {
+                    dimension += memberElement["memberId"] + '.';
+                    break;
+                }
+            }
+        }
+    }
+    dimension += "0.0.0.0.0.0.0"
+    return dimension;
+}
+
+export {getCoordinateForCyberCrime,getCoordinateForInternetUse, getCoordinateForECommerce, PIDs}
 
 /*cheet sheet for the memberID of the dimensions. this data is extracted by console logging.
 PID: 22100135:

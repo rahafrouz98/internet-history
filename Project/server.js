@@ -23,11 +23,12 @@ async function startServer()
     let app = express();
     app.use(cors());
     app.use(express.json())
-    //__dirname is a global variable and returns the absolute path of the directory that the server.js file is in.
+    //__dirname is a global variable and returns the absolute path of the directory that the server.js file is actually in it.
     //express.static is providing access to the files in the folders without the need to specify their path in a serparate get request. So they
     //can be accessed by app.use('/') directly.
     app.use('/script', express.static(__dirname + '/script'))
     app.use('/css', express.static(__dirname + '/css'))
+    app.use('/assets', express.static(__dirname + '/assets'))
 
 
     app.get('/', function (req, res) {
@@ -39,7 +40,7 @@ async function startServer()
     app.get('/pids', function (req, res) {
         res.json(meta.PIDs);
     })
-    app.post('/internetuse', async function (req, res) {
+    app.post('/datapoint', async function (req, res) {
         let tempBody = req.body;
         let options = {
             method: "POST",
