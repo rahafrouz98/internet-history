@@ -1,0 +1,33 @@
+<header>
+    <div id = "logo"> <img src="public/assets/images/logo_mobile.png" alt="logo"> </div>
+    <nav>
+        <ul>
+            <li class="active"><a href = "public/html/index.html">Technology</a></li>
+            <li><a href = "public/html/index.html">Legislation</a></li>
+            <li><a href = "public/html/statics.html">Statics</a></li>
+        </ul>
+    </nav>
+</header>
+<section id="visualization"></section>
+<section id="history">
+     {{#items}} 
+    <div id="history_item">
+        <div>{{title}} {{#year}}:</div>
+        <div>{{content}}</div>
+        {{#each images}}
+        <div class="image">
+            <div><img src={{address}} alt={{image_name}}></div>
+            <div>{{image_name}}</div>
+        </div>
+        {{/each}}
+        {{#each videos}}
+        <div class="video">
+            <iframe src={{link}}
+            allowfullscreen>
+            </iframe>
+        </div>
+        {{/each}}
+    </div>
+    {{/items}}
+</section>
+<section id="references"></section>

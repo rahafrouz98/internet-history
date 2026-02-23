@@ -28,7 +28,7 @@ async function getdataeData(coordinate, cubeName)
     }
     catch(err)
     {
-        console.error(err)
+        throw err
     }
 }
 

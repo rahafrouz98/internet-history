@@ -26,13 +26,10 @@ async function startServer()
     //__dirname is a global variable and returns the absolute path of the directory that the server.js file is actually in it.
     //express.static is providing access to the files in the folders without the need to specify their path in a serparate get request. So they
     //can be accessed by app.use('/') directly.
-    app.use('/script', express.static(__dirname + '/script'))
-    app.use('/css', express.static(__dirname + '/css'))
-    app.use('/assets', express.static(__dirname + '/assets'))
-
+    app.use('/public', express.static(__dirname + '/public'))
 
     app.get('/', function (req, res) {
-        res.sendFile(__dirname + '/html/index.html');
+        res.sendFile(__dirname + '/public/html/index.html');
     })
     app.get('/metadata', function (req, res) {
         res.json(meta.metadata);

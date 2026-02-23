@@ -62,6 +62,12 @@ nav>ul>li.active>a{
     text-decoration: none;
 }
 
-div#visualization{
+section#visualization{
     grid-column:1/-1;
+}
+section#history{
+    grid-column:1/-1;
+}
+div#history_item{
+    border: solid .3em;
 }

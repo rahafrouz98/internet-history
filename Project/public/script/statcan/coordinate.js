@@ -232,7 +232,7 @@ PID: 35100153:
     dimension 2 (Cyber-related violation):
         1. Total, all violations
         2. Invitation to sexual touching
-        3. Sexual exploitation
+        3. Sexual exploitationchec
         4. Luring a child via a computer
         5. Voyeurism
         6. Non-consensual distribution of intimate images
