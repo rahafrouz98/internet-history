@@ -1,18 +1,16 @@
 //The base of this template engine is taken from the week 11 of the module CM1040
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all has inspired to use Promise all
+//https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/data-*
 
-class HistoryItemsTemplateEngine {
+class HistoryTemplateEngine {
 
-    #template_url = "/public/html/history_items_template.html";
+    #template_url = "/public/html/templates/history_template.html";
     #template ="";
-    #technologyData=[];
-    #legislationData=[];
-    #techReferenceList=[]
-    #legReferenceList=[]
-    //This function sorets the data pased on their start date 
-    #sortData(data)
+    #data = {}
+    #referenceLists={ "technology":[], "legislation":[]}
+    constructor(data)
     {
-        data.sort((a,b)=>Number(a.start)-Number(b.start))
+        this.#data=data;
     }
  
     async #loadTemplate() 
@@ -27,35 +25,7 @@ class HistoryItemsTemplateEngine {
             throw err;
         }                                                                              
     }
-    async #fetchTechnologyHistory()
-    {
-        try
-        {
-            let response = await fetch("/public/assets/json/technology.json");
-            let data = await response.json();
-            this.#sortData(data.technology);
-            return data;
-        }
-        catch(err)
-        {
-            throw  err;
-        }
-        
-    }
-    async #fetchLegislationHistory()
-    {
-        try
-        {
-            let response = await fetch("/public/assets/json/legislation.json");
-            let data = await response.json();
-            this.#sortData(data.legislation);
-            return data;
-        }
-        catch(err)
-        {
-            throw  err;
-        }
-    }
+
     #referenceExtractor(item)
     {
         let tempReferenceList=[];
@@ -71,31 +41,33 @@ class HistoryItemsTemplateEngine {
     }
     #referenceColloctor()
     {
-        this.#technologyData["technology"].forEach((item)=>{
-            this.#techReferenceList.push(...this.#referenceExtractor(item))
+        console.log(   this.#data["technology"])
+        this.#data["technology"].forEach((item)=>{
+            this.#referenceLists["technology"].push(...this.#referenceExtractor(item))
         })
-        this.#legislationData["legislation"].forEach((item)=>{
-            this.#legReferenceList.push(...this.#referenceExtractor(item))
+        this.#data["legislation"].forEach((item)=>{
+            this.#referenceLists["legislation"].push(...this.#referenceExtractor(item))
         })
     }
-    #referenceEmbedder(item, tempTemplate, category)
+    #referenceIndexEmbedder(item, tempTemplate, category)
     {
         let itemReferenceList = this.#referenceExtractor(item)
-        let source =[]
-        if (category == "technology")
-        {
-            source = this.#techReferenceList;
-        }
-        else 
-            source = this.#legReferenceList;
 
         tempTemplate = tempTemplate.replace(/{{r}}/g, (match) => {
-            let tempIndex = source.indexOf(itemReferenceList[0]);
+            let tempIndex = this.#referenceLists[category].indexOf(itemReferenceList[0]);
             itemReferenceList.shift();
             return `[${tempIndex+1}]`;
          })
 
         return tempTemplate; 
+    }
+    //data-* is added to the elements to use them for linking them to the timeline
+    #dataSetPlacer(item, tempTemplate)
+    {
+        tempTemplate = tempTemplate.replace(/{{#data-}}/, (match)=>{
+            return `data-content=${item["id"]}`
+        })
+        return tempTemplate;
     }
     #yearPlacer(item, tempTemplate)
     {
@@ -115,13 +87,13 @@ class HistoryItemsTemplateEngine {
         return tempTemplate
     }
 
-    #renderTemplate(data) {
-        let category = Object.keys(data)[0]
+    #renderTemplate(data,category) 
+    {
         //to prevent the original template from change
         let template = this.#template;
         let output= "";
         template = template.replace(/{{#items}}([\s\S]*?){{\/items}}/, (match, contentFragment)=>{
-            data[category].forEach((item)=>{
+            data.forEach((item)=>{
                 let tempTemplate= contentFragment;
                 // Each loops (for videos and images)
                 tempTemplate = tempTemplate.replace(/{{#each (\w+)}}([\s\S]*?){{\/each}}/g, (match, arrayName, tempFragment) => {
@@ -158,8 +130,11 @@ class HistoryItemsTemplateEngine {
                     return item[dataField];
                 });
 
+                //replace data-set
+                tempTemplate = this.#dataSetPlacer(item, tempTemplate);
+
                 //referencing
-                tempTemplate = this.#referenceEmbedder(item, tempTemplate, category);
+                tempTemplate = this.#referenceIndexEmbedder(item, tempTemplate, category);
 
                 //year placing
                 tempTemplate = this.#yearPlacer(item, tempTemplate);
@@ -167,25 +142,19 @@ class HistoryItemsTemplateEngine {
                 tempTemplate+= "\n";
                 output+=tempTemplate;
             }) 
-            console.log(output)
             return output;
         })
-        console.log(template)
         return template;
     }
     async enginOperator()
     {
         try
         {
-             await this.#loadTemplate();
-            //PromiseAll is used so both asyncfunctions work in parallel
-            const [technologyData, legislationData] = await Promise.all([ this.#fetchTechnologyHistory(), this.#fetchLegislationHistory()])
-            this.#technologyData=technologyData;
-            this.#legislationData=legislationData;
+            await this.#loadTemplate();
             this.#referenceColloctor()
-            let technologyHistoryHTML = this.#renderTemplate(technologyData);
-            let legislationHistoryHTML = this.#renderTemplate(legislationData);
-            return [technologyHistoryHTML,legislationHistoryHTML];
+            let technologyHistoryHTML = this.#renderTemplate(this.#data["technology"], "technology");
+            let legislationHistoryHTML = this.#renderTemplate(this.#data["legislation"], "legislation");
+            return { "technology":technologyHistoryHTML,"legislation":legislationHistoryHTML};
         }
         catch(err)
         {
@@ -194,5 +163,5 @@ class HistoryItemsTemplateEngine {
     }
 }
 
-export{HistoryItemsTemplateEngine}
+export{HistoryTemplateEngine}
 

@@ -1,0 +1,24 @@
+<section id="visualization"></section>
+<section id="history">
+    {{#items}} 
+    <div class="history_item" {{#data-}}>
+        <div class="content_title">{{title}} {{#year}}:</div>
+        <div class="text">{{content}}</div>
+        {{#each images}}
+        <div class="image">
+            <div><img src={{address}} alt={{image_name}}></div>
+            <div>{{image_name}}</div>
+        </div>
+        {{/each}}
+        {{#each videos}}
+        <div class="video">
+            <iframe src={{link}}
+            allowfullscreen>
+            </iframe>
+        </div>
+        {{/each}}
+        <button class="timeline_button">Timeline</button>
+    </div>
+    {{/items}}
+</section>
+<section id="references"></section>
