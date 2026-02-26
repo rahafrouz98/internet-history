@@ -24,13 +24,14 @@ class HistoryTimeline{
             type:"box",
             margin:{axis:100}
         }
+
         this.#dataSet = {
             "technology": new vis.DataSet(this.#dataSetExtractor(data["technology"])),
             "legislation": new vis.DataSet(this.#dataSetExtractor(data["legislation"]))
         }
         this.#group = {
             "technology": this.#groupExtractor(data["technology"]),
-            "legislation": this.#groupExtractor(data["technology"])
+            "legislation": this.#groupExtractor(data["legislation"])
         }
     }
     loadTimeilne(category,container)
@@ -40,19 +41,6 @@ class HistoryTimeline{
             let selectedItem = document.querySelector(`[data-content="${properties["items"][0]}"]`);
             selectedItem ? selectedItem.scrollIntoView({behavior: "smooth"}): null;
         });
-    }
-    swapData()
-    {
-        if(this.#activeCategory == "technology")
-        {
-            this.#activeCategory == "legislation";
-        }
-        else
-        {
-            this.#activeCategory == "technology";
-        }
-        this.timeline.setItems(this.#dataSet[this.#activeCategory]);
-        this.timeline.setGroups(this.#group[this.#activeCategory]);
     }
     #dataSetExtractor(data)
     {

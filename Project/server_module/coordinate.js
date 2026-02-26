@@ -47,11 +47,6 @@ function getCoordinateForInternetUse(geo, ageGroup)
 function getCoordinateForCyberCrime(geo, violation, statistic, calendarQuarter)
 {
     let dimension = ""
-    console.log(geo);
-    console.log(violation);
-    console.log(statistic);
-    console.log(calendarQuarter);
-
 
     for (let dimensionObject of metadataCollection["cyberCrime"][0]["object"]["dimension"])
     {

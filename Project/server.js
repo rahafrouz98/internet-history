@@ -38,6 +38,7 @@ async function startServer()
     })
   
     app.post('/ecommerce', async function (req, res) {
+        console.log("Request for /ecommerce received. StatCan api request is being processed ...");
         let reqBody = req.body;
         let coordinateObj = getCoordinateForECommerce(reqBody["industry"], reqBody["sales"])
         try
@@ -52,6 +53,7 @@ async function startServer()
         }
     })
     app.post('/internetuse', async function (req, res) {
+        console.log("Request for /internetuse received. StatCan api request is being processed ...");
         let reqBody = req.body;
         let coordinateObj = getCoordinateForInternetUse(reqBody["geo"], reqBody["agegroup"])
         try
@@ -65,7 +67,8 @@ async function startServer()
             res.status(500).json({error: err.message});
         }
     })
-    app.post('/cibercrime', async function (req, res) {
+    app.post('/cybercrime', async function (req, res) {
+        console.log("Request for /cybercrime received.  StatCan api request is being processed ...");
         let reqBody = req.body;
         let coordinateObj = getCoordinateForCyberCrime(reqBody["geo"], reqBody["violation"],reqBody["statistic"],reqBody["calendarquarter"])
         try

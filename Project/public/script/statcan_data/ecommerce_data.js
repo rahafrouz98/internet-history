@@ -1,8 +1,8 @@
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import/with
-import eCommerceTemplate from "./statcan_datasets_template/e_commerce_data_template.json" with { type: "json" }
+import eCommerceTemplate from "./e_commerce_data_template.json" with { type: "json" }
 class EcommerceData
 {
-    data=null;
+    data={};
     constructor()
     {
         this.data= eCommerceTemplate;
@@ -16,6 +16,7 @@ class EcommerceData
                 try
                 {
                     this.data[industry][saleType] =await this.#requestForEcommerce(industry, saleType);
+
                 }
                 catch(err)
                 {
@@ -23,6 +24,11 @@ class EcommerceData
                 }
             }
         }
+        this.data["labelsObject"] = {}
+        this.data["labelsObject"]["year"]= this.#yearListExtractor();
+        this.data["labelsObject"]["salesType"]=this.#saleTypeExtractor();
+        this.data["labelsObject"]["industry"]=this.#industryTypeExtractor();
+        
     }
 
 
@@ -48,6 +54,67 @@ class EcommerceData
         {
             console.log(err);
             throw err;
+        }
+    }
+    //this function extract the existing sales types and return in a form of array to be used later in the template engin and charts
+    #industryTypeExtractor()
+    {
+        let industryTypes=[];
+
+        for(let key in this.data)
+        {
+           if(!industryTypes.includes(key) && key!=="labelsObject")
+            {
+                industryTypes.push(key);
+            }
+          
+        }
+        return industryTypes;
+    }
+    //this function extract the existing sales types and return in a form of array to be used later in the template engin and charts
+    #saleTypeExtractor()
+    {
+        let saleTypes=[];
+
+        //it just itterate through the elements of the first object of data to extract the sale types
+        for(let key in this.data)
+        {
+            if(key!=="labelsObject")
+            {
+                for(let keyofkey in this.data[key])
+                {
+                    if(!saleTypes.includes(keyofkey))
+                    {
+                        saleTypes.push(keyofkey);
+                    }
+                }
+             }
+             return saleTypes;
+        }
+    }
+    //this function extract the existing years and return in a form of array to be used later in the template engin and charts
+    #yearListExtractor()
+    {
+        let years=[]
+        //it just itterate the first array of the data to extract the existing years in it
+        for(let key in this.data)
+        {
+            if(key!=="labelsObject")
+            {
+                for(let keyofkey in this.data[key])
+                {
+                    for(let dataRow of this.data[key][keyofkey])
+                    {
+                        let tempYear = dataRow["refPer"];
+                        tempYear = tempYear.split('-')[0];
+                        if (!years.includes(tempYear))
+                        {
+                            years.push(tempYear);
+                        }
+                    }
+                    return  years;
+                }
+            }
         }
     }
 }

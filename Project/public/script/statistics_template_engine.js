@@ -1,55 +1,37 @@
-
-
-class StatisticsTemplateEngine {
-
+class StatisticsTemplateEngine 
+{
     #template_url = "";
     #template = "";
-    #eCommerceData={};
-    constructor(ecommerceData)
+    #dataContainer={};
+    constructor(ecommerceData, cyberCrimeData)
     {
-        this.#eCommerceData = ecommerceData
+        this.#dataContainer =
+                            {
+                                "crime":cyberCrimeData,
+                                "sale":ecommerceData
+                            }
+
         this.#template_url = "/public/html/templates/statistics_template.html";
     }
-    #yearListExtractor(data)
-    {
-        let years=[]
-        //it just itterate the first array of the datato extract the existing years in it
-        for(let key in data)
-        {
-            for(let keyofkey in data[key])
-            {
-                for(let dataRow of data[key][keyofkey])
-                {
-                    let tempYear = dataRow["refPer"];
-                    tempYear = tempYear.split('-')[0];
-                    if (!years.includes(tempYear))
-                    {
-                        years.push(tempYear);
-                    }
-                }
-                return  years;
-            }
-        }
-    }
+
     #renderTemplate()
     {
         // Each loops
-        this.#template = this.#template.replace(/{{#each (\w+)}}([\s\S]*?){{\/each}}/g, (match, loopName, templateFragment) => {
-            if (loopName == "years")
-            {
-                let years = this.#yearListExtractor(this.#eCommerceData)
-                return years.map(item=>{return this.#replaceYearFragment(templateFragment, item)}).join("");
-            }
-        
+        this.#template = this.#template.replace(/{{#each (\w+)}}([\s\S]*?){{\/each}}/g, (match, eachName, templateFragment) => {
+            let nameFragments = eachName.split("_")
+            let dataName = nameFragments[1];
+            let arrayName = nameFragments[0];
+            let dataArray = this.#dataContainer[dataName]["labelsObject"][arrayName]
+            return dataArray.map(item=>{return this.#replaceFragment(templateFragment, item)}).join("");
         })
 
         return this.#template;
     }
-    #replaceYearFragment(templateFragment, year) 
+    #replaceFragment(templateFragment, item) 
     {
-        console.log(year)
-        return templateFragment.replace(/{{#year}}/g, year);
+        return templateFragment.replace(/{{(\w+)}}/g, item);
     }
+
     async #loadTemplate() 
     {
         try

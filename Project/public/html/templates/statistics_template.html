@@ -1,12 +1,39 @@
 <section id="ciber_crime" class="category_container">data</section>
-<section id="e_commerce"class="category_container">
-    <div class="chart_container"><canvas id="bar_chart"></canvas></div>
+    <div class="chart_container">
+        <canvas id="crime_chart"></canvas></div>
     <div class = "chart_data_container">
-        <form class="years">
-            <p>Years:</p>
-                {{#each years}}
-                <div><input type="checkbox" name="e_commerce_year" value={{#year}}>{{#year}}</div>
-                {{/each}}
+        <form>
+            <div class="violation">
+                <p>Violation:</p>
+                    {{#each violation_crime}}
+                    <div><input type="checkbox" name="violation" value="{{violation}}" checked>{{violation}}</div>
+                    {{/each}}
+            </div>
+            <div class="geo">
+                <p>Geography:</p>
+                    {{#each geo_crime}}
+                    <div><input type="radio" name="geo" value="{{geo}}">{{geo}}</div>
+                    {{/each}}  
+            </div> 
+        </form>
+    </div>
+<section id="e_commerce"class="category_container">
+    <div class="chart_container">
+        <canvas id="sale_chart"></canvas></div>
+    <div class = "chart_data_container">
+        <form>
+            <div class="year">
+                <p>Years:</p>
+                    {{#each year_sale}}
+                    <div><input type="checkbox" name="year" value="{{year}}" checked>{{year}}</div>
+                    {{/each}}
+            </div>
+            <div class="industry">
+                <p>Industries:</p>
+                    {{#each industry_sale}}
+                    <div><input type="radio" name="industry" value="{{industry}}">{{industry}}</div>
+                    {{/each}}  
+            </div> 
         </form>
     </div>
 </section>

@@ -74,14 +74,20 @@ nav>ul>li>a.active{
     text-decoration: none;
     cursor:default;
 }
+main.loading{
+    display: flex;
+    align-self: center;
+    justify-self: center;
+    font-size:5em;
+}
 
 main{
     grid-column: 1/-1;
     grid-row: 3/6;
     display: grid;
     grid-template-columns: 1fr;
- 
     align-items: center;
+    font-size: 1em;
 }
 
 section#visualization{
@@ -155,7 +161,12 @@ iframe{
 .chart_container{
     grid-column: 1/3;
 }
-#bar_chart{
+#sale_chart{
+    width: 100%;
+    height: 100%; 
+    height: 50vh;
+}
+#crime_chart{
     width: 100%;
     height: 100%; 
     height: 50vh;
@@ -163,7 +174,5 @@ iframe{
 
 .chart_data_container{
     grid-column: 3/4;
-    display:grid;
-    grid-template-columns: 1fr 1fr;
-    align-items:baseline;
+
 }

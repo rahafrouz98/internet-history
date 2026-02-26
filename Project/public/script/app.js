@@ -9,22 +9,24 @@ import {HistoryData} from "./historydata.js";
 import {HistoryTemplateEngine} from "./history_template_engine.js";
 import {StatisticsTemplateEngine} from "./statistics_template_engine.js";
 import {BarChart} from "./charts/bar_chart.js";
-import {EcommerceData} from "./stat_data_request.js";
+import {EcommerceData} from "./statcan_data/ecommerce_data.js";
+import {cyberCrimeData} from "./statcan_data/cyber_crime_data.js";
+import {CrimeBarChart} from "./charts/crime_bar_chart.js"
 
 let renderedHTMLContainer ={};
 let historyTimeline = null;
 let barChart = null;
+let crimeBarChart = null;
 
 document.addEventListener("DOMContentLoaded", async()=>{
 
     await initializ();
-     await stats();
 })
 
 async function stats()
 {
    //let internetUseData = await requestForInternetUse("Canada", "Total, 15 years and over");
-   // let cyberCrimeData = await requestForCyberCrime("Canada", "Total, all violations", "Year to date data", "Q1");
+    //let cyberCrimeData = await requestForCyberCrime("Canada", "Total, all violations", "Year to date data", "Q1");
     //console.log(internetUseData)
     //console.log(cyberCrimeData);
     //console.log(eCommerce.data);
@@ -41,22 +43,27 @@ async function initializ()
     let historyEngine = new HistoryTemplateEngine(historyData.data);
     //historyEngine.enginOperator() returns an object of two elements. First element is the technology data and the second is the legislation data.
     renderedHTMLContainer = await historyEngine.enginOperator();
-    //creates and loades data about statistics of ecommerce
+    //creates and loads data of statistics of ecommerce
     let eCommerce = new EcommerceData();
     await eCommerce.loadData();
+    //creates and loads data  of statistics of cyber crime
+    let cyberCrime = new cyberCrimeData();
+    await cyberCrime.loadData();
     //create a StatisticsTemplateEngine and generate an HTML for the statistics page
-    let statisticsEngine = new StatisticsTemplateEngine(eCommerce.data);
+    let statisticsEngine = new StatisticsTemplateEngine(eCommerce.data, cyberCrime.data);
     //statisticsEngine.enginOperator() returns a text as the rendered HTML for the statistics page
     renderedHTMLContainer["statistics"] = await statisticsEngine.enginOperator();
     //embed the rendered html in the main element of the page
-    let mainElement = document.querySelector("body>main")
+    let mainElement = document.querySelector("body>main");
+    mainElement.classList.remove("loading");
     mainElement.innerHTML = renderedHTMLContainer["technology"];
     //generateh a vis-timeline and insert it in the page
     let visContainer = document.getElementById("visualization"); 
     historyTimeline = new HistoryTimeline(historyData.data, "100%", "40vh");
     historyTimeline.loadTimeilne("technology",visContainer)
-    //add event listener to menue buttons
-    barChart = new BarChart();
+    
+    barChart = new BarChart(eCommerce.data);
+    crimeBarChart = new CrimeBarChart(cyberCrime);
 
     menuEventListeners();
     contentsEventListeners("technology");
@@ -114,8 +121,11 @@ function loadContents(targetCategory,switchedButton)
             contentsEventListeners(targetCategory);
             break;
         case "statistics":
-            let barContainer = document.getElementById("bar_chart");
-            barChart.loadChart(barContainer);
+            let barContainer = document.getElementById("sale_chart");
+            barChart.makeChart(barContainer);
+            let crimeBarContainer = document.getElementById("crime_chart");
+            crimeBarChart.makeChart(crimeBarContainer);
+            
     }
 
 }
