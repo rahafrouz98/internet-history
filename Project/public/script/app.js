@@ -4,13 +4,12 @@
 //https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView
 //https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/Attribute_selectors
 
-import {getCoordinateForECommerce,getCoordinateForCyberCrime,getCoordinateForInternetUse} from "./statcan/coordinate.js";
-import {getdataeData} from "./statcan/data_endpoints.js";
 import {HistoryTimeline} from "./timeline.js";
 import {HistoryData} from "./historydata.js";
 import {HistoryTemplateEngine} from "./history_template_engine.js";
 import {StatisticsTemplateEngine} from "./statistics_template_engine.js";
-import {BarChart} from "./statistics/bar_chart.js";
+import {BarChart} from "./charts/bar_chart.js";
+import {EcommerceData} from "./stat_data_request.js";
 
 let renderedHTMLContainer ={};
 let historyTimeline = null;
@@ -19,7 +18,20 @@ let barChart = null;
 document.addEventListener("DOMContentLoaded", async()=>{
 
     await initializ();
+     await stats();
 })
+
+async function stats()
+{
+   //let internetUseData = await requestForInternetUse("Canada", "Total, 15 years and over");
+   // let cyberCrimeData = await requestForCyberCrime("Canada", "Total, all violations", "Year to date data", "Q1");
+    //console.log(internetUseData)
+    //console.log(cyberCrimeData);
+    //console.log(eCommerce.data);
+}
+
+
+
 async function initializ()
 {
     //create a HistoryData and fetch data
@@ -29,8 +41,11 @@ async function initializ()
     let historyEngine = new HistoryTemplateEngine(historyData.data);
     //historyEngine.enginOperator() returns an object of two elements. First element is the technology data and the second is the legislation data.
     renderedHTMLContainer = await historyEngine.enginOperator();
+    //creates and loades data about statistics of ecommerce
+    let eCommerce = new EcommerceData();
+    await eCommerce.loadData();
     //create a StatisticsTemplateEngine and generate an HTML for the statistics page
-    let statisticsEngine = new StatisticsTemplateEngine()
+    let statisticsEngine = new StatisticsTemplateEngine(eCommerce.data);
     //statisticsEngine.enginOperator() returns a text as the rendered HTML for the statistics page
     renderedHTMLContainer["statistics"] = await statisticsEngine.enginOperator();
     //embed the rendered html in the main element of the page
@@ -121,23 +136,4 @@ function contentsEventListeners(category)
     }
 
 }
-
-    
-
-    // let internetUseCoordinate = await getCoordinateForInternetUse("Nova Scotia", "15 to 24 years")
-    // let cyberCrimeCoordinate = await getCoordinateForCyberCrime("Canada", "Total, all violations", "Quarterly data", "Q1")
-    // let eCommerceCoordinate = await getCoordinateForECommerce("Canada", "Spectator sports", "Total sales")
-    //console.log(internetUseCoordinate);
-    // console.log(cyberCrimeCoordinate);
-    // console.log(eCommerceCoordinate);
-    // let internetUseData = await getdataeData(internetUseCoordinate, "internetUse");
-    // let cyberCrimeData = await getdataeData(cyberCrimeCoordinate, "cyberCrime");
-    // let eCommerceData = await getdataeData(eCommerceCoordinate, "eCommerce");
-    // console.log(internetUseData);
-    // console.log(cyberCrimeData);
-    // console.log(eCommerceData);
-
-
-//    let visContainer = document.getElementById("visualization") 
-//    let historyTimeline = new HistoryTimeline(visContainer, )
 

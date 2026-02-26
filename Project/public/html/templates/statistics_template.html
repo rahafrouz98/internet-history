@@ -1,7 +1,14 @@
 <section id="ciber_crime" class="category_container">data</section>
 <section id="e_commerce"class="category_container">
     <div class="chart_container"><canvas id="bar_chart"></canvas></div>
-    <div class = "chart_data_container">dataaaaa</div>
+    <div class = "chart_data_container">
+        <form class="years">
+            <p>Years:</p>
+                {{#each years}}
+                <div><input type="checkbox" name="e_commerce_year" value={{#year}}>{{#year}}</div>
+                {{/each}}
+        </form>
+    </div>
 </section>
 <section id="internet_use" class="category_container">data</section>
 <section id="references"></section>

@@ -4,9 +4,14 @@
 //https://www.geeksforgeeks.org/web-tech/express-js-express-json-function/
 
 let express = require('express');
-//core is used incase the client side is running in different port
+//core is used in case the client side is running in different port
 let cors = require('cors');
-let meta = require('./server_module/metadata');
+//this module provides a function to cache the meta data of target ed cubes at the start of the running the server
+let {cacheMetaData} = require("./server_module/metadata.js")
+//this module provides functions to extract the coordinates
+let {getCoordinateForCyberCrime,getCoordinateForInternetUse, getCoordinateForECommerce} = require("./server_module/coordinate.js");
+//this module profides function to extract actual datafrom the cubes based on the provided coordinate
+let {extractDataFromCube} = require("./server_module/statcan_endpoint.js");
 
 
 //this async function is created to cache the metadata from the statcan API and after it is resolved the server starts.
@@ -14,7 +19,7 @@ async function startServer()
 {
     try 
     {
-        await meta.cacheAllMetadata();
+        await cacheMetaData();
     }
     catch(err)
     {
@@ -31,24 +36,42 @@ async function startServer()
     app.get('/', function (req, res) {
         res.sendFile(__dirname + '/public/html/index.html');
     })
-    app.get('/metadata', function (req, res) {
-        res.json(meta.metadata);
-    })
-    app.get('/pids', function (req, res) {
-        res.json(meta.PIDs);
-    })
-    app.post('/datapoint', async function (req, res) {
-        let tempBody = req.body;
-        let options = {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(tempBody)
-        }
+  
+    app.post('/ecommerce', async function (req, res) {
+        let reqBody = req.body;
+        let coordinateObj = getCoordinateForECommerce(reqBody["industry"], reqBody["sales"])
         try
         {
-            let response = await fetch(`https://www150.statcan.gc.ca/t1/wds/rest/getDataFromCubePidCoordAndLatestNPeriods`, options);
-            let data = await response.json();     
-            res.json(data);
+            let data = await extractDataFromCube(coordinateObj);
+            res.json(data[0]["object"]["vectorDataPoint"]);
+        }
+        catch(err)
+        {
+            console.error(err);
+            res.status(500).json({error: err.message});
+        }
+    })
+    app.post('/internetuse', async function (req, res) {
+        let reqBody = req.body;
+        let coordinateObj = getCoordinateForInternetUse(reqBody["geo"], reqBody["agegroup"])
+        try
+        {
+            data = await extractDataFromCube(coordinateObj);
+            res.json(data[0]["object"]["vectorDataPoint"]);
+        }
+        catch(err)
+        {
+            console.error(err);
+            res.status(500).json({error: err.message});
+        }
+    })
+    app.post('/cibercrime', async function (req, res) {
+        let reqBody = req.body;
+        let coordinateObj = getCoordinateForCyberCrime(reqBody["geo"], reqBody["violation"],reqBody["statistic"],reqBody["calendarquarter"])
+        try
+        {
+            data = await extractDataFromCube(coordinateObj);
+            res.json(data[0]["object"]["vectorDataPoint"]);
         }
         catch(err)
         {

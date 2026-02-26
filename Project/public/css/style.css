@@ -161,7 +161,9 @@ iframe{
     height: 50vh;
 }
 
-
 .chart_data_container{
     grid-column: 3/4;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    align-items:baseline;
 }

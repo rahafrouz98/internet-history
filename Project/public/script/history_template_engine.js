@@ -41,7 +41,6 @@ class HistoryTemplateEngine {
     }
     #referenceColloctor()
     {
-        console.log(   this.#data["technology"])
         this.#data["technology"].forEach((item)=>{
             this.#referenceLists["technology"].push(...this.#referenceExtractor(item))
         })
