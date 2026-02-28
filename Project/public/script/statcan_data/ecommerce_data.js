@@ -9,26 +9,31 @@ class EcommerceData
     }
     async loadData()
     {
+        let promises = [];
         for(let industry in this.data)
         {
            for( let saleType in this.data[industry])
            {
-                try
-                {
-                    this.data[industry][saleType] =await this.#requestForEcommerce(industry, saleType);
-
-                }
-                catch(err)
-                {
-                    console.log(`Data for ${industry} + ${saleType} is not available`)
-                }
+                let promise = this.#requestForEcommerce(industry, saleType).then(result => this.data[industry][saleType] = result).
+                    catch( err=>{
+                                    console.log(`Receiving data for for ${industry} -> ${saleType} was unsuccessful`);
+                                    console.log("Error Message" +err); 
+                                });
+                promises.push(promise);
+                
             }
         }
+        await Promise.all(promises);
+        this.labelsExtractor();
+    }
+
+    //this adda labels for the data sets to be used in the charts and template engine
+    labelsExtractor()
+    {   
         this.data["labelsObject"] = {}
         this.data["labelsObject"]["year"]= this.#yearListExtractor();
         this.data["labelsObject"]["salesType"]=this.#saleTypeExtractor();
         this.data["labelsObject"]["industry"]=this.#industryTypeExtractor();
-        
     }
 
 

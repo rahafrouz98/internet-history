@@ -3,12 +3,13 @@ class StatisticsTemplateEngine
     #template_url = "";
     #template = "";
     #dataContainer={};
-    constructor(ecommerceData, cyberCrimeData)
+    constructor(ecommerceData, cyberCrimeData, internetUseData)
     {
         this.#dataContainer =
                             {
                                 "crime":cyberCrimeData,
-                                "sale":ecommerceData
+                                "sale":ecommerceData,
+                                "internet":internetUseData
                             }
 
         this.#template_url = "/public/html/templates/statistics_template.html";

@@ -1,45 +1,45 @@
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import/with
-import cyberCrimeTemplate from "./cyber_crime_data_template.json" with { type: "json" }
-
-class cyberCrimeData
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all
+import internetUseTemplate from "./internet_use_data_template.json" with { type: "json" }
+class InternetUseData
 {
     data={};
     constructor()
     {
-        this.data= cyberCrimeTemplate;
+        this.data= internetUseTemplate;
     }
-    async loadData(violation = "Total, all violations")
+    async loadData()
     {
         let promises=[];
-        //just loads the data for Total, all violations. The reason is, there is no other categories of violations for the provinces  in the StatCan yet.
-        for( let geo in this.data)
+        for(let geo in this.data)
         {
-            let promise = this.#requestForcyberCrime(geo, violation).then(result => this.data[geo][violation] = result ).
-                catch( err =>{
-                                console.log(`Receiving data for for ${geo} -> ${violation} was unsuccessful`);
-                                console.log("Error Message" +err);
-                            });
-            promises.push(promise);
+           for( let age in this.data[geo])
+           {
+                let promise = this.#requestForInternetUse(geo, age).then(result => this.data[geo][age]=result).
+                    catch( err=>{
+                                    console.log(`Receiving data for for ${geo} -> ${age} was unsuccessful`);
+                                    console.log("Error Message" +err);
+                                });
+                promises.push(promise);
+            }
         }
-        await Promise.all(promises); 
+        await Promise.all(promises);
         this.labelsExtractor();
     }
-    //this adda labels for the data sets to be used in the charts and template engine
+     //this adda labels for the data sets to be used in the charts and template engine
     labelsExtractor()
     {
-        this.data["labelsObject"] = {};
+        this.data["labelsObject"] = {}
         this.data["labelsObject"]["year"]= this.#yearListExtractor();
-        this.data["labelsObject"]["violation"]=this.#violationExtractor();
-        this.data["labelsObject"]["geo"]=this.#geoTypeExtractor();
+        this.data["labelsObject"]["geo"]= this.#geoListExtractor();
+        this.data["labelsObject"]["age"]=this.#ageGroupListExtractor();
     }
 
-    async #requestForcyberCrime(geo, violation)
+    async #requestForInternetUse(geo, age)
     {
         let tempBody = {
-                        "geo":geo,
-                        "violation": violation,
-                        "statistic": "Year to date data",
-                        "calendarquarter": "Q1"
+                            "geo":geo,
+                            "agegroup":age
                         }
         let options = 
         {
@@ -49,7 +49,7 @@ class cyberCrimeData
         }
         try
         {
-            let statCanResponse = await fetch(`/cybercrime`, options)
+            let statCanResponse = await fetch(`/internetuse`, options)
             let data = await statCanResponse.json()
             return data
         }
@@ -60,23 +60,9 @@ class cyberCrimeData
         }
     }
     //this function extract the existing sales types and return in a form of array to be used later in the template engin and charts
-    #geoTypeExtractor()
+    #ageGroupListExtractor()
     {
-        let geos=[];
-
-        for(let key in this.data)
-        {
-           if(!geos.includes(key) && key!=="labelsObject")
-            {
-                geos.push(key);
-            }
-        }
-        return geos;
-    }
-    //this function extract the existing sales types and return in a form of array to be used later in the template engin and charts
-    #violationExtractor()
-    {
-        let violations=[];
+        let ageGroups=[];
 
         //it just itterate through the elements of the first object of data to extract the sale types
         for(let key in this.data)
@@ -85,14 +71,25 @@ class cyberCrimeData
             {
                 for(let keyofkey in this.data[key])
                 {
-                    if(!violations.includes(keyofkey))
+                    if(!ageGroups.includes(keyofkey))
                     {
-                        violations.push(keyofkey);
+                        ageGroups.push(keyofkey);
                     }
                 }
              }
-             return violations;
+             return ageGroups;
         }
+    }
+    //this function extract the existing years and return in a form of array to be used later in the template engin and charts
+    #geoListExtractor()
+    {
+        let geo=[]
+        //it just itterate the first array of the data to extract the existing years in it
+        for(let key in this.data)
+        {           
+            geo.push(key);
+        }
+        return geo;
     }
     //this function extract the existing years and return in a form of array to be used later in the template engin and charts
     #yearListExtractor()
@@ -121,4 +118,5 @@ class cyberCrimeData
     }
 }
 
-export {cyberCrimeData}
+
+export {InternetUseData}
