@@ -25,6 +25,7 @@ class EcommerceData
         }
         await Promise.all(promises);
         this.labelsExtractor();
+        console.log(this.data);
     }
 
     //this adda labels for the data sets to be used in the charts and template engine

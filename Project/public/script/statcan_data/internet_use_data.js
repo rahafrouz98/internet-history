@@ -25,6 +25,7 @@ class InternetUseData
         }
         await Promise.all(promises);
         this.labelsExtractor();
+        console.log(this.data)
     }
      //this adda labels for the data sets to be used in the charts and template engine
     labelsExtractor()
@@ -86,8 +87,11 @@ class InternetUseData
         let geo=[]
         //it just itterate the first array of the data to extract the existing years in it
         for(let key in this.data)
-        {           
-            geo.push(key);
+        {     
+            if(key!=="labelsObject")
+            {
+                geo.push(key);
+            }      
         }
         return geo;
     }

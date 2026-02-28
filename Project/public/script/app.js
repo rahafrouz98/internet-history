@@ -13,8 +13,8 @@ import {EcommerceData} from "./statcan_data/ecommerce_data.js";
 import {cyberCrimeData} from "./statcan_data/cyber_crime_data.js";
 import {CrimeBarChart} from "./charts/crime_bar_chart.js";
 import {InternetUseData} from "./statcan_data/internet_use_data.js"
-import {StatsChart} from "./charts/line_chart.js"
-
+import {LineChart} from "./charts/line_chart.js"
+import {PolarChart} from "./charts/polar_chart.js"
 let renderedHTMLContainer ={};
 let historyTimeline = null;
 let saleLineChart = null;
@@ -25,21 +25,12 @@ let cyberCrime = null;
 let eCommerce = null;
 let statisticsEngine=null;
 let statisticsLoaded = false;
+let internetPolarChart = null;
 
 document.addEventListener("DOMContentLoaded", async()=>{
 
     await initializ();
 })
-
-async function stats()
-{
-   //let internetUseData = await requestForInternetUse("Canada", "Total, 15 years and over");
-    //let cyberCrimeData = await requestForCyberCrime("Canada", "Total, all violations", "Year to date data", "Q1");
-    //console.log(internetUseData)
-    //console.log(cyberCrimeData);
-    //console.log(eCommerce.data);
-}
-
 
 
 async function initializ()
@@ -57,9 +48,10 @@ async function initializ()
                                 statisticsEngine = new StatisticsTemplateEngine(eCommerce.data, cyberCrime.data,internetUse.data);
                                 //statisticsEngine.enginOperator() returns a text as the rendered HTML for the statistics page
                                 renderedHTMLContainer["statistics"] = await statisticsEngine.enginOperator()
-                                saleLineChart = new StatsChart(eCommerce.data,"Spectator sports" ,"year", "line");
-                                crimeBarChart = new CrimeBarChart(cyberCrime.data, "Total, all violations", "geo");
-                                internetLineChart = new StatsChart(internetUse.data, "Canada", "year", "line");
+                                saleLineChart = new LineChart(eCommerce.data,"Spectator sports","industry" ,"year", "salesType","line");//(data,selectedCategory,categories,labels,legends,type)
+                                crimeBarChart = new CrimeBarChart(cyberCrime.data, "Total, all violations", "geo");//(data,selectedCategory,categories,labels,legends,type)
+                                internetPolarChart = new PolarChart(internetUse.data, "Canada", "geo","age","age" ,"polarArea");//(data,selectedCategory,categories,labels,legends,type)
+                                internetLineChart = new LineChart(internetUse.data, "Canada", "geo","year", "age","line");//(data,selectedCategory,categories,labels,legends,type)
                                 statisticsLoaded =true;
                                 //this part is for when the statistics page is selected sooner than data is loaded
                                 let body = document.body;
@@ -92,6 +84,7 @@ async function loadStatCanData()
     cyberCrime = new cyberCrimeData();
     internetUse = new InternetUseData();
     await Promise.all([internetUse.loadData(),cyberCrime.loadData(), eCommerce.loadData()] )
+
 }
 
 function menuEventListeners()
@@ -174,8 +167,10 @@ function loadStatisticsCharts()
         saleLineChart.makeChart(saleLineContainer);
         let crimeBarContainer = document.getElementById("crime_chart");
         crimeBarChart.makeChart(crimeBarContainer);
-        let internetUseContainer = document.getElementById("internet_line_chart");
-        internetLineChart.makeChart(internetUseContainer);
+        let lineInternetUseContainer = document.getElementById("internet_line_chart");
+        internetLineChart.makeChart(lineInternetUseContainer);
+        let polarInternetUseContainer = document.getElementById("internet_polar_chart");
+        internetPolarChart.makeChart(polarInternetUseContainer);
 }
 
 

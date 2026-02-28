@@ -1,6 +1,7 @@
 //https://www.chartjs.org/docs/latest/charts/line.html
+//https://stackoverflow.com/questions/35099779/javascript-if-a-value-exists-in-an-object
 //this is used for representing the Internet Use and E-Commerce sales
-class StatsChart
+class LineChart
 {
   chart = null;
   data = {};
@@ -10,17 +11,22 @@ class StatsChart
   chechBoxContainer=null;
   labelsList = [];
   type = null;
-  constructor(data,selectedCategory,labelList,type)
+  categoriesList = null;
+  xSeries = null;
+  legendList = null;
+  constructor(data,selectedCategory,categories,labels,legends,type)
   {
     this.data= data;
     this.selectedCategory = selectedCategory;
     //this maked a shadow copy of the list and changing it does not change the original one.
-    this.labelsList = [...this.data["labelsObject"][labelList]];
+    this.labelsList = [...this.data["labelsObject"][labels]];
     this.type = type;
+    this.categoriesList =[...this.data["labelsObject"][categories]];
+    this.legendList = [...this.data["labelsObject"][legends]]
   }
   addEventListener()
   {
-    this.radioButtonsContainer.forEach(radio => {
+    this.radioButtonsContainer?.forEach(radio => {
       radio.addEventListener("change", (e)=>{
         this.selectedCategory = e.target.value;
         this.updateDataSet();
@@ -29,7 +35,7 @@ class StatsChart
       })
     });
 
-    this.chechBoxContainer.forEach(box=>{
+    this.chechBoxContainer?.forEach(box=>{
       box.addEventListener("change", (e)=>{
           if(e.target.checked == true)
           {
@@ -51,31 +57,26 @@ class StatsChart
   updateDataSet()
   {
     this.dataSets= [];
-    for(let salesType in this.data[this.selectedCategory])
+    for(let legend of this.legendList)
     { 
       let valueList = [];
-      for(let year of this.labelsList)
+      for(let row of this.data[this.selectedCategory][legend])
       {
-        for(let row of this.data[this.selectedCategory][salesType])
-        {
-          if(year === row["refPer"].split("-")[0])
-          {
-            valueList.push(row["value"])
-          }
-        }
+          valueList.push(row["value"])
       }
+      
       let tempDataSet = {
-                          label: salesType,
+                          label: legend,
                           data: valueList
                         }
       this.dataSets.push(tempDataSet);
     }
-
   }
-  makeChart(container)
+  loadControllers(container)
   {
     //finds the radio buttons and put thme in a container and selects one of them as a default
-    this.radioButtonsContainer = container.parentElement.parentElement.querySelector("div.chart_data_container").querySelector('div.radio').querySelectorAll("input");
+    this.radioButtonsContainer = container.parentElement.parentElement.querySelector("div.chart_data_container").querySelector('div.radio')?.querySelectorAll("input");
+
     for(let radio of this.radioButtonsContainer)
     {
       if (radio.value == this.selectedCategory)
@@ -85,12 +86,13 @@ class StatsChart
       }
     }
     //finds the check boxes and put them in a container
-    this.chechBoxContainer = container.parentElement.parentElement.querySelector("div.chart_data_container").querySelector("div.check_box").querySelectorAll("input")
- 
-
+    this.chechBoxContainer = container.parentElement.parentElement.querySelector("div.chart_data_container").querySelector("div.check_box")?.querySelectorAll("input")
+  }
+  makeChart(container)
+  {
+    this.loadControllers(container);
     this.addEventListener();
     this.updateDataSet();
-   
     this.chart =  new Chart(container, 
     {
         type: this.type,
@@ -109,4 +111,4 @@ class StatsChart
     });
   }
 }
-export{StatsChart}
+export{LineChart}
