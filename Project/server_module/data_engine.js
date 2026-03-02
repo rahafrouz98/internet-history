@@ -22,32 +22,36 @@ class DataEngine
     }
     async loadData()
     {
-        let promises=[];
-        for(let category in this.data)
+        try
         {
-           for( let subcategory in this.data[category])                    
-           {
-                let tempCoord = await this.coordinateFinder.getCoordinates[this.dataType](category, subcategory);
-                let latestN = 20;
-                let reqBody = JSON.stringify([{
-                        "productId": this.PIDs[this.dataType],
-                        "coordinate": tempCoord,
-                        "latestN": latestN}])
-                try
+            for(let category in this.data)
+            {
+                for( let subcategory in this.data[category])                    
                 {
-                    let result = await this.statcanApi.sendRequestToStatcan(reqBody,"vectorpoint");
-                    let vector = result[0]["object"]["vectorDataPoint"];
-                    this.data[category][subcategory]=vector
-                }
-                catch(err)
-                {
-                    console.log(`The request for ${reqBody} in data_engine.js was unsuccessful. Error: ` + err)
-                    console.log(`Server will use the last cached data`)
-                    this.data = require(this.cachedDataPath)
+                        let tempCoord = await this.coordinateFinder.getCoordinates[this.dataType](category, subcategory);
+                        let latestN = 20;
+                        let reqBody = JSON.stringify([{
+                                "productId": this.PIDs[this.dataType],
+                                "coordinate": tempCoord,
+                                "latestN": latestN}])
+
+                        let result = await this.statcanApi.sendRequestToStatcan(reqBody,"vectorpoint");
+                        if(!result)
+                        {
+                            throw new Error(`fetching data for ${reqBody} was unsuccessful`);
+                        }
+                        let vector = result[0]["object"]["vectorDataPoint"];
+                        this.data[category][subcategory]=vector;
                 }
             }
         }
-        await Promise.all(promises);
+        catch(err)
+        {
+            console.log(`The request for ${this.datatype} in data_engine.js was unsuccessful. Error: ` + err)
+            console.log(`Server will use the last cached data`)
+            this.data = require("."+this.cachedDataPath);
+        }
+   
         this.labelsExtractor();
         //this cache the extracted data in a file and if later the Statcan was not available at the moment that server starts, 
         //server will use this file as the latest available data.

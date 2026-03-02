@@ -22,12 +22,12 @@ class StatApi
             body:reqBody}
         try{
             //[1] is used as an array because the recursive algorithm inside  needs a reference to the original value 
-            let ApiResponse = await this.#delayRequest(URL, options,[1]);
-            if ( ApiResponse["status"] === 429)
+            let apiResponse = await this.#delayRequest(URL, options,[1]);
+            let data
+            if (apiResponse)
             {
-                throw new Error( `Request for ${tempBody} in statcan.js was unsuccessful`)
+                data = await apiResponse.json()
             }
-            let data = await ApiResponse.json()
             return data;
         }
         catch(err){
@@ -43,29 +43,41 @@ class StatApi
     //instead of the actual data. Folloing function will be used to resend the request with delay
     async #delayRequest(URL, options,trackerArray)
     {
-        let statCanResponse = await fetch(URL, options);
+        try
+        {
+            let statCanResponse = await fetch(URL, options);
 
-        if (statCanResponse["status"]===200)
-        {
-            return statCanResponse;
+            if (statCanResponse["status"]===200)
+            {
+                return statCanResponse;
+            }
+            else if ( trackerArray[0] <=3 )
+            {
+                await this.#stoper();
+                trackerArray[0]++
+                return this.#delayRequest(URL,options, trackerArray);
+            }
+            else
+            {
+                return null;
+            }
+            // else 
+            // {
+            //     let errorMessage = `Error in statcan_endpoint for ${options["body"]}: It is tried three times and failed. Last response:` + statCanResponse
+            //     console.log(errorMessage)
+            //     //return this code:503 as an indication that the data is unavailable for some reason.
+            //     //by geting this code in the other functions in the stack, the cached files (in the /project/server_module/cached folder) will be as the 
+            //     //latest available data
+            //     return({"status": 503})
+            // }
+
         }
-        else if ( trackerArray[0] <=3 && statCanResponse["status"]===429 )
+        catch(err)
         {
-            await this.#stoper();
-            trackerArray[0]++
-            return this.#delayRequest(URL,options, trackerArray);
+            console.log("A problem has encountered with fetch function in delayRequest() function.")
+            return null;
         }
-        else if(trackerArray[0] >3 && statCanResponse["status"]===429)
-        {
-            let errorMessage = `Error in statcan_endpoint for ${options["body"]}: It is tried three times and failed. Last response:` + statCanResponse
-            console.log(errorMessage)
-            return({"status": 429})
-        }
-        else
-        {
-            console.log(statCanResponse)
-            throw new Error("Something went wrong in fetching data from Statcan")
-        }
+
     }
 }
 let statcanApi = new StatApi();

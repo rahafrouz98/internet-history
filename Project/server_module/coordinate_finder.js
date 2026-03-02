@@ -20,43 +20,35 @@ class CoordinateFinder
         this.statcanApi = require("./statcan_api.js");
     }
     //This function is used to cache the metadata of the cubes in the metadata object for later use to extract the coordinates
-    async #collectAllMetaData() 
+    async cacheMetaData() 
     {
-        let promises=[]
-        for (let name in this.PIDs) 
-        {
-            let tempBody = JSON.stringify([{"productId":this.PIDs[name]}]);
-            let promise = statcanApi.sendRequestToStatcan(tempBody,"metadata").then((result)=>this.metadataCollection[name] = result)                                                             
-            .catch( err=>{
-                            console.log(err)
-                            throw err;
-                        }) 
-            promises.push(promise)
-        }
-        await Promise.all(promises)
-        return this.metadataCollection;
-    }
-    //metadata is cached to the file to be used later in finding coordinates 
-    async cacheMetaData()
-    {
-        let fs = require("fs");
         try
         {
-            await this.#collectAllMetaData();
+            for (let name in this.PIDs) 
+            {
+                let tempBody = JSON.stringify([{"productId":this.PIDs[name]}]);
+                let result = await statcanApi.sendRequestToStatcan(tempBody,"metadata");
+                if(!result)
+                {
+                    throw new Error(`fetching data for ${name} was unsuccessful`);
+                }
+                this.metadataCollection[name] = result;                                                            
+            }
+            let fs = require("fs");
             fs.writeFileSync(__dirname +"/cached/meta.json",JSON.stringify(this.metadataCollection, null, 2));
         }
         catch(err)
         {
             console.log("The request for medtadata to Statcan was unsuccessful. Error: " + err)
             console.log("Server will use the last cached metadata")
-            this.metadataCollection = require("/cached/meta.json")  
-        }     
+            this.metadataCollection = require("./cached/meta.json")  
+        }
     }
 
     //this function is used to extract the coordinated of the cube PID: 22100135(Internet use by province and age group) based on brovided filters
     async getCoordinateForInternetUse(geo, ageGroup)
     {
-        let dimension = "";
+        let coordinate = "";
         for(let dimensionObject of this.metadataCollection["internetUse"][0]["object"]["dimension"])
         {
             if(dimensionObject["dimensionNameEn"]=="Geography")
@@ -65,7 +57,7 @@ class CoordinateFinder
                 {
                     if(memberObject["memberNameEn"]==geo)
                     {
-                        dimension += (memberObject["memberId"] + '.');
+                        coordinate += (memberObject["memberId"] + '.');
                         break;
                     }
                 }
@@ -73,7 +65,7 @@ class CoordinateFinder
             //for "Internet use from any location" which is the second member of the coordinate. There is only one memberID for this dimension object
             else if (dimensionObject["dimensionNameEn"] == "Internet use from any location")
             {
-                dimension += ('1.');
+                coordinate += ('1.');
             }
             else if(dimensionObject["dimensionNameEn"] == "Age group")
             {
@@ -81,20 +73,20 @@ class CoordinateFinder
                 {
                     if(memberObject["memberNameEn"]== ageGroup)
                     {
-                        dimension += (memberObject["memberId"] + '.');
+                        coordinate += (memberObject["memberId"] + '.');
                         break;
                     }
                 }
             }
         }
-        dimension += "0.0.0.0.0.0.0"
-        return dimension;
+        coordinate += "0.0.0.0.0.0.0"
+        return coordinate;
     }
 
     //this function is used to extract the coordinated of the cube PID:35100153(Cyber crime in Canada) based on brovided filters
     async getCoordinateForCyberCrime(geo, violation, statistic = "Year to date data", calendarQuarter = "Q1")
     {
-        let dimension = ""
+        let coordinate = ""
 
         for (let dimensionObject of this.metadataCollection["cyberCrime"][0]["object"]["dimension"])
         {
@@ -104,7 +96,7 @@ class CoordinateFinder
                 {
                     if (memberObject["memberNameEn"] == geo)
                     {
-                        dimension += (memberObject["memberId"] + '.');
+                        coordinate += (memberObject["memberId"] + '.');
                         break;
                     }
                 }
@@ -115,7 +107,7 @@ class CoordinateFinder
                 {
                     if (memberObject["memberNameEn"] == violation)
                     {
-                        dimension += memberObject["memberId"] + '.';
+                        coordinate += memberObject["memberId"] + '.';
                         break;
                     }
                 }
@@ -126,7 +118,7 @@ class CoordinateFinder
                 {
                     if (memberObject["memberNameEn"] == statistic)
                     {
-                        dimension += memberObject["memberId"] + '.';
+                        coordinate += memberObject["memberId"] + '.';
                         break;
                     }
                 }
@@ -137,20 +129,20 @@ class CoordinateFinder
                 {
                     if (memberObject["memberNameEn"] == calendarQuarter)
                     {
-                        dimension += memberObject["memberId"] + '.';
+                        coordinate += memberObject["memberId"] + '.';
                         break;
                     }
                 }
             }
         }
-        dimension += "0.0.0.0.0.0";
-        return dimension;
+        coordinate += "0.0.0.0.0.0";
+        return coordinate;
     }
 
     //This function is used to extract the coordinated of the cube PID:21100234(E-commerce sales in Canada) based on brovided filters
     async getCoordinateForECommerce(industry, sales)
     {
-        let dimension = "1." //the first dimension is geography and e-commerce cube has only one dimension for the geography which is Canada.
+        let coordinate = "1." //the first dimension is geography and e-commerce cube has only one dimension for the geography which is Canada.
         for (let dimensionObject of this.metadataCollection["eCommerce"][0]["object"]["dimension"])
         {
             if (dimensionObject["dimensionNameEn"] == "North American Industry Classification System (NAICS)")
@@ -159,7 +151,7 @@ class CoordinateFinder
                 {
                     if (memberObject["memberNameEn"] == industry)
                     {
-                        dimension += memberObject["memberId"] + '.';
+                        coordinate += memberObject["memberId"] + '.';
                         break;
                     }
                 }
@@ -170,14 +162,14 @@ class CoordinateFinder
                 {
                     if (memberObject["memberNameEn"] == sales)
                     {
-                        dimension += memberObject["memberId"] + '.';
+                        coordinate += memberObject["memberId"] + '.';
                         break;
                     }
                 }
             }
         } 
-        dimension += "0.0.0.0.0.0.0";
-        return dimension;
+        coordinate += "0.0.0.0.0.0.0";
+        return coordinate;
     }
 }
 let coordinateFinder = new CoordinateFinder();
