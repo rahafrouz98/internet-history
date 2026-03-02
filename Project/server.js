@@ -6,20 +6,32 @@
 let express = require('express');
 //core is used in case the client side is running in different port
 let cors = require('cors');
-//this module provides a function to cache the meta data of target ed cubes at the start of the running the server
-let {cacheMetaData} = require("./server_module/metadata.js")
-//this module provides functions to extract the coordinates
-let {getCoordinateForCyberCrime,getCoordinateForInternetUse, getCoordinateForECommerce} = require("./server_module/coordinate.js");
-//this module profides function to extract actual datafrom the cubes based on the provided coordinate
-let {extractDataFromCube} = require("./server_module/statcan_endpoint.js");
 
+//this module extracts and cache the metadata
+let coordinateFinder = require("./server_module/coordinate_finder.js")
+
+//these are child instances of DataEngine to extract data from statcan api endpoint construct data in the format of json and cache them in json files and memory
+//cached files will be used instead of the data in the memory if statcan api was not available
+let eCommerceDataEngine = require("./server_module/ecommerce_data_engine.js");
+let internetUseEngine = require("./server_module/internet_data_engine.js");
+let cyberCrimeDataEngine = require("./server_module/cybercrime_data_engine.js");
 
 //this async function is created to cache the metadata from the statcan API and after it is resolved the server starts.
 async function startServer()
 {
+     console.log("Data is being loaded from Statcan . . . ")
     try 
     {
-        await cacheMetaData();
+        await coordinateFinder.cacheMetaData();
+        let statcanData =
+                    {
+                        "internetUse":{},
+                        "cyberCrime":{},
+                        "eCommerce":{}
+                    };
+        [statcanData["internetUse"],statcanData["eCommerce"],statcanData["cyberCrime"] ]=
+                           await Promise.all([internetUseEngine.loadData(),eCommerceDataEngine.loadData(),cyberCrimeDataEngine.loadData()])
+        console.log("Data isloaded and ready. ")
     }
     catch(err)
     {

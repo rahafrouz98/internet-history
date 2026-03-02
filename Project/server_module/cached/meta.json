@@ -1,4 +1,167 @@
 {
+  "eCommerce": [
+    {
+      "status": "SUCCESS",
+      "object": {
+        "responseStatusCode": 0,
+        "productId": "21100234",
+        "cansimId": "361-0112",
+        "cubeTitleEn": "Spectator sports, event promoters, artists and related industries, e-commerce sales",
+        "cubeTitleFr": "Sports-spectacles, promoteurs d'événements, artistes et industries connexes, ventes provenant du commerce électronique",
+        "cubeStartDate": "2016-01-01",
+        "cubeEndDate": "2024-01-01",
+        "frequencyCode": 12,
+        "nbSeriesCube": 9,
+        "nbDatapointsCube": 81,
+        "releaseTime": "2026-02-17T08:30",
+        "archiveStatusCode": "2",
+        "archiveStatusEn": "CURRENT - a cube available to the public and that is current",
+        "archiveStatusFr": "ACTIF - un cube qui est disponible au public et qui est toujours mise a jour",
+        "subjectCode": [
+          "2209",
+          "210409"
+        ],
+        "surveyCode": [
+          "5132"
+        ],
+        "dimension": [
+          {
+            "dimensionPositionId": 1,
+            "dimensionNameEn": "Geography",
+            "dimensionNameFr": "Géographie",
+            "hasUom": false,
+            "member": [
+              {
+                "memberId": 1,
+                "parentMemberId": null,
+                "memberNameEn": "Canada",
+                "memberNameFr": "Canada",
+                "classificationCode": "11124",
+                "classificationTypeCode": "1",
+                "geoLevel": 0,
+                "vintage": 2016,
+                "terminated": 0,
+                "memberUomCode": null
+              }
+            ]
+          },
+          {
+            "dimensionPositionId": 2,
+            "dimensionNameEn": "North American Industry Classification System (NAICS)",
+            "dimensionNameFr": "Le système de classification des industries de l'Amérique du Nord (SCIAN)",
+            "hasUom": false,
+            "member": [
+              {
+                "memberId": 1,
+                "parentMemberId": null,
+                "memberNameEn": "Spectator sports",
+                "memberNameFr": "Sports-spectacles",
+                "classificationCode": "7112",
+                "classificationTypeCode": "42",
+                "geoLevel": null,
+                "vintage": null,
+                "terminated": 0,
+                "memberUomCode": null
+              },
+              {
+                "memberId": 2,
+                "parentMemberId": null,
+                "memberNameEn": "Promoters (presenters) of performing arts, sports and similar events",
+                "memberNameFr": "Promoteurs (diffuseurs) d'événements artistiques et sportifs et d'événements similaires",
+                "classificationCode": "7113",
+                "classificationTypeCode": "42",
+                "geoLevel": null,
+                "vintage": null,
+                "terminated": 0,
+                "memberUomCode": null
+              },
+              {
+                "memberId": 3,
+                "parentMemberId": null,
+                "memberNameEn": "Agents and managers for artists, athletes, entertainers and other public figures",
+                "memberNameFr": "Agents et représentants d'artistes, d'athlètes et d'autres personnalités publiques",
+                "classificationCode": "7114",
+                "classificationTypeCode": "42",
+                "geoLevel": null,
+                "vintage": null,
+                "terminated": 0,
+                "memberUomCode": null
+              }
+            ]
+          },
+          {
+            "dimensionPositionId": 3,
+            "dimensionNameEn": "Sales",
+            "dimensionNameFr": "Ventes",
+            "hasUom": true,
+            "member": [
+              {
+                "memberId": 1,
+                "parentMemberId": null,
+                "memberNameEn": "Total sales",
+                "memberNameFr": "Total des ventes",
+                "classificationCode": null,
+                "classificationTypeCode": null,
+                "geoLevel": null,
+                "vintage": null,
+                "terminated": 0,
+                "memberUomCode": 81
+              },
+              {
+                "memberId": 2,
+                "parentMemberId": null,
+                "memberNameEn": "E-commerce sales",
+                "memberNameFr": "Ventes par commerce électronique",
+                "classificationCode": null,
+                "classificationTypeCode": null,
+                "geoLevel": null,
+                "vintage": null,
+                "terminated": 0,
+                "memberUomCode": 81
+              },
+              {
+                "memberId": 3,
+                "parentMemberId": null,
+                "memberNameEn": "E-commerce as a percentage of total sales",
+                "memberNameFr": "Commerce électronique en pourcentage des ventes totales",
+                "classificationCode": null,
+                "classificationTypeCode": null,
+                "geoLevel": null,
+                "vintage": null,
+                "terminated": 0,
+                "memberUomCode": 239
+              }
+            ]
+          }
+        ],
+        "footnote": [
+          {
+            "footnoteId": 1,
+            "footnotesEn": "Estimates for the most recent year are preliminary. Preliminary data are subject to revision. Due to rounding, components may not add to total. Scaling may also affect the calculation of ratios. ",
+            "footnotesFr": "Les estimations pour l'année la plus récente sont des résultats provisoires. Les données provisoires sont susceptibles d'être révisées. Les chiffres ayant été arrondis, les totaux peuvent ne pas correspondre. L'échelonnage pourrait également avoir une incidence sur le calcul des ratios.",
+            "link": {
+              "footnoteId": 1,
+              "dimensionPositionId": 0,
+              "memberId": 0
+            }
+          },
+          {
+            "footnoteId": 2,
+            "footnotesEn": "Data presented in this table from 2022 onward, and for the years prior to 2019, are from the surveyed portion only. The survey portion excludes the smallest firms in terms of revenues earned. These firms account for a relatively small portion of total industry revenues and are only included in the estimates of this table for reference years 2019 to 2021.\n",
+            "footnotesFr": "Dans ce tableau, les données à partir de 2022 et celles des années antérieures à 2019 proviennent de la portion enquêtée seulement. La portion enquêtée exclut les plus petites entreprises en matière de revenus gagnés. Ces entreprises ne comptent que pour une petite part du total des revenus de l'industrie et elles ne sont incluses dans les estimations du tableau que pour les années de référence 2019 à 2021.\n",
+            "link": {
+              "footnoteId": 2,
+              "dimensionPositionId": 0,
+              "memberId": 0
+            }
+          }
+        ],
+        "correctionFootnote": [],
+        "correction": [],
+        "issueDate": "2018-03-02"
+      }
+    }
+  ],
   "cyberCrime": [
     {
       "status": "SUCCESS",
@@ -721,169 +884,6 @@
         "correctionFootnote": [],
         "correction": [],
         "issueDate": "2024-10-24"
-      }
-    }
-  ],
-  "eCommerce": [
-    {
-      "status": "SUCCESS",
-      "object": {
-        "responseStatusCode": 0,
-        "productId": "21100234",
-        "cansimId": "361-0112",
-        "cubeTitleEn": "Spectator sports, event promoters, artists and related industries, e-commerce sales",
-        "cubeTitleFr": "Sports-spectacles, promoteurs d'événements, artistes et industries connexes, ventes provenant du commerce électronique",
-        "cubeStartDate": "2016-01-01",
-        "cubeEndDate": "2024-01-01",
-        "frequencyCode": 12,
-        "nbSeriesCube": 9,
-        "nbDatapointsCube": 81,
-        "releaseTime": "2026-02-17T08:30",
-        "archiveStatusCode": "2",
-        "archiveStatusEn": "CURRENT - a cube available to the public and that is current",
-        "archiveStatusFr": "ACTIF - un cube qui est disponible au public et qui est toujours mise a jour",
-        "subjectCode": [
-          "2209",
-          "210409"
-        ],
-        "surveyCode": [
-          "5132"
-        ],
-        "dimension": [
-          {
-            "dimensionPositionId": 1,
-            "dimensionNameEn": "Geography",
-            "dimensionNameFr": "Géographie",
-            "hasUom": false,
-            "member": [
-              {
-                "memberId": 1,
-                "parentMemberId": null,
-                "memberNameEn": "Canada",
-                "memberNameFr": "Canada",
-                "classificationCode": "11124",
-                "classificationTypeCode": "1",
-                "geoLevel": 0,
-                "vintage": 2016,
-                "terminated": 0,
-                "memberUomCode": null
-              }
-            ]
-          },
-          {
-            "dimensionPositionId": 2,
-            "dimensionNameEn": "North American Industry Classification System (NAICS)",
-            "dimensionNameFr": "Le système de classification des industries de l'Amérique du Nord (SCIAN)",
-            "hasUom": false,
-            "member": [
-              {
-                "memberId": 1,
-                "parentMemberId": null,
-                "memberNameEn": "Spectator sports",
-                "memberNameFr": "Sports-spectacles",
-                "classificationCode": "7112",
-                "classificationTypeCode": "42",
-                "geoLevel": null,
-                "vintage": null,
-                "terminated": 0,
-                "memberUomCode": null
-              },
-              {
-                "memberId": 2,
-                "parentMemberId": null,
-                "memberNameEn": "Promoters (presenters) of performing arts, sports and similar events",
-                "memberNameFr": "Promoteurs (diffuseurs) d'événements artistiques et sportifs et d'événements similaires",
-                "classificationCode": "7113",
-                "classificationTypeCode": "42",
-                "geoLevel": null,
-                "vintage": null,
-                "terminated": 0,
-                "memberUomCode": null
-              },
-              {
-                "memberId": 3,
-                "parentMemberId": null,
-                "memberNameEn": "Agents and managers for artists, athletes, entertainers and other public figures",
-                "memberNameFr": "Agents et représentants d'artistes, d'athlètes et d'autres personnalités publiques",
-                "classificationCode": "7114",
-                "classificationTypeCode": "42",
-                "geoLevel": null,
-                "vintage": null,
-                "terminated": 0,
-                "memberUomCode": null
-              }
-            ]
-          },
-          {
-            "dimensionPositionId": 3,
-            "dimensionNameEn": "Sales",
-            "dimensionNameFr": "Ventes",
-            "hasUom": true,
-            "member": [
-              {
-                "memberId": 1,
-                "parentMemberId": null,
-                "memberNameEn": "Total sales",
-                "memberNameFr": "Total des ventes",
-                "classificationCode": null,
-                "classificationTypeCode": null,
-                "geoLevel": null,
-                "vintage": null,
-                "terminated": 0,
-                "memberUomCode": 81
-              },
-              {
-                "memberId": 2,
-                "parentMemberId": null,
-                "memberNameEn": "E-commerce sales",
-                "memberNameFr": "Ventes par commerce électronique",
-                "classificationCode": null,
-                "classificationTypeCode": null,
-                "geoLevel": null,
-                "vintage": null,
-                "terminated": 0,
-                "memberUomCode": 81
-              },
-              {
-                "memberId": 3,
-                "parentMemberId": null,
-                "memberNameEn": "E-commerce as a percentage of total sales",
-                "memberNameFr": "Commerce électronique en pourcentage des ventes totales",
-                "classificationCode": null,
-                "classificationTypeCode": null,
-                "geoLevel": null,
-                "vintage": null,
-                "terminated": 0,
-                "memberUomCode": 239
-              }
-            ]
-          }
-        ],
-        "footnote": [
-          {
-            "footnoteId": 1,
-            "footnotesEn": "Estimates for the most recent year are preliminary. Preliminary data are subject to revision. Due to rounding, components may not add to total. Scaling may also affect the calculation of ratios. ",
-            "footnotesFr": "Les estimations pour l'année la plus récente sont des résultats provisoires. Les données provisoires sont susceptibles d'être révisées. Les chiffres ayant été arrondis, les totaux peuvent ne pas correspondre. L'échelonnage pourrait également avoir une incidence sur le calcul des ratios.",
-            "link": {
-              "footnoteId": 1,
-              "dimensionPositionId": 0,
-              "memberId": 0
-            }
-          },
-          {
-            "footnoteId": 2,
-            "footnotesEn": "Data presented in this table from 2022 onward, and for the years prior to 2019, are from the surveyed portion only. The survey portion excludes the smallest firms in terms of revenues earned. These firms account for a relatively small portion of total industry revenues and are only included in the estimates of this table for reference years 2019 to 2021.\n",
-            "footnotesFr": "Dans ce tableau, les données à partir de 2022 et celles des années antérieures à 2019 proviennent de la portion enquêtée seulement. La portion enquêtée exclut les plus petites entreprises en matière de revenus gagnés. Ces entreprises ne comptent que pour une petite part du total des revenus de l'industrie et elles ne sont incluses dans les estimations du tableau que pour les années de référence 2019 à 2021.\n",
-            "link": {
-              "footnoteId": 2,
-              "dimensionPositionId": 0,
-              "memberId": 0
-            }
-          }
-        ],
-        "correctionFootnote": [],
-        "correction": [],
-        "issueDate": "2018-03-02"
       }
     }
   ],
