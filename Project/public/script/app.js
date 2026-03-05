@@ -101,7 +101,7 @@ statisticsData
 }
 
 //load and update the contents of the target page
-function loadContents(targetCategory,switchedButton)
+function loadContents(targetCategory)
 {
     //update the content of the menue and general elements for all pages
     let body = document.body;
@@ -140,7 +140,7 @@ function loadContents(targetCategory,switchedButton)
 //add event listeners to the components in the main element(which are loaded by template engines)
 function vistimelineEventlisteners(category)
 {
-    let timelineButton = document.querySelector(".timeline_button");
+    let timelineButton = document.querySelector("#timeline_button");
     timelineButton.addEventListener("click", ()=>{
             document.querySelector("#visualization").scrollIntoView({behavior: "smooth"})
         })

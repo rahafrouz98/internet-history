@@ -95,13 +95,14 @@ nav>button{
     bottom: 5px;
     border-width: 2px;
     font-size: 1em;
-    background-color: var(--theme-light-color);
-    color: var(--theme-color);
-    border-color:var(--theme-color);
+    background-color: var(--theme-color);
+    color: var(--theme-light-color);
+    border-color:var(--theme-light-color);
     margin-bottom: 15px;
     cursor: pointer;
     z-index: 310;
-    border-radius: 5px;
+    border-radius: 6px;
+    padding:2px
 }
 #technology{
     grid-column: 1/2;

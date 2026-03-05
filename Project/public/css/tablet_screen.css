@@ -29,6 +29,9 @@
         width:150px;
         border-radius: 8px;
     }
+    #timeline_button.active{
+        border-radius: 8px;
+    }
     section#visualization{
         padding: 0 10px 0 10px;
         height: 250px;
