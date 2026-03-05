@@ -22,12 +22,15 @@
         height: 160px;
         max-width: 100%;
     }
-    nav{
+    #toolbar{
         height: 40px;
     }
-    nav>button{
+    #toolbar button{
         width:150px;
         border-radius: 8px;
+    }
+    main *:focus {
+        scroll-margin-top: 200px;
     }
     #timeline_button.active{
         border-radius: 8px;

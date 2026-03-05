@@ -26,6 +26,9 @@
     #logo>img{
         height: 200px;
     }
+    main *:focus {
+        scroll-margin-top: 250px;
+    }
     section#visualization{
         height: 300px;
     }

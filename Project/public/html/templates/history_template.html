@@ -1,4 +1,4 @@
-<section id="visualization"></section>
+<section id="visualization" role="figure"></section>
 <section id="history">
     {{#items}} 
     <div class="history_item" {{#data-}}>
@@ -13,7 +13,7 @@
         {{#each videos}}
         <div class="video">
             <iframe src={{link}}
-            allowfullscreen>
+            allowfullscreen title="youtube video for {{title}}">
             </iframe>
         </div>
         {{/each}}
