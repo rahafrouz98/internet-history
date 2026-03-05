@@ -2,26 +2,7 @@
 class HistoryData{
     data={};
 
-    //this function is used instead of the constructor because constructor can not wahe await in it.
-    async fetchData()
-    {
-        //PromiseAll is used so both asyncfunctions work in parallel
-        try
-        {
-            const [technologyData, legislationData] = await Promise.all([ this.#fetchTechnologyHistory(), this.#fetchLegislationHistory()])
-            this.data={
-                "technology":technologyData["technology"],
-                "legislation":legislationData["legislation"]
-            }
-            this.#idInserter(this.data["technology"]);
-            this.#idInserter(this.data["legislation"]);
-        }
-        catch(err)
-        {
-            throw err;
-        }
-    }
-    //this funstion adds id to the items of the data. This id will later be used for linking to the data set
+    //this funstion adds id to the items of the data. This id will later be used for linking to the data set in vis time-lines
     #idInserter(itemList)
     {
         let id = 1;
@@ -36,35 +17,26 @@ class HistoryData{
         data.sort((a,b)=>Number(a.start)-Number(b.start))
     }
 
-    async #fetchTechnologyHistory()
+    async loadData()
     {
         try
         {
-            let response = await fetch("/public/assets/json/technology.json");
+            let response = await fetch("/history");
             let data = await response.json();
-            this.#sortData(data.technology);
-            return data;
+            this.#sortData(data["technology"]);
+            this.#sortData(data["legislation"]);
+            this.#idInserter(data["technology"]);
+            this.#idInserter(data["legislation"]);
+            this.data = data;
         }
         catch(err)
         {
-            throw  err;
+            console.log("fetching data at for technology history was unsuccessful. ")
+            console.log("Error message: " + err)
         }
         
     }
-    async #fetchLegislationHistory()
-    {
-        try
-        {
-            let response = await fetch("/public/assets/json/legislation.json");
-            let data = await response.json();
-            this.#sortData(data.legislation);
-            return data;
-        }
-        catch(err)
-        {
-            throw  err;
-        }
-    }
+
 }
 
 export {HistoryData}

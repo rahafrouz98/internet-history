@@ -20,18 +20,17 @@ let cyberCrimeDataEngine = require("./server_module/cybercrime_data_engine.js");
 async function startServer()
 {
      console.log("Data is being loaded from Statcan . . . ")
+    let statcanData =
+        {
+            "internetUse":{},
+            "cyberCrime":{},
+            "eCommerce":{}
+        };
     try 
     {
         await coordinateFinder.cacheMetaData();
-        let statcanData =
-                    {
-                        "internetUse":{},
-                        "cyberCrime":{},
-                        "eCommerce":{}
-                    };
-        [statcanData["internetUse"],statcanData["eCommerce"],statcanData["cyberCrime"] ]=
-                           await Promise.all([internetUseEngine.loadData(),eCommerceDataEngine.loadData(),cyberCrimeDataEngine.loadData()])
-        console.log("Data isloaded and ready. ")
+        [statcanData["internetUse"],statcanData["eCommerce"],statcanData["cyberCrime"] ]=await Promise.all([internetUseEngine.loadData(),eCommerceDataEngine.loadData(),cyberCrimeDataEngine.loadData()]);
+        console.log("Data is loaded and ready. ");
     }
     catch(err)
     {
@@ -48,49 +47,31 @@ async function startServer()
     app.get('/', function (req, res) {
         res.sendFile(__dirname + '/public/html/index.html');
     })
-  
-    app.post('/ecommerce', async function (req, res) {
-        console.log("request for StatCan E-Commerce api is received")
-        let reqBody = req.body;
-        let coordinateObj = getCoordinateForECommerce(reqBody["industry"], reqBody["sales"])
+    app.get('/history',async function (req, res) { 
         try
         {
-            let data = await extractDataFromCube(coordinateObj);
-            res.json(data[0]["object"]["vectorDataPoint"]);
+            let historyData = 
+            { 
+                "technology":require('./server_module/database/technology'),
+                "legislation":require('./server_module/database/legislation')
+            }
+            res.json(historyData);
         }
         catch(err)
         {
-            console.error(err);
+            console.error('error at /statistics: '+err);
             res.status(500).json({error: err.message});
         }
     })
-    app.post('/internetuse', async function (req, res) {
-        console.log("request for StatCan Internet Use api is received")
-        let reqBody = req.body;
-        let coordinateObj = getCoordinateForInternetUse(reqBody["geo"], reqBody["agegroup"])
+
+    app.get('/statistics', async function (req, res) {
         try
         {
-            data = await extractDataFromCube(coordinateObj);
-            res.json(data[0]["object"]["vectorDataPoint"]);
+            res.json(statcanData);
         }
         catch(err)
         {
-            // console.error(err);
-            // res.status(500).json({error: err.message});
-        }
-    })
-    app.post('/cybercrime', async function (req, res) {
-        console.log("request for StatCan Cyber Crime api is received")
-        let reqBody = req.body;
-        let coordinateObj = getCoordinateForCyberCrime(reqBody["geo"], reqBody["violation"],reqBody["statistic"],reqBody["calendarquarter"])
-        try
-        {
-            data = await extractDataFromCube(coordinateObj);
-            res.json(data[0]["object"]["vectorDataPoint"]);
-        }
-        catch(err)
-        {
-            console.error(err);
+            console.error('error at /statistics: '+err);
             res.status(500).json({error: err.message});
         }
     })

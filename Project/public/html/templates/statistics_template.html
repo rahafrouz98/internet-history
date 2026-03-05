@@ -1,77 +1,112 @@
-<section id="ciber_crime" class="category_container">
-    <div class"chart_title">Police Reported cybercrime[1]</div>
+<section class="statistics">
+    <div class="chart_title">Police Reported Cybercrime Incidents by Province/Territory<a href = "https://www.statcan.gc.ca/en/start">[1]</a></div>
     <div class="chart_container">
-        <canvas id="crime_chart"></canvas></div>
-    <div class = "chart_data_container">
+        <canvas id="crime_chart_bar"></canvas>
+    </div>
+    <div class = "data_container">
         <form>
             <div class="radio">
                 <p>Violation:</p>
-                    <div><input type="radio" name="violation" value="Total, all violations" checked>Total, all violations</div>
+                <div><input type="radio" name="violation" value="Total, all violations" checked disabled>Total, all violations</div>
             </div>
             <div class="check_box">
                 <p>Geography:</p>
-                    {{#each geo_crime}}
-                    <div><input type="checkbox" name="geo" value="{{geo}}" checked>{{geo}}</div>
-                    {{/each}}  
+                {{#each geo_cyberCrime}}
+                <div><input type="checkbox" name="geo" value="{{geo}}" checked>{{geo}}</div>
+                {{/each}}  
             </div> 
         </form>
     </div>
 </section>
-<section id="e_commerce"class="category_container">
-    <div class"chart_title">Police Reported cybercrime[1]</div>
+<section class="statistics">
+    <div class="chart_title">Police Reported Cybercrime Incidents by Violation Categories<a href = "https://www.statcan.gc.ca/en/start">[1]</a></div>
     <div class="chart_container">
-        <canvas id="sale_chart"></canvas></div>
-    <div class = "chart_data_container">
+        <canvas id="crime_chart_doughnut"></canvas>
+    </div>
+    <div class = "data_container">
         <form>
-            <div class="check_box">
+            <div class="radio">
                 <p>Years:</p>
-                    {{#each year_sale}}
-                    <div><input type="checkbox" name="year" value="{{year}}" checked>{{year}}</div>
-                    {{/each}}
+                {{#each year_cyberCrime}}
+                <div><input type="radio" name="violation" value="{{year}}" checked>{{year}}</div>
+                {{/each}}
             </div>
+            <div class="check_box">
+                <p>Geography:</p>
+                <div><input type="checkbox" name="geo" value="Canada" checked disabled>Canada</div>
+            </div> 
+        </form>
+    </div>
+</section>
+<section class="statistics">
+    <div class="chart_title">Sales Volume by Industry Types<a href = "https://www.statcan.gc.ca/en/start">[1]</a></div>
+    <div class="chart_container">
+        <canvas id="sale_chart"></canvas>
+    </div>
+    <div class = "data_container">
+        <form>
             <div class="radio" id="saletest">
                 <p>Industries:</p>
-                    {{#each industry_sale}}
-                    <div><input type="radio" name="industry" value="{{industry}}">{{industry}}</div>
-                    {{/each}}  
+                {{#each industry_eCommerce}}
+                <div><input type="radio" name="industry" value="{{industry}}">{{industry}}</div>
+                {{/each}}  
             </div> 
+            <div class="check_box">
+                <p>Years:</p>
+                {{#each year_eCommerce}}
+                <div><input type="checkbox" name="year" value="{{year}}" checked>{{year}}</div>
+                {{/each}}
+            </div>
         </form>
     </div>
 </section>
-<section id="internet_use_polar" class="category_container">
-    <div class"chart_title">Police Reported cybercrime[1]</div>
+<section class="statistics">
+    <div class="chart_title">Internet Use Percentage of Age-Groups based on Geography<a href = "https://www.statcan.gc.ca/en/start">[1]</a></div>
     <div class="chart_container">
-        <canvas id="internet_polar_chart"></canvas></div>
-    <div class = "chart_data_container">
+        <canvas id="internet_polar_chart"></canvas>
+    </div>
+    <div class = "data_container">
         <form>
             <div class="radio" id="internet test">
                 <p>Age Group:</p>
-                    {{#each geo_internet}}
-                    <div><input type="radio" name="geo" value="{{geo}}">{{geo}}</div>
-                    {{/each}}  
+                {{#each geo_internetUse}}
+                <div><input type="radio" name="geo" value="{{geo}}">{{geo}}</div>
+                {{/each}}  
             </div> 
         </form>
     </div>
 </section>
-<section id="internet_use_trend" class="category_container">
+<section class="statistics">
+    <div class="chart_title">Internet Use Percentage of Age-Groups trend<a href = "https://www.statcan.gc.ca/en/start">[1]</a></div>
     <div class="chart_container">
-        <canvas id="internet_line_chart"></canvas></div>
-    <div class = "chart_data_container">
+        <canvas id="internet_line_chart"></canvas>
+    </div>
+    <div class = "data_container">
         <form>
             <div class="check_box">
                 <p>Years:</p>
-                    {{#each year_internet}}
-                    <div><input type="checkbox" name="year" value="{{year}}" checked>{{year}}</div>
-                    {{/each}}
+                {{#each year_internetUse}}
+                <div><input type="checkbox" name="year" value="{{year}}" checked>{{year}}</div>
+                {{/each}}
             </div>
             <div class="radio" id="internet test">
                 <p>Geography:</p>
-                    {{#each geo_internet}}
-                    <div><input type="radio" name="geo" value="{{geo}}">{{geo}}</div>
-                    {{/each}}  
+                {{#each geo_internetUse}}
+                <div><input type="radio" name="geo" value="{{geo}}">{{geo}}</div>
+                {{/each}}  
             </div> 
         </form>
     </div>
 </section>
-
-<section id="references"></section>
+<section id="reference"> Resources:
+    <ol>
+        <li>
+            <a href = "https://www.statcan.gc.ca/en/start">Statistics Canada </a>
+        </li>
+    </ol>
+</section>
+<footer>
+    <p>Contact me:</p> 
+    <div><a href="mailto:h.rahafrouz@gmail.com">h.rahafrouz@gmail.com</a></div>
+    <div><a href="mailto:h197@student.london.ac.uk">h197@student.london.ac.uk</a></div>
+</footer>

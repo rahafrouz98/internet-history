@@ -9,23 +9,21 @@ import {HistoryTimeline} from "./timeline.js";
 import {HistoryData} from "./historydata.js";
 import {HistoryTemplateEngine} from "./history_template_engine.js";
 import {StatisticsTemplateEngine} from "./statistics_template_engine.js";
-import {EcommerceData} from "./statcan_data/ecommerce_data.js";
-import {cyberCrimeData} from "./statcan_data/cyber_crime_data.js";
-import {CrimeBarChart} from "./charts/crime_bar_chart.js";
-import {InternetUseData} from "./statcan_data/internet_use_data.js"
+import {BarChart} from "./charts/bar_chart.js";
 import {LineChart} from "./charts/line_chart.js"
 import {PolarChart} from "./charts/polar_chart.js"
+import {DoughnutChart} from "./charts/doughnut_chart.js"
 let renderedHTMLContainer ={};
 let historyTimeline = null;
 let saleLineChart = null;
 let crimeBarChart = null;
+let crimeDoughnutChart = null;
 let internetLineChart = null;
-let internetUse = null;
-let cyberCrime = null;
-let eCommerce = null;
 let statisticsEngine=null;
-let statisticsLoaded = false;
 let internetPolarChart = null;
+let historyData = null;
+let statisticsData = null;
+
 
 document.addEventListener("DOMContentLoaded", async()=>{
 
@@ -35,56 +33,46 @@ document.addEventListener("DOMContentLoaded", async()=>{
 
 async function initializ()
 {
-    //create a HistoryData and fetch data
-    let historyData = new HistoryData;
-    await historyData.fetchData();
+    //load history and statistics data with Promise.all() to decrease delays
+    historyData = new HistoryData;
+    await historyData.loadData()
+    try
+    {
+        let statisticsResponse = await fetch('/statistics');
+        statisticsData = await statisticsResponse.json();
+    }
+    catch(err)
+    {
+        console.log("fetching data from /statistics was unsuccessful")
+        console.log("Error message: "+ err)
+    }
+    console.log(statisticsData)
+    console.log(historyData.data)
     //create a HistoryItemsTEmplateEngine and generate the rendered htmls for technical and legislation pages 
     let historyEngine = new HistoryTemplateEngine(historyData.data);
     //historyEngine.enginOperator() returns an object of two elements. First element is the technology data and the second is the legislation data.
     renderedHTMLContainer = await historyEngine.enginOperator();
-    //When the statistics data is not loaded yet the statistics page will show "Data is being loaded for StatCan..."
-    renderedHTMLContainer["statistics"] = `<div class="loading">Data is being loaded for Statcan...</div>`
-    loadStatCanData().then(async()=>{
-                                statisticsEngine = new StatisticsTemplateEngine(eCommerce.data, cyberCrime.data,internetUse.data);
-                                //statisticsEngine.enginOperator() returns a text as the rendered HTML for the statistics page
-                                renderedHTMLContainer["statistics"] = await statisticsEngine.enginOperator()
-                                saleLineChart = new LineChart(eCommerce.data,"Spectator sports","industry" ,"year", "salesType","line");//(data,selectedCategory,categories,labels,legends,type)
-                                crimeBarChart = new CrimeBarChart(cyberCrime.data, "Total, all violations", "geo");//(data,selectedCategory,categories,labels,legends,type)
-                                internetPolarChart = new PolarChart(internetUse.data, "Canada", "geo","age","age" ,"polarArea");//(data,selectedCategory,categories,labels,legends,type)
-                                internetLineChart = new LineChart(internetUse.data, "Canada", "geo","year", "age","line");//(data,selectedCategory,categories,labels,legends,type)
-                                statisticsLoaded =true;
-                                //this part is for when the statistics page is selected sooner than data is loaded
-                                let body = document.body;
-                                let bodyCategory = document.body.dataset.category;
-                                if(bodyCategory==="statistics")
-                                {
-                                    let targetMain = document.querySelector("body>main");
-                                    targetMain.innerHTML=renderedHTMLContainer["statistics"];
-                                    loadStatisticsCharts();
-                                }
+    //this engin is used for rendering an html for the main element of statistics page
+    statisticsEngine = new StatisticsTemplateEngine(statisticsData);
+    //statisticsEngine.enginOperator() returns a text as the rendered HTML for the statistics page
+    renderedHTMLContainer["statistics"] = await statisticsEngine.enginOperator()
+    saleLineChart = new LineChart(statisticsData["eCommerce"],"Spectator sports","industry" ,"year", "salesType","line");//(data,selectedCategory,categories,labels,legends,type)
+    crimeDoughnutChart = new DoughnutChart(statisticsData["cyberCrime"], "Canada", "geo","violation",null,"doughnut", "2025");//(data,selectedCategory,categories,labels,legends,type, selectedYear)
+    crimeBarChart = new BarChart(statisticsData["cyberCrime"], "Total, all violations", "violation", "geo", "year",'bar');//(data,selectedCategory,categories,labels,legends,type)
+    internetPolarChart = new PolarChart(statisticsData["internetUse"], "Canada", "geo","age","age" ,"polarArea");//(data,selectedCategory,categories,labels,legends,type)
+    internetLineChart = new LineChart(statisticsData["internetUse"], "Canada", "geo","year", "age","line");//(data,selectedCategory,categories,labels,legends,type)                         
 
-                                }).catch((err)=>console.log(err));
-
-    //embed the rendered html in the main element of the page
+    //embed the rendered html in the main element of the technology page 
     let mainElement = document.querySelector("body>main");
     mainElement.innerHTML = renderedHTMLContainer["technology"];
-    //generateh a vis-timeline and insert it in the page
+    //generate a vis-timeline and insert it in the page
     let visContainer = document.getElementById("visualization"); 
-    historyTimeline = new HistoryTimeline(historyData.data, "100%", "40vh");
+    historyTimeline = new HistoryTimeline(historyData.data, "100%", "100%");
     historyTimeline.loadTimeilne("technology",visContainer)
     
-
     menuEventListeners();
     //for start it add event listeners to the first page
     vistimelineEventlisteners("technology");
-}
-async function loadStatCanData()
-{
-    eCommerce = new EcommerceData();
-    cyberCrime = new cyberCrimeData();
-    internetUse = new InternetUseData();
-    await Promise.all([internetUse.loadData(),cyberCrime.loadData(), eCommerce.loadData()] )
-
 }
 
 function menuEventListeners()
@@ -98,7 +86,7 @@ function menuEventListeners()
         //console.log("technology clicked in: "+bodyCategory)
         loadContents("technology", event.currentTarget)
     })
-
+statisticsData
     let legislationButton = document.getElementById("legislation");
     legislationButton.addEventListener("click",(event)=>{
         //console.log("legislation clicked in: "+bodyCategory)
@@ -122,9 +110,15 @@ function loadContents(targetCategory,switchedButton)
     {
         return;
     }
-    let activeButton = document.querySelector("nav>ul>li>a.active");
-    activeButton.classList.remove("active");
-    switchedButton.classList.add("active");
+    let timelineButton = document.getElementById("timeline_button")
+    if(targetCategory === "statistics")
+    {
+        timelineButton.classList.remove("active");
+    }
+    else if (!timelineButton.classList.contains("active") )
+    {
+        timelineButton.classList.add("active");
+    }
     body.dataset.category = targetCategory;
     let targetMain = document.querySelector("body>main");
     targetMain.innerHTML=renderedHTMLContainer[targetCategory];
@@ -139,22 +133,18 @@ function loadContents(targetCategory,switchedButton)
             vistimelineEventlisteners(targetCategory);
             break;
         case "statistics":
-            if(statisticsLoaded)
-            {
                 loadStatisticsCharts();
-            }
     }
 
 }
 //add event listeners to the components in the main element(which are loaded by template engines)
 function vistimelineEventlisteners(category)
 {
-    let timelineButtonList = document.querySelectorAll(".timeline_button");
-    timelineButtonList.forEach(button=>{
-        button.addEventListener("click", ()=>{
+    let timelineButton = document.querySelector(".timeline_button");
+    timelineButton.addEventListener("click", ()=>{
             document.querySelector("#visualization").scrollIntoView({behavior: "smooth"})
         })
-    })
+    
 }
 //this function holds the execution for 5000 seconds
 function hold()
@@ -165,12 +155,14 @@ function loadStatisticsCharts()
 {
         let saleLineContainer = document.getElementById("sale_chart");
         saleLineChart.makeChart(saleLineContainer);
-        let crimeBarContainer = document.getElementById("crime_chart");
+        let crimeBarContainer = document.getElementById("crime_chart_bar");
         crimeBarChart.makeChart(crimeBarContainer);
         let lineInternetUseContainer = document.getElementById("internet_line_chart");
         internetLineChart.makeChart(lineInternetUseContainer);
         let polarInternetUseContainer = document.getElementById("internet_polar_chart");
         internetPolarChart.makeChart(polarInternetUseContainer);
+        let crimeDoughnutContainer = document.getElementById("crime_chart_doughnut")
+        crimeDoughnutChart.makeChart(crimeDoughnutContainer);
 }
 
 

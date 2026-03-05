@@ -1,0 +1,97 @@
+@media(min-width:768px)
+{
+    html {
+        font-size: 17px;
+    }
+    body::-webkit-scrollbar-thumb {
+        background-color: var(--theme-color);
+        border-radius: 8px;
+        border: 4px solid var(--theme-light-color)
+    }
+    body::-webkit-scrollbar {
+        width: 12px;
+    }
+    header{
+        height: 200px;
+        grid-template-rows: 160px 40px;
+    }
+    #logo{
+        height: 160px;
+    }
+    #logo>img{
+        height: 160px;
+        max-width: 100%;
+    }
+    nav{
+        height: 40px;
+    }
+    nav>button{
+        width:150px;
+        border-radius: 8px;
+    }
+    section#visualization{
+        padding: 0 10px 0 10px;
+        height: 250px;
+    }
+    .content_title{
+        padding: 15px 0 15px 15px;
+    }
+    .text{
+        padding: 0px 25px 0 25px;
+    }
+    div.image{
+        width:500px;
+    }
+    .timeline_button.active{
+        right:20px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+    }
+    .vis-panel::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    border: 3px solid var(--theme-light-color)
+    }
+    .vis-panel::-webkit-scrollbar {
+    width: 12px;
+    }
+    section.statistics{
+        grid-template-columns: 3fr 1fr;
+    }
+    section.statistics> div.chart_title{
+        grid-column: 1/2;
+        padding: 0 20px 20px 20px;
+    }
+    section.statistics>div.chart_container
+    {
+        grid-column: 1/2;
+        width: 560px;
+    }
+    section.statistics>div.chart_container>canvas{
+        grid-column: 2/-1;
+        inset: 0px;
+    }
+    section.statistics>div.data_container{
+        grid-column: 2/-1;
+    }
+    section.statistics>div.data_container>form{
+        display:grid;
+        grid-template-columns: 1fr;
+        align-items: baseline;
+        justify-items: center;
+    }
+    section.statistics>div.data_container>form div{
+        padding: 0 0 24px 0;
+    }
+    section.statistics>div.data_container>form div>p{
+        padding: 0 0 4px 0;
+    }
+    section.statistics>div.data_container>form div div{
+        padding-left: 8px;
+        padding: 0 0 4px 12px;
+    }
+    #reference{
+        padding: 15px 0 15px 15px;
+    }
+}
+
+

@@ -1,0 +1,55 @@
+
+@media(min-width:1024px)
+{
+    html {
+        font-size: 18px;
+    }
+
+    body::-webkit-scrollbar-track {
+        background: var(--theme-timeline-color);
+    }
+    body::-webkit-scrollbar-thumb {
+        background-color: var(--theme-color);
+        border-radius: 10px;
+        border: 5px solid var(--theme-light-color)
+    }
+    body::-webkit-scrollbar {
+        width: 15px;
+    }
+    header{
+        height: 250px;
+        grid-template-rows: 200px 50px;
+    }
+    #logo{
+        height: 200px;
+    }
+    #logo>img{
+        height: 200px;
+    }
+    section#visualization{
+        height: 300px;
+    }
+    div.image{
+        width:800px;
+    }
+    div.video{
+        width:800px;
+    }
+    section.statistics>div.chart_container
+    {
+        padding:20px;
+        width: 700px;
+    }
+    section.statistics>div.data_container>form div{
+        padding: 0 0 30px 0;
+    }
+    section.statistics>div.data_container>form div>p{
+        padding: 0 0 5px 0;
+    }
+    section.statistics>div.data_container>form div div{
+        padding-left: 10px;
+        padding: 0 0 5px 15px;
+    }
+}
+
+

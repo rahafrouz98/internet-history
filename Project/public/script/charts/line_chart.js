@@ -14,18 +14,31 @@ class LineChart
   categoriesList = null;
   xSeries = null;
   legendList = null;
+  legendPadding = null;
   constructor(data,selectedCategory,categories,labels,legends,type)
   {
     this.data= data;
     this.selectedCategory = selectedCategory;
     //this maked a shadow copy of the list and changing it does not change the original one.
-    this.labelsList = [...this.data["labelsObject"][labels]];
     this.type = type;
     this.categoriesList =[...this.data["labelsObject"][categories]];
-    this.legendList = [...this.data["labelsObject"][legends]]
+    legends? this.legendList = [...this.data["labelsObject"][legends]]: null;
+    labels? this.labelsList = [...this.data["labelsObject"][labels]]: null;
+    this.legendPadding = 8;
   }
-  addEventListener()
+  setupControllers()
   {
+    if (this.radioButtonsContainer)
+    {
+      for(let radio of this.radioButtonsContainer)
+      {
+        if (radio.value == this.selectedCategory)
+        {
+          radio.checked=true;
+          break;
+        }
+      }
+    }
     this.radioButtonsContainer?.forEach(radio => {
       radio.addEventListener("change", (e)=>{
         this.selectedCategory = e.target.value;
@@ -41,6 +54,8 @@ class LineChart
           {
             this.labelsList.push(e.target.value)
             this.labelsList.sort()
+            console.log("sorted")
+            console.log(this.labelsList)
           }
           else
           {
@@ -53,7 +68,6 @@ class LineChart
       })
     })
   }
-
   updateDataSet()
   {
     this.dataSets= [];
@@ -75,39 +89,31 @@ class LineChart
   loadControllers(container)
   {
     //finds the radio buttons and put thme in a container and selects one of them as a default
-    this.radioButtonsContainer = container.parentElement.parentElement.querySelector("div.chart_data_container").querySelector('div.radio')?.querySelectorAll("input");
-
-    for(let radio of this.radioButtonsContainer)
-    {
-      if (radio.value == this.selectedCategory)
-      {
-        radio.checked=true;
-        break;
-      }
-    }
+    this.radioButtonsContainer = container.parentElement.parentElement?.querySelector("div.data_container")?.querySelector('div.radio')?.querySelectorAll("input");
+    
     //finds the check boxes and put them in a container
-    this.chechBoxContainer = container.parentElement.parentElement.querySelector("div.chart_data_container").querySelector("div.check_box")?.querySelectorAll("input")
+    this.chechBoxContainer = container.parentElement.parentElement?.querySelector("div.data_container")?.querySelector("div.check_box")?.querySelectorAll("input")
   }
   makeChart(container)
   {
     this.loadControllers(container);
-    this.addEventListener();
+    this.setupControllers()
     this.updateDataSet();
-    this.chart =  new Chart(container, 
-    {
+    this.chart =  new Chart(container, {
         type: this.type,
         data: {
                 labels: this.labelsList,
                 datasets: this.dataSets
-              },
-        options: {
-                    scales: 
-                    {
-                      y: {
-                        beginAtZero: true
-                      }
+            },
+        options:{
+                plugins:{
+                  legend:{
+                    labels:{
+                      padding:this.legendPadding
                     }
                   }
+                }
+              }
     });
   }
 }

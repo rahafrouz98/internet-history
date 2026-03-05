@@ -17,7 +17,7 @@ class HistoryTimeline{
     {
         this.#options = {
             width: w,
-            height: h,
+            maxHeight: h,
             stack:true,
             zoomMin: 150000000000,
             verticalScroll:true,
@@ -41,6 +41,7 @@ class HistoryTimeline{
             let selectedItem = document.querySelector(`[data-content="${properties["items"][0]}"]`);
             selectedItem ? selectedItem.scrollIntoView({behavior: "smooth"}): null;
         });
+        window.addEventListener("resize", () => {this.timeline.redraw();});
     }
     #dataSetExtractor(data)
     {

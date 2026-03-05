@@ -6,7 +6,7 @@
         <div class="text">{{content}}</div>
         {{#each images}}
         <div class="image">
-            <div><img src={{address}} alt={{image_name}}></div>
+            <img src={{address}} alt={{image_name_alt}}>
             <div>{{image_name}}</div>
         </div>
         {{/each}}
@@ -17,15 +17,19 @@
             </iframe>
         </div>
         {{/each}}
-        <button class="timeline_button">Timeline</button>
     </div>
     {{/items}}
 </section>
-<section id="references">
-{{#references}}
-    {{#each references}}
-    <div>   </div>
-    {{/each}}
-{{/references}}
-    
+<section id="reference">
+    <div>Resources:</div>
+    <ol> 
+        {{#each references}}
+        <li>{{reference}}</li>
+        {{/each}}
+    </ol> 
  </section>
+<footer>
+    <p>Contact me:</p> 
+    <div><a href="mailto:h.rahafrouz@gmail.com">h.rahafrouz@gmail.com</a></div>
+    <div><a href="mailto:h197@student.london.ac.uk">h197@student.london.ac.uk</a></div> 
+</footer>

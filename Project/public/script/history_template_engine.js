@@ -26,41 +26,62 @@ class HistoryTemplateEngine {
         }                                                                              
     }
 
-    #referenceExtractor(item)
+
+    #contentItemReferenceExtractor(item)
     {
         let tempReferenceList=[];
         //extract the references of content  
         item["references"].forEach(reference => {
             tempReferenceList.push(reference); 
             });
+        return tempReferenceList;
+    }
+    #imageItemReferenceExtractor(item)
+    {
+        let tempReferenceList=[];
         //extract the references of images 
         item["images"].forEach(image=>{
             tempReferenceList.push(image["reference"]); 
-        })
+            })
         return tempReferenceList;
     }
     #referenceColloctor()
     {
+        //list of references for the technology
         this.#data["technology"].forEach((item)=>{
-            this.#referenceLists["technology"].push(...this.#referenceExtractor(item))
+            this.#referenceLists["technology"].push(...this.#contentItemReferenceExtractor(item));
+            this.#referenceLists["technology"].push(...this.#imageItemReferenceExtractor(item));
         })
+        //list of references for the legislation
         this.#data["legislation"].forEach((item)=>{
-            this.#referenceLists["legislation"].push(...this.#referenceExtractor(item))
+            this.#referenceLists["legislation"].push(...this.#contentItemReferenceExtractor(item));
+            this.#referenceLists["legislation"].push(...this.#imageItemReferenceExtractor(item));
         })
     }
-    #referenceIndexEmbedder(item, tempTemplate, category)
+    #referenceIndexEmbedder(item, itemTemplate, category)
     {
-        let itemReferenceList = this.#referenceExtractor(item)
-
-        tempTemplate = tempTemplate.replace(/{{r}}/g, (match) => {
-            let tempIndex = this.#referenceLists[category].indexOf(itemReferenceList[0]);
-            itemReferenceList.shift();
-            return `[${tempIndex+1}]`;
+        //in the reference list for each item, the references are sorted based on the order in which they are cited in the text.
+        //this variable is used so  references indexes get extracted  and inderted in the content according to their citted order.
+        let tempContentItemReferenceList = this.#contentItemReferenceExtractor(item)
+        //insert the references indices for the content
+        itemTemplate = itemTemplate.replace(/{{r}}/g, (match) => {
+            let tempIndex = this.#referenceLists[category].indexOf(tempContentItemReferenceList[0]);
+            let referenceElement = `<a href="${tempContentItemReferenceList[0]}" title="${tempContentItemReferenceList[0]}" >[${tempIndex+1}]</a>`
+            tempContentItemReferenceList.shift();
+            return referenceElement;
+         })
+         let tempImageItemReferenceList = this.#imageItemReferenceExtractor(item)
+         //insert reference index for each image 
+         itemTemplate = itemTemplate.replace(/{{image_r}}/g, (match) => {
+            let tempIndex = this.#referenceLists[category].indexOf(tempImageItemReferenceList[0]);
+            let referenceElement = `<a href="${tempImageItemReferenceList[0]}" title="${tempImageItemReferenceList[0]}" >[${tempIndex+1}] </a>`
+            tempImageItemReferenceList.shift();
+            return referenceElement;
          })
 
-        return tempTemplate; 
+        return itemTemplate; 
     }
-    //data-* is added to the elements to use them for linking them to the timeline
+    //data-* is added to the HTML elements to use them for linking and scrolling  them to the timeline
     #dataSetPlacer(item, tempTemplate)
     {
         tempTemplate = tempTemplate.replace(/{{#data-}}/, (match)=>{
@@ -85,51 +106,61 @@ class HistoryTemplateEngine {
             });
         return tempTemplate
     }
+    #replaceImageFragment(imageTemplateFragment, imageItem) 
+    {
+        return imageTemplateFragment.replace(/{{(\w+)}}/g, (match, elementFragment)=>
+            {
+                if(elementFragment ==="image_name" && imageItem["reference"])
+                {
+                    //it will be used later when inserting reference indices in the template
+                    return imageItem[elementFragment]+"{{image_r}}";
+                }
+                //it insertes the image name in the slt attribute of html
+                else if(elementFragment ==="image_name_alt")
+                {
+                    return imageItem["image_name"];
+                }
+                return imageItem[elementFragment];
+            });
+    }
 
     #renderTemplate(data,category) 
     {
         //to prevent the original template from change
         let template = this.#template;
         let output= "";
+        //this replace the fragment in between {{#items}} and {{\/items}} with the content of each item in the history data. if used this for loop here because
+        //there was a using pure regEx could not separate the outer and inner loop
         template = template.replace(/{{#items}}([\s\S]*?){{\/items}}/, (match, contentFragment)=>{
             data.forEach((item)=>{
                 let tempTemplate= contentFragment;
-                // Each loops (for videos and images)
-                tempTemplate = tempTemplate.replace(/{{#each (\w+)}}([\s\S]*?){{\/each}}/g, (match, arrayName, tempFragment) => {
+                // Each loops for videos and images of the items in the history data
+                tempTemplate = tempTemplate.replace(/{{#each (\w+)}}([\s\S]*?){{\/each}}/g, (match, arrayName, itemTemplateFragment) => {
                     const listOfThings = item[arrayName];
-                    if (!listOfThings.length) {
-                        return '';
-                    }
                     if (arrayName === "videos" )
                     {
-                        //This variable is used so it enables the program to embed multiple videos from the array of videos in each item( if there are multiple videos)
-                        let tempTempFragment="";
-                        //here the innerItem would be the link(string) to the video
-                        listOfThings.forEach( (innerItem)=> {
-                            tempTempFragment += tempFragment.replace( /{{(\w+)}}/, innerItem )
-                        })
-                        return tempTempFragment;
+                        return listOfThings.map(video=>{return itemTemplateFragment.replace( /{{(\w+)}}/, video )}).join("");
                     }
                     else if(arrayName === "images")
                     {
-                        //This variable is used so it enables the program to embed multiple images from the array of videos in each item( if there are multiple images)
-                        let tempTempFragment="";
-                        //here the innerItem is an object that contains three elements
-                        listOfThings.forEach( (innerItem)=> {
-                            tempTempFragment += tempFragment.replace( /{{(\w+)}}/g, (match, imageElement)=>{
-                                return innerItem[imageElement];
-                            })
-                        })
-                        return tempTempFragment;
-
+                        return listOfThings.map(imageItem=>{return this.#replaceImageFragment(itemTemplateFragment, imageItem)}).join("");
                     }
                 });
-                // Variable swapping
+                // to replace contents, titles
                 tempTemplate = tempTemplate.replace(/{{(\w+)}}/g, (match, dataField) => {
-                    return item[dataField];
+                    //it reserves the {{r}} in the image_names(inserted by #replaceImageFragment() ) for later to be replaced by reference images
+                    if(dataField !== "image_r")
+                    {
+                       return item[dataField]; 
+                    }
+                    //it makes the {{image_r}} remain unchanged
+                    else
+                    {
+                        return "{{image_r}}"
+                    }
                 });
 
-                //replace data-set
+                //replace data-set in the html element for each item for linking it to the vis-timeline
                 tempTemplate = this.#dataSetPlacer(item, tempTemplate);
 
                 //referencing
@@ -143,6 +174,11 @@ class HistoryTemplateEngine {
             }) 
             return output;
         })
+        // Each loops for references
+        template = template.replace(/{{#each (\w+)}}([\s\S]*?){{\/each}}/g, (match, arrayname ,itemTemplateFragment) => {
+           return this.#referenceLists[category].map(reference=>{return itemTemplateFragment.replace( /{{(\w+)}}/, reference )}).join("");
+        });
+        
         return template;
     }
     async enginOperator()

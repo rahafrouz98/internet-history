@@ -3,15 +3,9 @@ class StatisticsTemplateEngine
     #template_url = "";
     #template = "";
     #dataContainer={};
-    constructor(ecommerceData, cyberCrimeData, internetUseData)
+    constructor(data)
     {
-        this.#dataContainer =
-                            {
-                                "crime":cyberCrimeData,
-                                "sale":ecommerceData,
-                                "internet":internetUseData
-                            }
-
+        this.#dataContainer = data; 
         this.#template_url = "/public/html/templates/statistics_template.html";
     }
 
@@ -22,15 +16,18 @@ class StatisticsTemplateEngine
             let nameFragments = eachName.split("_")
             let dataName = nameFragments[1];
             let arrayName = nameFragments[0];
-            let dataArray = this.#dataContainer[dataName]["labelsObject"][arrayName]
-            return dataArray.map(item=>{return this.#replaceFragment(templateFragment, item)}).join("");
+            let listOfThings= this.#dataContainer[dataName]["labelsObject"][arrayName]
+            return listOfThings.map(item=>{return this.#replaceFragment(templateFragment, item)}).join("");
         })
-
         return this.#template;
     }
     #replaceFragment(templateFragment, item) 
     {
-        return templateFragment.replace(/{{(\w+)}}/g, item);
+        //this condition is to exclude the "Total, all violations" from the doughnut chart check boxes 
+        if (item !== "Total, all violations")
+        {
+            return templateFragment.replace(/{{(\w+)}}/g, item);
+        }
     }
 
     async #loadTemplate() 
