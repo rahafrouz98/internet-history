@@ -39,7 +39,7 @@ class HistoryTimeline{
         this.timeline = new vis.Timeline(container, this.#dataSet[category],this.#group[category] ,this.#options);
         this.timeline.on('select', function (properties) {
             let selectedItem = document.querySelector(`[data-content="${properties["items"][0]}"]`);
-            selectedItem ? selectedItem.scrollIntoView({behavior: "smooth"}): null;
+            selectedItem ? selectedItem.scrollIntoView({behavior: "smooth", block:"center"}): null;
         });
         window.addEventListener("resize", () => {this.timeline.redraw();});
     }

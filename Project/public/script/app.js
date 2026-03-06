@@ -4,6 +4,10 @@
 //https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView
 //https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/Attribute_selectors
 //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all
+//https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement
+//https://www.geeksforgeeks.org/css/how-to-center-an-element-using-positionfixed-in-css/
+//https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dialog
+//https://community.weweb.io/t/scroll-in-open-dialog/16745
 
 import {HistoryTimeline} from "./timeline.js";
 import {HistoryData} from "./historydata.js";
@@ -13,6 +17,7 @@ import {BarChart} from "./charts/bar_chart.js";
 import {LineChart} from "./charts/line_chart.js"
 import {PolarChart} from "./charts/polar_chart.js"
 import {DoughnutChart} from "./charts/doughnut_chart.js"
+import {ContributeDialog} from "./contribute_dialog.js"
 let renderedHTMLContainer ={};
 let historyTimeline = null;
 let saleLineChart = null;
@@ -23,6 +28,7 @@ let statisticsEngine=null;
 let internetPolarChart = null;
 let historyData = null;
 let statisticsData = null;
+let contributeDialog = null;
 
 
 document.addEventListener("DOMContentLoaded", async()=>{
@@ -56,6 +62,16 @@ async function initializ()
     statisticsEngine = new StatisticsTemplateEngine(statisticsData);
     //statisticsEngine.enginOperator() returns a text as the rendered HTML for the statistics page
     renderedHTMLContainer["statistics"] = await statisticsEngine.enginOperator()
+    //loads the html for the contribute dialog
+    try
+    {
+        let response = await fetch("/public/html/templates/contribute_dialog.html");
+        renderedHTMLContainer["contributeDialog"] = await response.text();
+    }
+    catch(err)
+    {
+        console.log("fetching the html for dialog box was unsuccessful")
+    }    
     saleLineChart = new LineChart(statisticsData["eCommerce"],"Spectator sports","industry" ,"year", "salesType","line");//(data,selectedCategory,categories,labels,legends,type)
     crimeDoughnutChart = new DoughnutChart(statisticsData["cyberCrime"], "Canada", "geo","violation",null,"doughnut", "2025");//(data,selectedCategory,categories,labels,legends,type, selectedYear)
     crimeBarChart = new BarChart(statisticsData["cyberCrime"], "Total, all violations", "violation", "geo", "year",'bar');//(data,selectedCategory,categories,labels,legends,type)
@@ -68,36 +84,40 @@ async function initializ()
     //generate a vis-timeline and insert it in the page
     let visContainer = document.getElementById("visualization"); 
     historyTimeline = new HistoryTimeline(historyData.data, "100%", "100%");
-    historyTimeline.loadTimeilne("technology",visContainer)
-    
+    historyTimeline.loadTimeilne("technology",visContainer);
+    //create contribute dialog
+    let shareButton = document.getElementById("share_content");
+    let dialogDiv = document.getElementById("contribute");
+    contributeDialog = new ContributeDialog(renderedHTMLContainer["contributeDialog"] ,dialogDiv, shareButton);
     menuEventListeners();
-    //for start it add event listeners to the first page
-    vistimelineEventlisteners("technology");
 }
 
 function menuEventListeners()
 {
     //add events to the menue options
     let body = document.body;
-    let bodyCategory = document.body.dataset.category
+    let bodyCategory = document.body.dataset.category;
 
     let technologyButton = document.getElementById("technology");
     technologyButton.addEventListener("click",(event)=>{
         //console.log("technology clicked in: "+bodyCategory)
         loadContents("technology", event.currentTarget)
-    })
-statisticsData
+    });
+
     let legislationButton = document.getElementById("legislation");
     legislationButton.addEventListener("click",(event)=>{
         //console.log("legislation clicked in: "+bodyCategory)
         loadContents("legislation", event.currentTarget)
-    })
+    });
 
     let statisticsButton = document.getElementById("statistics");
     statisticsButton.addEventListener("click",(event)=>{
-        //console.log("statistics clicked in: "+bodyCategory)
-        loadContents("statistics", event.currentTarget)
-    })
+        loadContents("statistics", event.currentTarget);
+    });
+    let timelineButton = document.querySelector("#timeline_button");
+    timelineButton.addEventListener("click", ()=>{
+        document.querySelector("#visualization").scrollIntoView({behavior: "smooth", block:"center"});
+    });
 }
 
 //load and update the contents of the target page
@@ -130,22 +150,13 @@ function loadContents(targetCategory)
         case "legislation":
             let visContainer = document.getElementById("visualization");
             historyTimeline.loadTimeilne(targetCategory,visContainer);
-            vistimelineEventlisteners(targetCategory);
             break;
         case "statistics":
                 loadStatisticsCharts();
     }
 
 }
-//add event listeners to the components in the main element(which are loaded by template engines)
-function vistimelineEventlisteners(category)
-{
-    let timelineButton = document.querySelector("#timeline_button");
-    timelineButton.addEventListener("click", ()=>{
-            document.querySelector("#visualization").scrollIntoView({behavior: "smooth"})
-        })
-    
-}
+
 //this function holds the execution for 5000 seconds
 function hold()
 {

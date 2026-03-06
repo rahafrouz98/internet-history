@@ -16,16 +16,6 @@
     body::-webkit-scrollbar {
         width: 15px;
     }
-    header{
-        height: 250px;
-        grid-template-rows: 200px 50px;
-    }
-    #logo{
-        height: 200px;
-    }
-    #logo>img{
-        height: 200px;
-    }
     main *:focus {
         scroll-margin-top: 250px;
     }

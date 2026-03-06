@@ -3,6 +3,10 @@
     html {
         font-size: 17px;
     }
+    button{
+        width:150px;
+        border-radius: 8px;
+    }
     body::-webkit-scrollbar-thumb {
         background-color: var(--theme-color);
         border-radius: 8px;
@@ -24,10 +28,6 @@
     }
     #toolbar{
         height: 40px;
-    }
-    #toolbar button{
-        width:150px;
-        border-radius: 8px;
     }
     main *:focus {
         scroll-margin-top: 200px;
@@ -98,6 +98,12 @@
     #reference{
         padding: 15px 0 15px 15px;
     }
+    footer{
+        align-items:center;
+        font-size: 1.2em;
+    }
+    #timeline_button.active{
+        right:20px;
+    }
 }
-
 

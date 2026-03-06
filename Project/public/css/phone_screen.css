@@ -14,7 +14,18 @@
 html {
     font-size: 16px;
 }
+button{
+    width:100px;
+    background-color: var(--theme-color);
+    color: var(--theme-light-color);
+    border-color:var(--theme-light-color);
+    cursor: pointer;
+    font-size: 1.2em;
+    border-radius: 6px;
+    padding:0;
+}
 body{
+    position:relative;
     display:grid;
     grid-template-columns: 1fr;
     align-items:center;
@@ -41,8 +52,8 @@ header{
     left:0;
     grid-column: 1/-1;
     grid-row: 1/2;
-    width: 100hw;
-    height: 150px;
+    width: 100vw;
+    height: 138px;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 110px 28px;
@@ -75,35 +86,6 @@ header{
     justify-items: center;
     color: var(--theme-light-color);
 }
-#toolbar button{
-    width:100px;
-    background-color: var(--theme-color);
-    color: var(--theme-light-color);
-    border-color:var(--theme-light-color);
-    cursor: pointer;
-    font-size: 1.2em;
-    border-radius: 6px;
-    padding:0;
-}
-#timeline_button{
-    display:none;
-}
-#timeline_button.active{
-    display:block;
-    position:fixed;
-    right:15px;
-    bottom: 5px;
-    border-width: 2px;
-    font-size: 1em;
-    background-color: var(--theme-color);
-    color: var(--theme-light-color);
-    border-color:var(--theme-light-color);
-    margin-bottom: 15px;
-    cursor: pointer;
-    z-index: 310;
-    border-radius: 6px;
-    padding:2px
-}
 #technology{
     grid-column: 1/2;
     grid-row: 1/-1;
@@ -118,10 +100,10 @@ header{
 }
 .loading{
     position: absolute;
+    font-size: 3em;
     top:40%;
     left: 30%;
 }
-
 main{
     position:relative;
     grid-column: 1/-1;
@@ -292,23 +274,100 @@ section.statistics>div.data_container>form div div{
     overflow-wrap: break-word;
 }
 footer{
+    position: relative;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-items: center;
+    align-items:baseline;
+    justify-content: space-between;
     grid-column: 1/-1;
     background:var(--theme-color);
     border-bottom:solid var(--theme-color);
     border-left:solid var(--theme-color);
     border-right:solid var(--theme-color);
     width:100%;
-    height: 20vh;
+    height: 15vh;
     color: var(--theme-light-color);
-    font-size: 1.5em;
+    font-size: 1em;
+    padding:0px 0px 0px 10px;
 }
 footer *{
-    padding: 10px;
+    padding: 0px;
     color: var(--theme-light-color);
 }
-
-
+#timeline_button{
+    display:none;
+}
+#timeline_button.active{
+    display:block;
+    position:fixed;
+    right:20px;
+    bottom: 20px;
+    font-size: 1em;
+    z-index: 310;
+    padding:0;
+}
+#share_content{
+    font-size: 1em;
+    padding:0;
+    width: 200px;
+    margin-bottom: 10px;
+}
+#contribute{
+    display: none;
+    font-size: 1em;
+}
+#contribute.active{
+    display: block;
+    position:relative;
+}
+#contribute.active>dialog{
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%); 
+    background: var(--theme-color);
+    color: var(--theme-light-color);
+    border: solid var(--theme-vis-line-color);
+    padding:7px;
+    max-height: 60vh;
+}
+#contribute.active>dialog::-webkit-scrollbar-track {
+    background: var(--theme-timeline-color);
+}
+#contribute.active>dialog::-webkit-scrollbar-thumb {
+    background-color: var(--theme-color);
+    border-radius: 4px;
+    border: 3px solid var(--theme-light-color)
+}
+#contribute.active>dialog::-webkit-scrollbar {
+    width: 10px;
+}
+#contribute.ative>dialog select{
+    font-size: .9em;
+    color:var(--theme-vis-darktext-color);
+}
+#contribute.active>dialog button{
+    font-size: 1em;
+}
+#contribute span{
+    color:rgb(208, 255, 0);
+}
+#content{
+    width: 90%;
+    height: 15vh;
+}
+#contribute.active>dialog>form>div{
+    border: solid var(--theme-light-color);
+    border-width: 2px 2px 0px 2px;
+    padding:5px;
+}
+#contribute.active>dialog>form>div>ol{
+    padding:0 0 0 20px;
+}
+#contribute.active>dialog>form>div>ol>li{
+    border: dotted var(--theme-light-color);
+    border-width: 0 0 1px 0;
+    padding:10px 0 0 0;
+}
+#contribute.active>dialog>form button{
+    margin: 10px 0 0 0;
+}

@@ -2,10 +2,15 @@
 //begining node.js
 //https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 //https://www.geeksforgeeks.org/web-tech/express-js-express-json-function/
+//because of the error message calhost:3000/contribute 413 (Payload Too Large) i increased the limit to 5mb inspired by
+//https://stackoverflow.com/questions/73248270/node-js-express-json-limit-whitelist#:~:text=Sorted%20by:,use(express.
+//https://gist.github.com/barbietunnie/5fa07012925ee0fe53a0?permalink_comment_id=2841489&utm_source for secode base64 image
 
 let express = require('express');
 //core is used in case the client side is running in different port
 let cors = require('cors');
+//module for reading and writing files
+let fs = require("fs");
 
 //this module extracts and cache the metadata
 let coordinateFinder = require("./server_module/coordinate_finder.js")
@@ -38,7 +43,7 @@ async function startServer()
     }
     let app = express();
     app.use(cors());
-    app.use(express.json())
+    app.use(express.json(({ limit: '5Mb' })))
     //__dirname is a global variable and returns the absolute path of the directory that the server.js file is actually in it.
     //express.static is providing access to the files in the folders without the need to specify their path in a serparate get request. So they
     //can be accessed by app.use('/') directly.
@@ -47,7 +52,7 @@ async function startServer()
     app.get('/', function (req, res) {
         res.sendFile(__dirname + '/public/html/index.html');
     })
-    app.get('/history',async function (req, res) { 
+    app.get('/history', function (req, res) { 
         try
         {
             let historyData = 
@@ -64,7 +69,7 @@ async function startServer()
         }
     })
 
-    app.get('/statistics', async function (req, res) {
+    app.get('/statistics', function (req, res) {
         try
         {
             res.json(statcanData);
@@ -75,9 +80,23 @@ async function startServer()
             res.status(500).json({error: err.message});
         }
     })
+    app.post('/contribute', function(req,res){
+        let data = req.body;
+        let base64=data["images"][0]["image_file"];
+        console.log(base64);
+        cacheImage("/public/assets/images/test/image.png", base64)
+        res.send("Thank you for contributing the content");
+    })
 
     app.listen(3000, function () {
     console.log('web server listening on port 3000')
     })
 }
-startServer()
+startServer();
+//this converets base64 to buffer and saves it in the folder
+function cacheImage(savingPath,base64Data)
+{
+    let matches = base64Data.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
+    let buffer = Buffer.from(matches[2], "base64");
+    fs.writeFileSync(__dirname +savingPath, buffer);
+}
