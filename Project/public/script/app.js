@@ -30,7 +30,6 @@ let historyData = null;
 let statisticsData = null;
 let contributeDialog = null;
 
-
 document.addEventListener("DOMContentLoaded", async()=>{
 
     await initializ();
@@ -130,18 +129,25 @@ function loadContents(targetCategory)
     {
         return;
     }
+    body.dataset.category = targetCategory;
+    let targetMain = document.querySelector("body>main");
+    targetMain.innerHTML=renderedHTMLContainer[targetCategory];
+
+
     let timelineButton = document.getElementById("timeline_button")
     if(targetCategory === "statistics")
     {
         timelineButton.classList.remove("active");
     }
-    else if (!timelineButton.classList.contains("active") )
+    else
     {
+        //make the timeline button vissible
         timelineButton.classList.add("active");
+        //update the elements for the contribute button
+        let shareButton = document.getElementById("share_content");
+        let dialogDiv = document.getElementById("contribute");
+        contributeDialog.initializeElements(renderedHTMLContainer["contributeDialog"], dialogDiv, shareButton);
     }
-    body.dataset.category = targetCategory;
-    let targetMain = document.querySelector("body>main");
-    targetMain.innerHTML=renderedHTMLContainer[targetCategory];
 
     //update the specific contents (loaded by template engine) of each page 
     switch(targetCategory)

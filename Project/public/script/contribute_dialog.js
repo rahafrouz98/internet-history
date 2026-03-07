@@ -22,10 +22,14 @@ class ContributeDialog
     dialog = null;
     constructor(html, container, dialogButton)
     {
+        this.initializeElements(html, container, dialogButton);
+    }
+    initializeElements(html,container,dialogButton)
+    {
         this.html = html;
         this.parent = container;
         this.dialogButton = dialogButton;
-        this.dialogButton.addEventListener("click",()=>{
+        this.dialogButton.addEventListener("click",(e)=>{
             this.parent.innerHTML = this.html;
             this.dialog = this.parent.querySelector("dialog");
             this.parent.classList.add("active");
@@ -37,13 +41,15 @@ class ContributeDialog
     {
         //close the contribute dialog
         let closeButton = this.dialog.querySelector("form>div>button.cancel");
-        closeButton.addEventListener("click", () => {
+        closeButton.addEventListener("click", (e) => {
+            e.preventDefault();
             this.dialog.close();
             this.parent.innerHTML="";
         });
         //add li elements for the references
         let addReferenceButton = this.dialog.querySelector("form>div>button.reference");
-        addReferenceButton.addEventListener("click", ()=>{
+        addReferenceButton.addEventListener("click", (e)=>{
+            e.preventDefault();
             let olReferences = this.dialog.querySelector("form>div>ol.reference");
             let liReference = document.createElement("li");
             liReference.innerHTML = `<input name="reference">`
@@ -51,7 +57,8 @@ class ContributeDialog
         });
         //add li elements for the videos
         let addVideoButton = this.dialog.querySelector("form>div>button.video");
-        addVideoButton.addEventListener("click", ()=>{
+        addVideoButton.addEventListener("click", (e)=>{
+            e.preventDefault();
             let olVideos = this.dialog.querySelector("form>div>ol.video");
             let liVideo = document.createElement("li");
             liVideo.innerHTML = `<input name="video">`
@@ -59,7 +66,8 @@ class ContributeDialog
         });
         //add li elements for the images
         let addImageButton = this.dialog.querySelector("form>div>button.image");
-        addImageButton.addEventListener("click", ()=>{
+        addImageButton.addEventListener("click", (e)=>{
+            e.preventDefault();
             let olImages = this.dialog.querySelector("form>div>ol.image");
             let liImage = document.createElement("li");
             liImage.innerHTML = `<div>Select File:<input type="file" accept="image/png, image/jpeg" name="image_file"></div>
@@ -69,10 +77,10 @@ class ContributeDialog
         });
 
         //add event listener for the submit button
-        let form = this.dialog.querySelector("form");
-        form.addEventListener("submit", async (e)=>{
+        let form = this.dialog.querySelector("form>div>button.submit");
+        form.addEventListener("click", async (e)=>{
             e.preventDefault();
-           await this.postdata(await this.constructJSON())
+           await this.postdata(await this.constructJSON());
             this.dialog.close();
             this.parent.innerHTML="";
         });
@@ -107,6 +115,7 @@ class ContributeDialog
                 if(input.name == "image_file" && input.value!="")
                 {
                     let file =input.files[0];
+                    console.log(input.value)
                     console.log(file)
                     let imageInBase64 = await this.convertImagetoBase64(file);
                     imageObject[input.name] = imageInBase64;
@@ -155,10 +164,10 @@ class ContributeDialog
                     headers: {"Content-Type": "application/json"},
                     body:JSON.stringify(data)
                 }
-            console.log(options)
+            console.log(data);
             let response = await fetch('/contribute', options);
-            //let message = await response.text();
-            //window.alert(message);
+            let message = await response.text();
+            window.alert(message);
         }
         catch(err)
         {

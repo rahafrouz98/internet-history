@@ -23,6 +23,7 @@ class HistoryData{
         {
             let response = await fetch("/history");
             let data = await response.json();
+            console.log(data)
             this.#sortData(data["technology"]);
             this.#sortData(data["legislation"]);
             this.#idInserter(data["technology"]);

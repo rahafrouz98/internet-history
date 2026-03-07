@@ -5,13 +5,16 @@
 //because of the error message calhost:3000/contribute 413 (Payload Too Large) i increased the limit to 5mb inspired by
 //https://stackoverflow.com/questions/73248270/node-js-express-json-limit-whitelist#:~:text=Sorted%20by:,use(express.
 //https://gist.github.com/barbietunnie/5fa07012925ee0fe53a0?permalink_comment_id=2841489&utm_source for secode base64 image
-
+//https://www.npmjs.com/package/unique-filename for unique file names for images
 let express = require('express');
 //core is used in case the client side is running in different port
 let cors = require('cors');
 //module for reading and writing files
 let fs = require("fs");
-
+//provides module for createing unique file names for the uploaded images
+let uniqueFilename = require('unique-filename');
+//this module is used to extract the file's name from the path
+let path = require('path');
 //this module extracts and cache the metadata
 let coordinateFinder = require("./server_module/coordinate_finder.js")
 
@@ -43,7 +46,7 @@ async function startServer()
     }
     let app = express();
     app.use(cors());
-    app.use(express.json(({ limit: '5Mb' })))
+    app.use(express.json(({ limit: '10Mb' })))
     //__dirname is a global variable and returns the absolute path of the directory that the server.js file is actually in it.
     //express.static is providing access to the files in the folders without the need to specify their path in a serparate get request. So they
     //can be accessed by app.use('/') directly.
@@ -57,8 +60,8 @@ async function startServer()
         {
             let historyData = 
             { 
-                "technology":require('./server_module/database/technology'),
-                "legislation":require('./server_module/database/legislation')
+                "technology":require('./server_module/database/technology.json'),
+                "legislation":require('./server_module/database/legislation.json')
             }
             res.json(historyData);
         }
@@ -82,9 +85,25 @@ async function startServer()
     })
     app.post('/contribute', function(req,res){
         let data = req.body;
-        let base64=data["images"][0]["image_file"];
-        console.log(base64);
-        cacheImage("/public/assets/images/test/image.png", base64)
+        for(let image of data["images"])
+        {
+            if(image["image_file"]!=="")
+            {
+                let base64 = image["image_file"];
+                //creates a unique file name
+                let imageUniqePathName = uniqueFilename(__dirname+"/public/assets/images/history");
+                imageUniqePathName += ".png";
+                //saves the image in the folder with the unique file name
+                cacheImage(imageUniqePathName, base64);
+                //record the file address in the data and delete the base64 format of image
+                let fileName = path.basename(imageUniqePathName)
+                image["address"]= "/public/assets/images/history/"+fileName;
+                delete image["image_file"];
+            }
+        }
+        //save revise data in the json files
+        saveContributedData(data)
+
         res.send("Thank you for contributing the content");
     })
 
@@ -98,5 +117,42 @@ function cacheImage(savingPath,base64Data)
 {
     let matches = base64Data.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
     let buffer = Buffer.from(matches[2], "base64");
-    fs.writeFileSync(__dirname +savingPath, buffer);
+    fs.writeFileSync(savingPath, buffer);
+}
+function saveContributedData(data)
+{
+    if(data["end"]==="")
+    {
+        delete data["end"]
+    }
+    for(let i= data["references"].length-1; i>=0; i-- )
+    {
+        if (data["references"][i]=="")
+        {
+            data["references"].splice(i,1);
+        }
+    }
+    for(let i= data["videos"].length-1; i>=0; i-- )
+    {
+        if (data["videos"][i]=="")
+        {
+            data["videos"].splice(i,1);
+        }
+    }
+    if(data["dataType"] === "Technology")
+    {   
+        delete data["dataType"];
+        data["review"] = "in process";
+        originData=require('./server_module/database/technology.json');
+        originData.push(data);
+        fs.writeFileSync(__dirname +"/server_module/database/technology.json",JSON.stringify(originData, null, 2)) 
+    }
+    else
+    {
+        delete data["dataType"];
+        data["review"] = "in process";
+        originData=require('./server_module/database/legislation.json');
+        originData.push(data);
+        fs.writeFileSync(__dirname +"/server_module/database/legislation.json",JSON.stringify(originData, null, 2)) 
+    }
 }

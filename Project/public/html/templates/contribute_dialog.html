@@ -13,32 +13,32 @@
             <input class="title" name="title" required>
         </div>
         <div>Start Year:<span>*</span>
-            <input class="start" type = number min="1950" max="2050" placegolder="YYYY" name="start" required>
+            <input class="start" type = number min="1950" max="2050" placeholder="YYYY" name="start" required>
         </div>
         <div>End Year:
-            <input class="end" type = number min="1950" max="2050" placegolder="YYYY" name="end">
+            <input class="end" type = number min="1950" max="2050" placeholder="YYYY" name="end">
         </div>
         <div>content:<span>*</span>
             <textarea class="content" name="content" required></textarea>
         </div>
         <div>Content References:
             <ol class="reference">
-                <li><input name="reference"></li>
+                <li><input name="reference" placeholder="https://"></li>
             </ol>
             <button class="reference">Add</button>
         </div>
-        <div>Youtube video ID:
+        <div>Video Embed URL:
             <ol class="video">
-                <li><input name="video"></li>
+                <li><input name="video" placeholder="https://www.youtube.com/embed/Video ID"></li>
             </ol>
             <button class="video">Add</button>
         </div>
-        <div>Image:
+        <div>Image(total size should be under 10Mb):
             <ol class="image">
                 <li>
                     <div>Select File:<input type="file" accept="image/png, image/jpeg" name="image_file"></div>
                     <div>Image Title:<input name="image_name"></div>
-                    <div>Image Reference:<input name="image_reference"></div>
+                    <div>Image Reference:<input name="reference" placeholder="https://"></div>
                 </li>
             </ol>
             <button class="image">Add</button>

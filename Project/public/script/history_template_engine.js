@@ -32,7 +32,10 @@ class HistoryTemplateEngine {
         let tempReferenceList=[];
         //extract the references of content  
         item["references"].forEach(reference => {
-            tempReferenceList.push(reference); 
+                if(reference !="")
+                {
+                    tempReferenceList.push(reference); 
+                }
             });
         return tempReferenceList;
     }
@@ -41,7 +44,10 @@ class HistoryTemplateEngine {
         let tempReferenceList=[];
         //extract the references of images 
         item["images"].forEach(image=>{
-            tempReferenceList.push(image["reference"]); 
+                if(image["reference"]!="")
+                {
+                    tempReferenceList.push(image["reference"]); 
+                }
             })
         return tempReferenceList;
     }
@@ -49,14 +55,19 @@ class HistoryTemplateEngine {
     {
         //list of references for the technology
         this.#data["technology"].forEach((item)=>{
-            this.#referenceLists["technology"].push(...this.#contentItemReferenceExtractor(item));
-            this.#referenceLists["technology"].push(...this.#imageItemReferenceExtractor(item));
+            let contentReferences = this.#contentItemReferenceExtractor(item);
+            contentReferences.length > 0 ? this.#referenceLists["technology"].push(...contentReferences): null;
+            let imageReferences = this.#imageItemReferenceExtractor(item);
+            imageReferences.length > 0 ? this.#referenceLists["technology"].push(...imageReferences): null;
         })
         //list of references for the legislation
         this.#data["legislation"].forEach((item)=>{
-            this.#referenceLists["legislation"].push(...this.#contentItemReferenceExtractor(item));
-            this.#referenceLists["legislation"].push(...this.#imageItemReferenceExtractor(item));
+            let contentReferences = this.#contentItemReferenceExtractor(item);
+            contentReferences.length > 0 ? this.#referenceLists["legislation"].push(...contentReferences): null;
+            let imageReferences = this.#imageItemReferenceExtractor(item);
+            imageReferences.length > 0 ? this.#referenceLists["legislation"].push(...imageReferences): null;
         })
+        console.log(this.#referenceLists)
     }
     #referenceIndexEmbedder(item, itemTemplate, category)
     {

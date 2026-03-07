@@ -360,6 +360,10 @@ footer *{
     border-width: 2px 2px 0px 2px;
     padding:5px;
 }
+#contribute.active>dialog>form>div>ol.video>li>input{
+    width: 100%;
+}
+
 #contribute.active>dialog>form>div>ol{
     padding:0 0 0 20px;
 }
