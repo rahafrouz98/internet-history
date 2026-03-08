@@ -144,6 +144,8 @@ function saveContributedData(data)
     else
     {
         delete data["dataType"];
+        //this property is added as an indication that data is added by useers andd needs to be reviewed. There could be a future extension for the admin to log in and
+        //review and validate these items
         data["review"] = "in process";
         originData=require('./server_modules/database/legislation.json');
         originData.push(data);
