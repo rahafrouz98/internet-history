@@ -1,5 +1,6 @@
-//https://www.chartjs.org/docs/latest/configuration/legend.html#legend-configuration
 import {LineChart} from "./line_chart.js"
+//This is a class for creating doughnut charts. It is a class that is extended from LineChart class and its updateDataSet()
+//and setupControllers() are overwritten to be customized for doughnut chart purposes.
 class DoughnutChart extends LineChart
 {
     constructor(data,selectedCategory,categories,labels,legends,type, selectedYear)

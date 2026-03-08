@@ -1,5 +1,7 @@
 
 import {LineChart} from "./line_chart.js"
+//This is a class for creating bar charts. It is a class that is extended from LineChart class and its updateDataSet()
+//is overwritten to be customized for bar chart purposes.
 class BarChart extends LineChart
 {
     //(statisticsData["cyberCrime"], "Total, all violations", "violation", "geo", "year",'bar')

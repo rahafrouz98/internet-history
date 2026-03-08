@@ -9,7 +9,6 @@
     margin:0;
 }
 
-
 html {
     font-size: 16px;
 }
@@ -374,3 +373,11 @@ footer *{
 #contribute.active>dialog>form button{
     margin: 10px 0 0 0;
 }
+
+
+/* 
+applying top:50%; left:50%; and  transform:translate(-50%, -50%); for centering the dialog form is inspired by geeksforgeeks[1].
+
+References:
+[1]geeksforgeeks. "How to center an element using position:fixed in CSS". Internet:https://www.geeksforgeeks.org/css/how-to-center-an-element-using-positionfixed-in-css/, 2024 [Accessed MArch 7th].
+*/

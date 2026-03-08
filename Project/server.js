@@ -1,11 +1,4 @@
-//https://expressjs.com/en/resources/middleware/cors.html
-//begining node.js
-//https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
-//https://www.geeksforgeeks.org/web-tech/express-js-express-json-function/
-//because of the error message calhost:3000/contribute 413 (Payload Too Large) i increased the limit to 5mb inspired by
-//https://stackoverflow.com/questions/73248270/node-js-express-json-limit-whitelist#:~:text=Sorted%20by:,use(express.
-//https://gist.github.com/barbietunnie/5fa07012925ee0fe53a0?permalink_comment_id=2841489&utm_source for secode base64 image
-//https://www.npmjs.com/package/unique-filename for unique file names for images
+
 let express = require('express');
 //core is used in case the client side is running in different ports
 let cors = require('cors');
@@ -85,6 +78,7 @@ async function startServer()
     })
     app.post('/contribute', function(req,res){
         let data = req.body;
+        //convert images from base64 to binary and save them in the local storage and record their addresses in the data
         for(let image of data["images"])
         {
             if(image["image_file"]!=="")
@@ -156,3 +150,30 @@ function saveContributedData(data)
         fs.writeFileSync(__dirname +"/server_modules/database/legislation.json",JSON.stringify(originData, null, 2)) 
     }
 }
+
+
+/* 
+Applying promise.all() to increase the speed of fetching data is inspired by Mozilla[1].
+Converting a base64 file to buffere and saving it in a file is inspired by Divine Hycenth[2].
+To use Statcan API endpoints and extract data from this API the the Statcan API guide is used as the reference[3].
+ProductIDs are retrieved from Statcan data page[4] and saved in the /server_modules/json_templates/pids.json.
+The techinques to implement Express.js for the server is inspired by B.A Syed[5].
+Using express.json() to read JSON data in the requests is inspired by geeksforgeeks[6].
+After posting json files that contain images, error message calhost:3000/contribute 413 (Payload Too Large) was received and I increased the limit to 5mb, inspired by saibot-tsch[7].
+To extract the third part of the base64 format for converting it to the buffer, a regular expression is applied and it is inspired by barbietunnie [8].
+To generate unique names for the images of the contribution data from the users i used unique-filename inspired by npm[9].
+Using path.basename for getting the file name from the path string is inspired by B.A Syed[5].
+
+
+References:
+[1]Mozilla. "Promise.all(). Interent: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all, 2025 [Accessed March 7th].
+[2]Divine Hycenth. “Convert a Base64 data into an Image in Node.js”. Internet: https://dev.to/dnature/convert-a-base64-data-into-an-image-in-node-js-3f88, 2020 [Accessed March 7th].
+[3]Statcan. “Web Data Service (WDS) User Guide”. Internet: https://www.statcan.gc.ca/en/developers/wds/user-guide, 2025 [Accessed March 7th].
+[4]Statcan."Data". Interent: https://www150.statcan.gc.ca/n1/en/type/data, 2026 [Accessed March 7th].
+[5]B.A Syed, "Beginning Nide.js", Apress, 2014.
+[6]geeksforgeeks. "ExpressJS express.json() Function". Interent: https://www.geeksforgeeks.org/web-tech/express-js-express-json-function/, 2025 [Accessed March 7th].
+[7]saibot-tsch. "Node.js: express.json limit whitelist".Interent: https://stackoverflow.com/questions/73248270/node-js-express-json-limit-whitelist, 2022 [accessed March 7th].
+[8]barbietunnie. "decode-base64.js". Internet: https://gist.github.com/barbietunnie/5fa07012925ee0fe53a0, 2023 [accessed March 7th].
+[9]npm, "unique-filename". Internet: https://www.npmjs.com/package/unique-filename, 2025 [Accessed March 7th]
+
+*/

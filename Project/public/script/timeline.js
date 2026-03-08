@@ -1,9 +1,8 @@
+//this class includes a vis-timeline instance in it and provides tools to recreate the timeline and assigne required data, HTML container and 
+//eventlisteneres based on the active page
 class HistoryTimeline{
-    #activeCategory = "technology";
     #dataSet = {};
     #group = {};
-    #technologyGroup = null;
-    #legislationGroup = null;
     #options = null;
     timeline = null;
 
@@ -73,3 +72,14 @@ class HistoryTimeline{
 }
 
 export {HistoryTimeline}
+
+/*
+Using data-* attribute for linking the items in the vis-timeline to the memebers in the database for scrolling purpose is inspired Mozilla[1][2] 
+Using .on("select", callbacck(properties)) as the eventliatener for clicking on items in the vis-timeline is inspired by unpkg[3].
+Applying attribute selector for finding elements based on there data-* attribute is inspired by mozilla[4]
+References:
+[1]Mozilla. "Use data attributes". Internet: https://developer.mozilla.org/en-US/docs/Web/HTML/How_to/Use_data_attributes, 2025 [Accessible March 7th].
+[2]Mozilla. "Element: scrollIntoView() method". Internet: https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView, 2025 [Accessible March 7th].
+[3]unpkg. "Timeline documentation". Internet: https://unpkg.com/vis@0.5.1/docs/timeline.html, [Accessible March 7th].
+[4]Mozilla. "Attribute selectors". Interent: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/Attribute_selectors, 2025 [Accessible March 7th].
+*/

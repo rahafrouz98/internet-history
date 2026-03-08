@@ -1,14 +1,5 @@
-//this source inspired to use data-*attribute to have a js file shared between multip;e pages:
-//https://stackoverflow.com/questions/8410298/one-js-file-for-multiple-pages. 
-//https://developer.mozilla.org/en-US/docs/Web/HTML/How_to/Use_data_attributes
-//https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView
-//https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/Attribute_selectors
-//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all
-//https://developer.mozilla.org/en-US/docs/Web/API/HTMLDialogElement
-//https://www.geeksforgeeks.org/css/how-to-center-an-element-using-positionfixed-in-css/
-//https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dialog
-//https://community.weweb.io/t/scroll-in-open-dialog/16745
-
+//This is the main javaScript code that is referenced from index.HTML and all other modules in the client side will
+//be initiated from this files
 import {HistoryTimeline} from "./timeline.js";
 import {HistoryData} from "./historydata.js";
 import {HistoryTemplateEngine} from "./history_template_engine.js";
@@ -35,7 +26,6 @@ document.addEventListener("DOMContentLoaded", async()=>{
     await initializ();
 })
 
-
 async function initializ()
 {
     //load history and statistics data with Promise.all() to decrease delays
@@ -55,7 +45,7 @@ async function initializ()
     let historyEngine = new HistoryTemplateEngine(historyData.data);
     //historyEngine.enginOperator() returns an object of two elements. First element is the technology data and the second is the legislation data.
     renderedHTMLContainer = await historyEngine.enginOperator();
-    //this engin is used for rendering an html for the main element of statistics page
+    //this engine is used for rendering an html for the main element of statistics page
     statisticsEngine = new StatisticsTemplateEngine(statisticsData);
     //statisticsEngine.enginOperator() returns a text as the rendered HTML for the statistics page
     renderedHTMLContainer["statistics"] = await statisticsEngine.enginOperator()
@@ -86,6 +76,7 @@ async function initializ()
     let shareButton = document.getElementById("share_content");
     let dialogDiv = document.getElementById("contribute");
     contributeDialog = new ContributeDialog(renderedHTMLContainer["contributeDialog"] ,dialogDiv, shareButton);
+    //setup the eventlisteners 
     menuEventListeners();
 }
 
@@ -97,13 +88,11 @@ function menuEventListeners()
 
     let technologyButton = document.getElementById("technology");
     technologyButton.addEventListener("click",(event)=>{
-        //console.log("technology clicked in: "+bodyCategory)
         loadContents("technology", event.currentTarget)
     });
 
     let legislationButton = document.getElementById("legislation");
     legislationButton.addEventListener("click",(event)=>{
-        //console.log("legislation clicked in: "+bodyCategory)
         loadContents("legislation", event.currentTarget)
     });
 
@@ -120,7 +109,7 @@ function menuEventListeners()
 //load and update the contents of the target page
 function loadContents(targetCategory)
 {
-    //update the content of the menue and general elements for all pages
+    //update the content of the menu and general elements for all pages
     let body = document.body;
     let activeCategory = document.body.dataset.category
     if(activeCategory == targetCategory)
@@ -161,23 +150,18 @@ function loadContents(targetCategory)
 
 }
 
-//this function holds the execution for 5000 seconds
-function hold()
-{
-    return new Promise((resolve)=>{setTimeout(resolve, 5000)})
-}
 function loadStatisticsCharts()
 {
-        let saleLineContainer = document.getElementById("sale_chart");
-        saleLineChart.makeChart(saleLineContainer);
-        let crimeBarContainer = document.getElementById("crime_chart_bar");
-        crimeBarChart.makeChart(crimeBarContainer);
-        let lineInternetUseContainer = document.getElementById("internet_line_chart");
-        internetLineChart.makeChart(lineInternetUseContainer);
-        let polarInternetUseContainer = document.getElementById("internet_polar_chart");
-        internetPolarChart.makeChart(polarInternetUseContainer);
-        let crimeDoughnutContainer = document.getElementById("crime_chart_doughnut")
-        crimeDoughnutChart.makeChart(crimeDoughnutContainer);
+    let saleLineContainer = document.getElementById("sale_chart");
+    saleLineChart.makeChart(saleLineContainer);
+    let crimeBarContainer = document.getElementById("crime_chart_bar");
+    crimeBarChart.makeChart(crimeBarContainer);
+    let lineInternetUseContainer = document.getElementById("internet_line_chart");
+    internetLineChart.makeChart(lineInternetUseContainer);
+    let polarInternetUseContainer = document.getElementById("internet_polar_chart");
+    internetPolarChart.makeChart(polarInternetUseContainer);
+    let crimeDoughnutContainer = document.getElementById("crime_chart_doughnut")
+    crimeDoughnutChart.makeChart(crimeDoughnutContainer);
 }
 
 

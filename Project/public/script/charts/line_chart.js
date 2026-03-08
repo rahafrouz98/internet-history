@@ -1,6 +1,5 @@
 //https://www.chartjs.org/docs/latest/charts/line.html
-//https://stackoverflow.com/questions/35099779/javascript-if-a-value-exists-in-an-object
-//this is used for representing the Internet Use and E-Commerce sales
+//this class is used for creating a line chart. It is also used as a parent class for creating classes for other charts. 
 class LineChart
 {
   chart = null;
@@ -54,8 +53,6 @@ class LineChart
           {
             this.labelsList.push(e.target.value)
             this.labelsList.sort()
-            console.log("sorted")
-            console.log(this.labelsList)
           }
           else
           {
@@ -118,3 +115,7 @@ class LineChart
   }
 }
 export{LineChart}
+
+/*The use of chart.js for creating line chart and configuration is inspired by chart.js[1].
+[1]chart.js. "Line Chart". Internet: https://www.chartjs.org/docs/latest/charts/line.html, 2025 [Accessible in March 7]
+*/ 

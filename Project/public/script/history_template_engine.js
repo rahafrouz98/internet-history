@@ -1,6 +1,5 @@
+//This is a class for rendering the HTML elements for the main element of Legislation and Technology pages
 //The base of this template engine is taken from the week 11 of the module CM1040
-//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all has inspired to use Promise all
-//https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/data-*
 
 class HistoryTemplateEngine {
 
@@ -72,7 +71,7 @@ class HistoryTemplateEngine {
     #referenceIndexEmbedder(item, itemTemplate, category)
     {
         //in the reference list for each item, the references are sorted based on the order in which they are cited in the text.
-        //this variable is used so  references indexes get extracted  and inderted in the content according to their citted order.
+        //this variable is used so  reference indexes get extracted  and inderted in the content according to their citted order.
         let tempContentItemReferenceList = this.#contentItemReferenceExtractor(item)
         //insert the references indices for the content
         itemTemplate = itemTemplate.replace(/{{r}}/g, (match) => {
@@ -140,8 +139,8 @@ class HistoryTemplateEngine {
         //to prevent the original template from change
         let template = this.#template;
         let output= "";
-        //this replace the fragment in between {{#items}} and {{\/items}} with the content of each item in the history data. if used this for loop here because
-        //there was a using pure regEx could not separate the outer and inner loop
+        //this replace the fragment in between {{#items}} and {{\/items}} with the content of each item in the history data. I used this for loop here because
+        //using pure regEx could not separate the outer and inner loop
         template = template.replace(/{{#items}}([\s\S]*?){{\/items}}/, (match, contentFragment)=>{
             data.forEach((item)=>{
                 let tempTemplate= contentFragment;

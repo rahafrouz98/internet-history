@@ -1,19 +1,5 @@
-//this class id for creating a form to contribute the content to the data base
-//https://stackoverflow.com/questions/55352073/how-to-create-and-fill-list-item-with-a-button
-//https://www.w3schools.com/html/html_youtube.asp
-//https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/file
-//https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/number
-//https://stackoverflow.com/questions/34676752/can-i-use-an-html-input-type-date-to-collect-only-a-year
-//https://developer.mozilla.org/en-US/docs/Web/API/Window/alert
-//https://forum.freecodecamp.org/t/form-submission-cancelled-because-the-form-is-not-connected/482721
-//https://stackoverflow.com/questions/31303071/how-to-upload-and-post-file-to-node-express-server
-//https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest_API/Using_FormData_Objects
-//https://stackoverflow.com/questions/71882042/how-to-send-and-receive-formdata-through-fetch-to-node-and-express
-//https://www.tencentcloud.com/techpedia/128003  Using Base64 Encoding (Alternative for APIs that only accept JSON)
-//https://developer.mozilla.org/en-US/docs/Web/API/FileReader
-//https://blog.shovonhasan.com/using-promises-with-filereader/#:~:text=Understanding%20FileReader,integrating%20it%20with%20an%20application.
-//https://developer.mozilla.org/en-US/docs/Web/API/FileReader/result
-//to convert a Base64 to buffer and buffer to image : https://dev.to/dnature/convert-a-base64-data-into-an-image-in-node-js-3f88
+//this class creates a form to provide tools for users to contribute new contents to the website
+
 class ContributeDialog
 {
     html = null;
@@ -176,3 +162,17 @@ class ContributeDialog
     }
 }
 export {ContributeDialog};
+
+/*
+Giving constraints to the input element to receive a 4-digit number as a year is inspired by Blackbam[1].
+Converting images to base64 for puting them in the JSON data is inspired by tencentcloud[2].
+Converting an image to base64 by using the fileReader.readAsDataURL() inside a promise to handle the asyncronous 
+behaviour of this function is inspired by 
+
+
+References:
+[1]Blackbam. "Can I use an HTML input type "date" to collect only a year?". Internet: https://stackoverflow.com/questions/34676752/can-i-use-an-html-input-type-date-to-collect-only-a-year, 2016 [Accessed MArch 7th].
+[2]tencentcloud. "How to upload files using JSON data interface?". Interent: https://www.tencentcloud.com/techpedia/128003, 2025 [Accessed MArch 7th].
+[3]Shovon Hasan. "Using Promises with FileReader". Interent: https://blog.shovonhasan.com/using-promises-with-filereader/, 2017 [accessed March 7th].
+
+*/

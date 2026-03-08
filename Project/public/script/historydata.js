@@ -1,8 +1,8 @@
-
+//this is a class that provide tools to fetch history data from the server endpoints
 class HistoryData{
     data={};
 
-    //this funstion adds id to the items of the data. This id will later be used for linking to the data set in vis time-lines
+    //this funstion adds id to the items of the data. This id will later be used for linking to the data set in vis-timelines
     #idInserter(itemList)
     {
         let id = 1;
@@ -23,7 +23,6 @@ class HistoryData{
         {
             let response = await fetch("/history");
             let data = await response.json();
-            console.log(data)
             this.#sortData(data["technology"]);
             this.#sortData(data["legislation"]);
             this.#idInserter(data["technology"]);

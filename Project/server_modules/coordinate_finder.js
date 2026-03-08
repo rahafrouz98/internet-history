@@ -1,5 +1,5 @@
-//This module is used to extract the  coordinate of each cube based on the dimensioins in their metadata
-//PIDs are taken from statcan website at https://www150.statcan.gc.ca/n1/en/type/data?MM=1 as following and are saved at /server_module/pids.json:
+//This module is used to extract the coordinate of each cube based on the needed dimensioins in their metadata
+//PIDs are taken from statcan website at https://www150.statcan.gc.ca/n1/en/type/data?MM=1 and saved at /server_modules/json_templates/pids.json:
 
 require ("./json_templates/pids.json")
 let statcanApi = require("./statcan_api.js");
@@ -19,7 +19,7 @@ class CoordinateFinder
         this.PIDs = require ("./json_templates/pids.json")
         this.statcanApi = require("./statcan_api.js");
     }
-    //This function is used to cache the metadata of the cubes in the metadata object for later use to extract the coordinates
+    //This function is used to cache the metadata of the cubes  for later use to extract the coordinates
     async cacheMetaData() 
     {
         try
@@ -45,7 +45,7 @@ class CoordinateFinder
         }
     }
 
-    //this function is used to extract the coordinated of the cube PID: 22100135(Internet use by province and age group) based on brovided filters
+    //this function is used to extract the coordinate of the cube PID: 22100135(Internet use by province and age group) based on provided dimensions
     async getCoordinateForInternetUse(geo, ageGroup)
     {
         let coordinate = "";
@@ -83,7 +83,7 @@ class CoordinateFinder
         return coordinate;
     }
 
-    //this function is used to extract the coordinated of the cube PID:35100153(Cyber crime in Canada) based on brovided filters
+    //this function is used to extract the coordinate of the cube PID:35100153(Cyber crime in Canada) based on provided dimensions
     async getCoordinateForCyberCrime(geo, violation, statistic = "Year to date data", calendarQuarter = "Q1")
     {
         let coordinate = ""
@@ -139,7 +139,7 @@ class CoordinateFinder
         return coordinate;
     }
 
-    //This function is used to extract the coordinated of the cube PID:21100234(E-commerce sales in Canada) based on brovided filters
+    //This function is used to extract the coordinated of the cube PID:21100234(E-commerce sales in Canada) based on provided dimensions
     async getCoordinateForECommerce(industry, sales)
     {
         let coordinate = "1." //the first dimension is geography and e-commerce cube has only one dimension for the geography which is Canada.

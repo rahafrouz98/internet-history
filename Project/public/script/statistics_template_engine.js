@@ -1,3 +1,4 @@
+//this engine taked statistics data and render and HTML for the main element of statistics page.
 class StatisticsTemplateEngine 
 {
     #template_url = "";

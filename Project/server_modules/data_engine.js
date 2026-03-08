@@ -1,7 +1,3 @@
-//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all has inspired to use Promise.all() to handle multiple async functions 
-//at the same time and increase the speed
-//https://nodejs.org/api/modules.html#modules_commonjs_modules has inspired to export a class 
-
 //this class is used as the parent of three other classes for extracting data from api and constructiong it in the form of json
 class DataEngine
 {
@@ -64,7 +60,7 @@ class DataEngine
     labelsExtractor()
     {
         this.data["labelsObject"] = {};
-        //for child classes this part will be completed
+        //for child classes following parts will be completed
         //subcategoryListExtractor()
         //categoryListExtractor()
         //yearListExtractor()
