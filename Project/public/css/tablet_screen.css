@@ -83,7 +83,7 @@
         display:grid;
         grid-template-columns: 1fr;
         align-items: baseline;
-        justify-items: center;
+        justify-items: left;
     }
     section.statistics>div.data_container>form div{
         padding: 0 0 24px 0;

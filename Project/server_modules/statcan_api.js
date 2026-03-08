@@ -59,17 +59,8 @@ class StatApi
             }
             else
             {
-                return null;
+                throw new Error();
             }
-            // else 
-            // {
-            //     let errorMessage = `Error in statcan_endpoint for ${options["body"]}: It is tried three times and failed. Last response:` + statCanResponse
-            //     console.log(errorMessage)
-            //     //return this code:503 as an indication that the data is unavailable for some reason.
-            //     //by geting this code in the other functions in the stack, the cached files (in the /project/server_module/cached folder) will be as the 
-            //     //latest available data
-            //     return({"status": 503})
-            // }
 
         }
         catch(err)

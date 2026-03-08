@@ -51,8 +51,6 @@ async function initializ()
         console.log("fetching data from /statistics was unsuccessful")
         console.log("Error message: "+ err)
     }
-    console.log(statisticsData)
-    console.log(historyData.data)
     //create a HistoryItemsTEmplateEngine and generate the rendered htmls for technical and legislation pages 
     let historyEngine = new HistoryTemplateEngine(historyData.data);
     //historyEngine.enginOperator() returns an object of two elements. First element is the technology data and the second is the legislation data.

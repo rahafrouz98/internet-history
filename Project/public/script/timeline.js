@@ -1,9 +1,3 @@
-//https://visjs.github.io/vis-timeline/docs/timeline/
-//https://github.com/visjs/vis-timeline
-//https://app.unpkg.com/vis-timeline@8.5.0/files/README.md
-//https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/data-*
-
-
 class HistoryTimeline{
     #activeCategory = "technology";
     #dataSet = {};

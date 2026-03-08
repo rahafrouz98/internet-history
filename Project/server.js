@@ -7,7 +7,7 @@
 //https://gist.github.com/barbietunnie/5fa07012925ee0fe53a0?permalink_comment_id=2841489&utm_source for secode base64 image
 //https://www.npmjs.com/package/unique-filename for unique file names for images
 let express = require('express');
-//core is used in case the client side is running in different port
+//core is used in case the client side is running in different ports
 let cors = require('cors');
 //module for reading and writing files
 let fs = require("fs");
@@ -16,13 +16,13 @@ let uniqueFilename = require('unique-filename');
 //this module is used to extract the file's name from the path
 let path = require('path');
 //this module extracts and cache the metadata
-let coordinateFinder = require("./server_module/coordinate_finder.js")
+let coordinateFinder = require("./server_modules/coordinate_finder.js")
 
 //these are child instances of DataEngine to extract data from statcan api endpoint construct data in the format of json and cache them in json files and memory
 //cached files will be used instead of the data in the memory if statcan api was not available
-let eCommerceDataEngine = require("./server_module/ecommerce_data_engine.js");
-let internetUseEngine = require("./server_module/internet_data_engine.js");
-let cyberCrimeDataEngine = require("./server_module/cybercrime_data_engine.js");
+let eCommerceDataEngine = require("./server_modules/ecommerce_data_engine.js");
+let internetUseEngine = require("./server_modules/internet_data_engine.js");
+let cyberCrimeDataEngine = require("./server_modules/cybercrime_data_engine.js");
 
 //this async function is created to cache the metadata from the statcan API and after it is resolved the server starts.
 async function startServer()
@@ -60,8 +60,8 @@ async function startServer()
         {
             let historyData = 
             { 
-                "technology":require('./server_module/database/technology.json'),
-                "legislation":require('./server_module/database/legislation.json')
+                "technology":require('./server_modules/database/technology.json'),
+                "legislation":require('./server_modules/database/legislation.json')
             }
             res.json(historyData);
         }
@@ -143,16 +143,16 @@ function saveContributedData(data)
     {   
         delete data["dataType"];
         data["review"] = "in process";
-        originData=require('./server_module/database/technology.json');
+        originData=require('./server_modules/database/technology.json');
         originData.push(data);
-        fs.writeFileSync(__dirname +"/server_module/database/technology.json",JSON.stringify(originData, null, 2)) 
+        fs.writeFileSync(__dirname +"/server_modules/database/technology.json",JSON.stringify(originData, null, 2)) 
     }
     else
     {
         delete data["dataType"];
         data["review"] = "in process";
-        originData=require('./server_module/database/legislation.json');
+        originData=require('./server_modules/database/legislation.json');
         originData.push(data);
-        fs.writeFileSync(__dirname +"/server_module/database/legislation.json",JSON.stringify(originData, null, 2)) 
+        fs.writeFileSync(__dirname +"/server_modules/database/legislation.json",JSON.stringify(originData, null, 2)) 
     }
 }

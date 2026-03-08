@@ -1,8 +1,7 @@
 :root{
     --theme-color: rgb(46, 66, 108);
     --theme-light-color:rgb(213, 221, 246);
-    --theme-vis-darktext-color:rgb(27, 26, 26);
-    --theme-vis-line-color:rgb(27, 26, 26);
+    --theme-dark-color:rgb(27, 26, 26);
 }
 *{
     border-color: var(--theme-color);
@@ -326,7 +325,7 @@ footer *{
     transform:translate(-50%, -50%); 
     background: var(--theme-color);
     color: var(--theme-light-color);
-    border: solid var(--theme-vis-line-color);
+    border: solid var(--theme-dark-color);
     padding:7px;
     max-height: 60vh;
 }
@@ -343,7 +342,7 @@ footer *{
 }
 #contribute.ative>dialog select{
     font-size: .9em;
-    color:var(--theme-vis-darktext-color);
+    color:var(--theme-dark-color);
 }
 #contribute.active>dialog button{
     font-size: 1em;
