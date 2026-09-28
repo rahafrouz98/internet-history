@@ -9,7 +9,7 @@ function updateAuthUI(session) {
     guestControls.hidden = Boolean(user);
     userControls.hidden = !user;
 
-    userName.textContent = user ? `Hi ${user.user_metadata?.name}` || user.email : "";
+    userName.textContent = user ? `Hi ${user.user_metadata?.name}`.toUpperCase() || user.email : "";
 
     if (user) {
         const signinModal = document.getElementById("signin-modal");
@@ -30,9 +30,6 @@ signOutButton.addEventListener("click", async () => {
 
     try {
         const { error } = await supabaseClient.auth.signOut();
-
-
-
     } catch (error) {
         authMessage.textContent = "Unable to sign out. Please try again.";
     } finally {

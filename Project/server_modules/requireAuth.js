@@ -1,4 +1,4 @@
-const supabase = require("./supabase");
+const { supabase } = require("./supabase");
 
 async function requireAuth(req, res, next) {
     const authorization = req.get("Authorization");

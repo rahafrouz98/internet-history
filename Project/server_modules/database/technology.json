@@ -1,252 +1,230 @@
 [
-  {
-    "category": "Videotex",
-    "title": "Telidon",
-    "start": "1979",
-    "end": "1985",
-    "references": [
-      "https://en.wikipedia.org/wiki/Telidon"
-    ],
-    "videos": [
-      "https://www.youtube.com/embed/vjMUe7hkwRs?start=11"
-    ],
-    "images": [],
-    "content": "Telidon was the first Canadian public network service before the Internet. It was available in the late 1970s. It provided videotex and teletex services to Canadians so they could read news, do banking, book flights, and shop. Telidon was developed by the Canadian Communications Research Center (CRC). It was the second generation of the videotex system, providing 2D colour graphics, multilingual support, and an improvement on interactivity.<br>Telidon had a few issues. First, it was difficult to maintain the users' interest because there was limited content in the system, and users were able to exhaust their favorite content in a short period of time. Second, the system was dominated by one-way content, such as advertising from large vendors or broadcasting news, and interactivity was limited to menu selections or sending information on forms (bank forms). This would make it difficult for users to produce content on the system. Another disadvantage of Telidon was its price. The Telidon terminals ranged around $2000.<br>By the emerging of early home computers by the mid-1980s and using information services like CompuServe and The Source, users could receive great online services that Telidon failed to offer, and at far lower prices, so Telidon started to disappear by the mid-1980s{{r}}."
-  },
-  {
-    "category": "NREN",
-    "title": "NetNorth",
-    "start": "1983",
-    "references": [
-      "https://www.canarie.ca/a-birthday-for-canadas-internet",
-      "https://www.canarie.ca/wp-content/uploads/2021/02/Publication-A-Nation-Goes-Online.pdf",
-      "https://www.sciencedirect.com/science/chapter/edited-volume/abs/pii/B9781555580476500084#:~:text=Publisher%20Summary,to%20provide%20file%2Dtransfer%20services"
-    ],
-    "videos": [],
-    "images": [],
-    "content": "NetNorth{{r}} was the first Canadian network, developed in the 1980s. It connected universities across Canada.The idea started from Waterton and Guelph Universities in 1983{{r}}. They had joint graduate programs, and there was a big computer purchased at Waterloo. They wanted to move their data back and forth between the two universities and be able to log into that computer from Guelph. This became a motivation in the ACSD conference, held in Toronto at Ryerson Polytechnic Institute in November 1983, to build a network similar to BITNET in the U.S., to connect universities’ networks to each other.<br> NetNorth used IBM's Network Job Entry (NJE) protocol{{r}}. It was a protocol used in the U.S. BITNET organization to connect academic communities by point-to-point links."
-  },
-  {
-    "category": "NREN",
-    "title": "NSFNET in Canada",
-    "start": "1990",
-    "references": [
-      "https://en.wikipedia.org/wiki/National_Science_Foundation_Network",
-      "https://www.zakon.org/robert/internet/timeline"
-    ],
-    "videos": [],
-    "images": [],
-    "content": "In 1985, the National Science Foundation (NSF) funded a project to create an academic research network, called NSFNET{{r}},  to facilitate access by researchers to the supercomputing centers. NSFNET applied TCP/IP protocols which were initially deployed successfully by ARPANET. NSFNET became the Internet backbone for U.S. government agencies and universities, and the ARPANET project was formally decommissioned in 1990.<br> In Canada, universities and other networks started to connect to the NSFNET instead of ARPANET through the CA*net starting in  1990{{r}}."
-  },
-  {
-    "category": "NREN",
-    "title": "CA*net",
-    "start": "1990",
-    "end": "1997",
-    "references": [
-      "https://www.canarie.ca/a-birthday-for-canadas-internet",
-      "https://www.canarie.ca/wp-content/uploads/2021/02/Publication-A-Nation-Goes-Online.pdf"
-    ],
-    "videos": [],
-    "images": [],
-    "content": "In 1989, the group that managed NetNorth decided to apply the TCP/IP standard{{r}}, which was introduced in the U.S. by ARPA (Advanced Research Projects Agency) in 1980. The motivation behind it was to have high-speed networks with the goal of establishing links between their networks and provincial networks, some of which had already implemented TCP/IP,  as well as connections to other external networks, including  ARPANET  and later NSFNET in the U.S. This idea was supported by Canada’s National Research Council financially and a committee was established to define a project for this. The project was granted to the University of Toronto and with the contribution from IBM Canada and INSINC. This network was called CA*net. This network started working at a relatively low speed of about 56 kbps. CA*net was launched in 1990 as the first coast-to-coast, IP-based production network{{r}}."
-  },
-  {
-    "category": "NREN",
-    "title": "CANARIE",
-    "start": "1993",
-    "references": [
-      "https://www.canarie.ca/a-birthday-for-canadas-internet/"
-    ],
-    "videos": [
-      "https://www.youtube.com/embed/vaqHLxs2h0E?t=30s"
-    ],
-    "images": [],
-    "content": "It was a non-profit organization, formed in 1993, to contribute to the development of digital technologies. One of the specific purposes of CANARIE was to upgrade the speed of CA*net to 1.5 megabits per second. CA*net started an interest in network communication, and the volume of requests for network services increased so that CA*net could not meet the demand. In return, commercial networks (ISPs) started emerging in the market. In 1997, CA*net acknowledged that commercial networks had become capable of meeting its members'needs for commodity Internet services and decided to wind down, and other parts of its mission were taken over by CANARIE Connection Services. CANARIE is now a dedicated connection for researchers who need a direct connection to high-performance computing centers or research facilities across Canada or around the world by being directly installed into their infrastructure{{r}}."
-  },
-  {
-    "category": "Dial-up ISP",
-    "title": "UUNET",
-    "start": "1991",
-    "references": [
-      "https://www.canarie.ca/wp-content/uploads/2021/02/Publication-A-Nation-Goes-Online.pdf"
-    ],
-    "videos": [],
-    "images": [],
-    "content": "UUNET Canada was the first commercial ISP in Canada was established in 1991. The motivation behind it was that for individuals and organizations denied access by provincial networks and CA*net, the only option was the comparatively slow and functionally limited networks such as Usenet that operated using temporary dialup connections between nodes over regular phone lines. UUNET Canada was 20% owned by the U.S. network provider UUNET Technologies, founded in 1987, in the U.S., as the first commercial provider. UUNET Technologies,  constructed its own network called AlterNet, and UUNET Canada gained access to this network. Later, UUNET Canada constructed its own network known as AlterNet Canada.{{r}}"
-  },
-  {
-    "category": "Dial-up ISP",
-    "title": "iSTAR Internet",
-    "start": "1994",
-    "end": "1997",
-    "references": [
-      "https://country-studies.com/canada/history-of-internet-in-canada.html"
-    ],
-    "videos": [],
-    "images": [],
-    "content": "iSTAR Internet, founded in 1994, carved its niche not only as another national ISP but also as the first to offer high-speed Internet service in Canada. The considerable rise in commercial ISPs during this era played a vital part in promoting Internet usage among the broader Canadian public. Later, in 1997, PSINet acquired iSTAR Internet.{{r}}"
-  },
-  {
-    "category": "Dial-up ISP",
-    "title": "NetCom",
-    "start": "1995",
-    "references": [
-      "https://en.wikipedia.org/wiki/Netcom_(United_States)"
-    ],
-    "videos": [],
-    "images": [],
-    "content": "In December 1995, Netcom Canada, a subsidiary of Netcom On-line, was launched in Toronto, Ontario, with Ron Close as its CEO. Netcom Canada boasted a Canada-wide network, and allowed U.S. Netcom customers to access their Internet accounts via their network using either NetCruiser or any PPP dialer{{r}}."
-  },
-  {
-    "category": "DSL ISP",
-    "title": "Sympatico",
-    "start": "1997",
-    "references": [
-      "https://crtc.gc.ca/eng/archive/1999/o99-591.htm",
-      "https://en.wikipedia.org/wiki/Bell_Internet"
-    ],
-    "videos": [],
-    "images": [],
-    "content": "Sympatico started DSL services in 1997, through the Nortel 1-Meg Modem, which connected to only one computer{{r}}. Sympatico changed its name to Bell Canada on August 8, 2008{{r}}."
-  },
-  {
-    "category": "DSL ISP",
-    "title": "Telus",
-    "start": "1997",
-    "references": [
-      "https://assets.ctfassets.net/fltupc9ltp8m/5nrtxy6gcUJ6lwdjN5nS09/5f942c1f4e89a0a31066e3cc12a51dfd/_SIA-4j__Issue_Date__Aug._22__1997_"
-    ],
-    "videos": [],
-    "images": [],
-    "content": "In 1997, Telus announced a plan to provide DSL services over the existing telephone loops with metallic continuity, to provide simultaneous voice and data capability between the subscriber and the serving central office{{r}}."
-  },
-  {
-    "category": "Cable ISP",
-    "title": "Rogers",
-    "start": "1995",
-    "references": [
-      "https://en.wikipedia.org/wiki/Rogers_Xfinity"
-    ],
-    "videos": [],
-    "images": [
-      {
-        "address": "/public/assets/images/history/cable_internet.png",
-        "image_name": "Hybrid Fiber Schematic test Diagram",
-        "reference": "https://www.researchgate.net/publication/221911198_Telemedicine_Broadband"
-      }
-    ],
-    "content": "In 1995, Rogers began offering high-speed Internet service with a technology named Cable Internet, which was branded as Hybrid Fiber. This technology carried Internet data through fiber cables to the regional optical nodes, and from there via the same coaxial cables used for television. Different frequency bands were used to separate Internet data from television signals{{r}}."
-  },
-  {
-    "category": "Cable ISP",
-    "title": "Bell Aliant",
-    "start": "2009",
-    "references": [
-      "https://en.wikipedia.org/wiki/Fibe_%28Bell_Aliant%29",
-      "https://www.fierce-network.com/telecom/bell-aliant-enhances-ftth-product-symmetrical-speeds-new-tv-features"
-    ],
-    "videos": [],
-    "images": [
-      {
-        "address": "/public/assets/images/history/ftth.png",
-        "image_name": "FTTH Schematic Diagram",
-        "reference": "https://www.novascotia.ca/sites/default/files/documents/1-1066/middle-mile-strategy-en.pdf"
-      }
-    ],
-    "content": "In 2009, Bell Aliant launched its FiberOP (briefly Fiber) services as the first ISP in Canada to cover an entire city (New Brunswick) with fiber-to-the-home (FTTH) technology, with speeds of 25 Mbps download and 5 Mbps upload. Bell Aliant extended its FiberOP services to other cities in Atlantic Canada between 2010 and 2011, and then in Ontario between 2012 and 2014. The company was fully acquired by Bell in 2014, and FiberOP services are still available with speeds up to 1.5 Gbit/s download and 940 Mbit/s upload.{{r}}{{r}}"
-  },
-  {
-    "category": "Cable ISP",
-    "title": "Bell Canada",
-    "start": "2010",
-    "references": [
-      "https://www.newswire.ca/news-releases/bell-high-speed-fibre-rollouts-enable-new-internet-and-tv-services---bellsnew-fibetm-internet-service-now-offers-fastest-upload-speeds-in-the-market-539266571.html"
-    ],
-    "videos": [],
-    "images": [],
-    "content": "In 2010, Bell Canada announced a three-year plan to deploy high-speed Fibre-to-the-Home (FTTH) across the Québec City region, including Ancienne-Lorette, Beauport, Charlesbourg, Lévis-Wolfe, Loretteville, St-Cyrille, Ste-Foy, St-Nicolas, St-Réal, and St-Romuald, with download speeds of at least 100 Mbps and upload speeds of at least 20 Mbps{{r}}."
-  },
-  {
-    "category": "Cable ISP",
-    "title": "Telus",
-    "start": "2016",
-    "references": [
-      "https://www.globenewswire.com/news-release/2023/09/25/2748825/0/en/TELUS-brings-ultra-fast-3-0-gigabit-Internet-to-customers-in-Western-Canada.html"
-    ],
-    "videos": [],
-    "images": [],
-    "content": "In 2016, Telus announced a project called PureFiber to provide FTTH in B.C. and Alberta. The Internet service offers download speeds of up to 150 Mbps and the same for upload. Later, in 2023, Telus introduced a groundbreaking new tier of home Internet called “PureFibre X 3.0” to customers in Alberta and British Columbia, giving them access to the fastest speeds in Western Canada, with symmetrical upload and download speeds of 3.0 Gbps{{r}}."
-  },
-  {
-    "category": "Wireless ISP",
-    "title": "Inukshuk Wireless",
-    "start": "2005",
-    "end": "2012",
-    "references": [
-      "https://en.wikipedia.org/wiki/Inukshuk_Wireless"
-    ],
-    "videos": [],
-    "images": [
-      {
-        "address": "/public/assets/images/history/wireless.png",
-        "image_name": "Wireless Internet Schamatic Diagram",
-        "reference": "https://www.novascotia.ca/sites/default/files/documents/1-1066/middle-mile-strategy-en.pdf"
-      }
-    ],
-    "content": "This wireless ISP was established in 2005 to build a Canada-wide network for wireless Internet connectivity in 45 major cities and over 120 rural communities. It was built using pre-WiMAX technology provided by Expedience Solution, now called Nexpedience Networks.<br>The spectrum and technology were merged into a joint venture with Bell (which was named Sympatico before 2008) in 2005. Bell Internet Portable was referred to as Sympatico High Speed Unplugged or Bell WiMAX Unplugged. Likewise, Bell Internet Rural was referred to as Bell WiMAX In-home. Bell announced the termination of its Portable Internet service on February 14, 2012{{r}}."
-  },
-  {
-    "category": "Wireless ISP",
-    "title": "Wireless Nomad ",
-    "start": "2009",
-    "references": [
-      "https://en.wikipedia.org/wiki/Wireless_Nomad"
-    ],
-    "videos": [],
-    "images": [],
-    "content": "Wireless Nomad was a cooperative based in Toronto. It started providing free Wi-Fi wireless Internet access and music to over a hundred nodes, making it the largest free Wi-Fi network in the country at the time. In 2009, Wireless Nomad shut down all Wi-Fi nodes and turned over its DSL Internet connection to TekSavvy.{{r}}"
-  },
-  {
-    "category": "Wireless ISP",
-    "title": "Project Chapleau",
-    "start": "2005",
-    "end": "2007",
-    "references": [
-      "https://en.wikipedia.org/wiki/Chapleau%2C_Ontario"
-    ],
-    "videos": [],
-    "images": [],
-    "content": "Project Chapleau was a Wi-Fi Internet connection that covered the entire town of Chapleau, Ontario, Canada. It was the first of its kind in Canada and began on November 9, 2005.<br>An analysis of the impact of high-speed Internet on the residents and town of Chapleau was published in 2010 by University of Toronto sociologists Jessica Collins and Barry Wellman. The research claimed that broadband use had aided health care, shopping, and information gathering and connected the town to the outside world.<br>In April 2007, Project Chapleau concluded without a reason being given. The Project Chapleau office (The Chapleau Innovation Centre) was converted into a public Internet access point, with job search and community networking facilities{{r}}."
-  },
-  {
-    "category": "Wireless ISP",
-    "title": "Xplore Inc",
-    "start": "2025",
-    "references": [
-      "https://www.xplore.ca/about/news/xplore-launches-new-ultra-fast-wireless-home-internet-for-rural-canada"
-    ],
-    "videos": [],
-    "images": [
-      {
-        "address": "/public/assets/images/history/5g.png",
-        "image_name": "5G Schematic Diagram",
-        "reference": "https://www.shutterstock.com/image-vector/5g-connectivity-high-speed-internet-connection-2297401641"
-      }
-    ],
-    "content": "In 2025, Xplore Inc., a Canadian-based Internet provider, announced the launch of 5G Ultra, a new generation of wireless home Internet. 5G Ultra leverages the latest 5G+ technology to offer speeds up to 500 Mbps to Canadians in small towns and rural communities. This technology works similarly to 5G cellular networks. The signals are transmitted via 5G towers and received by a special modem/router in the home{{r}}."
-  },
-  {
-    "category": "Wireless ISP",
-    "title": "Rogers Wireless",
-    "start": "2002",
-    "references": [
-      "https://en.wikipedia.org/wiki/Rogers_Wireless",
-      "https://en.wikipedia.org/wiki/GPRS",
-      "https://en.wikipedia.org/wiki/EDGE_(telecommunication)"
-    ],
-    "videos": [],
-    "images": [],
-    "content": "Since 2002, Rogers started its DSM network with GPRS (known as 2.5G) and later with EDGE (known as 2.75G), which were mobile phone technologies for packet-switched data transmission[3]. GPRS was limited to 114 kbit/s, and EDGE was limited to 384 kbit/s, which is only about four times the speed of dial-up.<br>In 2006, Rogers became the first Canadian carrier to operate a 3G UMTS/HSPA network, which was upgraded to HSPA+ in 2009. Enhancements included download speeds of up to a theoretical 21 Mbit/s. Further enhancements increased the download speeds to a theoretical 42 Mbit/s. Rogers' UMTS network coverage extended across all Canadian provinces and operated on 850 MHz.<br>In July 2011, Rogers was the first Canadian telecom operator to launch a commercial long-term evolution (LTE) network. Cat-6 LTE-Advanced has been available since January 2015, through carrier aggregation of band 4 and band 7, with a maximum download speed of 225 Mbit/s.<br>Rogers launched its 5G network in January 2020 and uses Block I from the 2500 MHz Frequency Block Plan. The company stated that rollout would expand to use its further-reaching 600 MHz spectrum later in the year for improved 5G coverage{{r}}{{r}}{{r}}."
-  }
+    {
+        "category": "Videotex",
+        "title": "Telidon",
+        "start": "1979",
+        "end": "1985",
+        "references": ["https://en.wikipedia.org/wiki/Telidon"],
+        "videos": ["https://www.youtube.com/embed/vjMUe7hkwRs?start=11"],
+        "images": [],
+        "content": "Telidon was the first Canadian public network service before the Internet. It was available in the late 1970s. It provided videotex and teletex services to Canadians so they could read news, do banking, book flights, and shop. Telidon was developed by the Canadian Communications Research Center (CRC). It was the second generation of the videotex system, providing 2D colour graphics, multilingual support, and an improvement on interactivity.<br>Telidon had a few issues. First, it was difficult to maintain the users' interest because there was limited content in the system, and users were able to exhaust their favorite content in a short period of time. Second, the system was dominated by one-way content, such as advertising from large vendors or broadcasting news, and interactivity was limited to menu selections or sending information on forms (bank forms). This would make it difficult for users to produce content on the system. Another disadvantage of Telidon was its price. The Telidon terminals ranged around $2000.<br>By the emerging of early home computers by the mid-1980s and using information services like CompuServe and The Source, users could receive great online services that Telidon failed to offer, and at far lower prices, so Telidon started to disappear by the mid-1980s{{r}}."
+    },
+    {
+        "category": "NREN",
+        "title": "NetNorth",
+        "start": "1983",
+        "references": [
+            "https://www.canarie.ca/a-birthday-for-canadas-internet",
+            "https://www.canarie.ca/wp-content/uploads/2021/02/Publication-A-Nation-Goes-Online.pdf",
+            "https://www.sciencedirect.com/science/chapter/edited-volume/abs/pii/B9781555580476500084#:~:text=Publisher%20Summary,to%20provide%20file%2Dtransfer%20services"
+        ],
+        "videos": [],
+        "images": [],
+        "content": "NetNorth{{r}} was the first Canadian network, developed in the 1980s. It connected universities across Canada.The idea started from Waterton and Guelph Universities in 1983{{r}}. They had joint graduate programs, and there was a big computer purchased at Waterloo. They wanted to move their data back and forth between the two universities and be able to log into that computer from Guelph. This became a motivation in the ACSD conference, held in Toronto at Ryerson Polytechnic Institute in November 1983, to build a network similar to BITNET in the U.S., to connect universities’ networks to each other.<br> NetNorth used IBM's Network Job Entry (NJE) protocol{{r}}. It was a protocol used in the U.S. BITNET organization to connect academic communities by point-to-point links."
+    },
+    {
+        "category": "NREN",
+        "title": "NSFNET in Canada",
+        "start": "1990",
+        "references": [
+            "https://en.wikipedia.org/wiki/National_Science_Foundation_Network",
+            "https://www.zakon.org/robert/internet/timeline"
+        ],
+        "videos": [],
+        "images": [],
+        "content": "In 1985, the National Science Foundation (NSF) funded a project to create an academic research network, called NSFNET{{r}},  to facilitate access by researchers to the supercomputing centers. NSFNET applied TCP/IP protocols which were initially deployed successfully by ARPANET. NSFNET became the Internet backbone for U.S. government agencies and universities, and the ARPANET project was formally decommissioned in 1990.<br> In Canada, universities and other networks started to connect to the NSFNET instead of ARPANET through the CA*net starting in  1990{{r}}."
+    },
+    {
+        "category": "NREN",
+        "title": "CA*net",
+        "start": "1990",
+        "end": "1997",
+        "references": [
+            "https://www.canarie.ca/a-birthday-for-canadas-internet",
+            "https://www.canarie.ca/wp-content/uploads/2021/02/Publication-A-Nation-Goes-Online.pdf"
+        ],
+        "videos": [],
+        "images": [],
+        "content": "In 1989, the group that managed NetNorth decided to apply the TCP/IP standard{{r}}, which was introduced in the U.S. by ARPA (Advanced Research Projects Agency) in 1980. The motivation behind it was to have high-speed networks with the goal of establishing links between their networks and provincial networks, some of which had already implemented TCP/IP,  as well as connections to other external networks, including  ARPANET  and later NSFNET in the U.S. This idea was supported by Canada’s National Research Council financially and a committee was established to define a project for this. The project was granted to the University of Toronto and with the contribution from IBM Canada and INSINC. This network was called CA*net. This network started working at a relatively low speed of about 56 kbps. CA*net was launched in 1990 as the first coast-to-coast, IP-based production network{{r}}."
+    },
+    {
+        "category": "NREN",
+        "title": "CANARIE",
+        "start": "1993",
+        "references": ["https://www.canarie.ca/a-birthday-for-canadas-internet/"],
+        "videos": ["https://www.youtube.com/embed/vaqHLxs2h0E?t=30s"],
+        "images": [],
+        "content": "It was a non-profit organization, formed in 1993, to contribute to the development of digital technologies. One of the specific purposes of CANARIE was to upgrade the speed of CA*net to 1.5 megabits per second. CA*net started an interest in network communication, and the volume of requests for network services increased so that CA*net could not meet the demand. In return, commercial networks (ISPs) started emerging in the market. In 1997, CA*net acknowledged that commercial networks had become capable of meeting its members'needs for commodity Internet services and decided to wind down, and other parts of its mission were taken over by CANARIE Connection Services. CANARIE is now a dedicated connection for researchers who need a direct connection to high-performance computing centers or research facilities across Canada or around the world by being directly installed into their infrastructure{{r}}."
+    },
+    {
+        "category": "Dial-up ISP",
+        "title": "UUNET",
+        "start": "1991",
+        "references": ["https://www.canarie.ca/wp-content/uploads/2021/02/Publication-A-Nation-Goes-Online.pdf"],
+        "videos": [],
+        "images": [],
+        "content": "UUNET Canada was the first commercial ISP in Canada was established in 1991. The motivation behind it was that for individuals and organizations denied access by provincial networks and CA*net, the only option was the comparatively slow and functionally limited networks such as Usenet that operated using temporary dialup connections between nodes over regular phone lines. UUNET Canada was 20% owned by the U.S. network provider UUNET Technologies, founded in 1987, in the U.S., as the first commercial provider. UUNET Technologies,  constructed its own network called AlterNet, and UUNET Canada gained access to this network. Later, UUNET Canada constructed its own network known as AlterNet Canada.{{r}}"
+    },
+    {
+        "category": "Dial-up ISP",
+        "title": "iSTAR Internet",
+        "start": "1994",
+        "end": "1997",
+        "references": ["https://country-studies.com/canada/history-of-internet-in-canada.html"],
+        "videos": [],
+        "images": [],
+        "content": "iSTAR Internet, founded in 1994, carved its niche not only as another national ISP but also as the first to offer high-speed Internet service in Canada. The considerable rise in commercial ISPs during this era played a vital part in promoting Internet usage among the broader Canadian public. Later, in 1997, PSINet acquired iSTAR Internet.{{r}}"
+    },
+    {
+        "category": "Dial-up ISP",
+        "title": "NetCom",
+        "start": "1995",
+        "references": ["https://en.wikipedia.org/wiki/Netcom_(United_States)"],
+        "videos": [],
+        "images": [],
+        "content": "In December 1995, Netcom Canada, a subsidiary of Netcom On-line, was launched in Toronto, Ontario, with Ron Close as its CEO. Netcom Canada boasted a Canada-wide network, and allowed U.S. Netcom customers to access their Internet accounts via their network using either NetCruiser or any PPP dialer{{r}}."
+    },
+    {
+        "category": "DSL ISP",
+        "title": "Sympatico",
+        "start": "1997",
+        "references": [
+            "https://crtc.gc.ca/eng/archive/1999/o99-591.htm",
+            "https://en.wikipedia.org/wiki/Bell_Internet"
+        ],
+        "videos": [],
+        "images": [],
+        "content": "Sympatico started DSL services in 1997, through the Nortel 1-Meg Modem, which connected to only one computer{{r}}. Sympatico changed its name to Bell Canada on August 8, 2008{{r}}."
+    },
+    {
+        "category": "DSL ISP",
+        "title": "Telus",
+        "start": "1997",
+        "references": [
+            "https://assets.ctfassets.net/fltupc9ltp8m/5nrtxy6gcUJ6lwdjN5nS09/5f942c1f4e89a0a31066e3cc12a51dfd/_SIA-4j__Issue_Date__Aug._22__1997_"
+        ],
+        "videos": [],
+        "images": [],
+        "content": "In 1997, Telus announced a plan to provide DSL services over the existing telephone loops with metallic continuity, to provide simultaneous voice and data capability between the subscriber and the serving central office{{r}}."
+    },
+    {
+        "category": "Cable ISP",
+        "title": "Rogers",
+        "start": "1995",
+        "references": ["https://en.wikipedia.org/wiki/Rogers_Xfinity"],
+        "videos": [],
+        "images": [
+            {
+                "address": "/public/assets/images/history/cable_internet.png",
+                "image_name": "Hybrid Fiber Schematic test Diagram",
+                "reference": "https://www.researchgate.net/publication/221911198_Telemedicine_Broadband"
+            }
+        ],
+        "content": "In 1995, Rogers began offering high-speed Internet service with a technology named Cable Internet, which was branded as Hybrid Fiber. This technology carried Internet data through fiber cables to the regional optical nodes, and from there via the same coaxial cables used for television. Different frequency bands were used to separate Internet data from television signals{{r}}."
+    },
+    {
+        "category": "Cable ISP",
+        "title": "Bell Aliant",
+        "start": "2009",
+        "references": [
+            "https://en.wikipedia.org/wiki/Fibe_%28Bell_Aliant%29",
+            "https://www.fierce-network.com/telecom/bell-aliant-enhances-ftth-product-symmetrical-speeds-new-tv-features"
+        ],
+        "videos": [],
+        "images": [
+            {
+                "address": "/public/assets/images/history/ftth.png",
+                "image_name": "FTTH Schematic Diagram",
+                "reference": "https://www.novascotia.ca/sites/default/files/documents/1-1066/middle-mile-strategy-en.pdf"
+            }
+        ],
+        "content": "In 2009, Bell Aliant launched its FiberOP (briefly Fiber) services as the first ISP in Canada to cover an entire city (New Brunswick) with fiber-to-the-home (FTTH) technology, with speeds of 25 Mbps download and 5 Mbps upload. Bell Aliant extended its FiberOP services to other cities in Atlantic Canada between 2010 and 2011, and then in Ontario between 2012 and 2014. The company was fully acquired by Bell in 2014, and FiberOP services are still available with speeds up to 1.5 Gbit/s download and 940 Mbit/s upload.{{r}}{{r}}"
+    },
+    {
+        "category": "Cable ISP",
+        "title": "Bell Canada",
+        "start": "2010",
+        "references": [
+            "https://www.newswire.ca/news-releases/bell-high-speed-fibre-rollouts-enable-new-internet-and-tv-services---bellsnew-fibetm-internet-service-now-offers-fastest-upload-speeds-in-the-market-539266571.html"
+        ],
+        "videos": [],
+        "images": [],
+        "content": "In 2010, Bell Canada announced a three-year plan to deploy high-speed Fibre-to-the-Home (FTTH) across the Québec City region, including Ancienne-Lorette, Beauport, Charlesbourg, Lévis-Wolfe, Loretteville, St-Cyrille, Ste-Foy, St-Nicolas, St-Réal, and St-Romuald, with download speeds of at least 100 Mbps and upload speeds of at least 20 Mbps{{r}}."
+    },
+    {
+        "category": "Cable ISP",
+        "title": "Telus",
+        "start": "2016",
+        "references": [
+            "https://www.globenewswire.com/news-release/2023/09/25/2748825/0/en/TELUS-brings-ultra-fast-3-0-gigabit-Internet-to-customers-in-Western-Canada.html"
+        ],
+        "videos": [],
+        "images": [],
+        "content": "In 2016, Telus announced a project called PureFiber to provide FTTH in B.C. and Alberta. The Internet service offers download speeds of up to 150 Mbps and the same for upload. Later, in 2023, Telus introduced a groundbreaking new tier of home Internet called “PureFibre X 3.0” to customers in Alberta and British Columbia, giving them access to the fastest speeds in Western Canada, with symmetrical upload and download speeds of 3.0 Gbps{{r}}."
+    },
+    {
+        "category": "Wireless ISP",
+        "title": "Inukshuk Wireless",
+        "start": "2005",
+        "end": "2012",
+        "references": ["https://en.wikipedia.org/wiki/Inukshuk_Wireless"],
+        "videos": [],
+        "images": [
+            {
+                "address": "/public/assets/images/history/wireless.png",
+                "image_name": "Wireless Internet Schamatic Diagram",
+                "reference": "https://www.novascotia.ca/sites/default/files/documents/1-1066/middle-mile-strategy-en.pdf"
+            }
+        ],
+        "content": "This wireless ISP was established in 2005 to build a Canada-wide network for wireless Internet connectivity in 45 major cities and over 120 rural communities. It was built using pre-WiMAX technology provided by Expedience Solution, now called Nexpedience Networks.<br>The spectrum and technology were merged into a joint venture with Bell (which was named Sympatico before 2008) in 2005. Bell Internet Portable was referred to as Sympatico High Speed Unplugged or Bell WiMAX Unplugged. Likewise, Bell Internet Rural was referred to as Bell WiMAX In-home. Bell announced the termination of its Portable Internet service on February 14, 2012{{r}}."
+    },
+    {
+        "category": "Wireless ISP",
+        "title": "Wireless Nomad ",
+        "start": "2009",
+        "references": ["https://en.wikipedia.org/wiki/Wireless_Nomad"],
+        "videos": [],
+        "images": [],
+        "content": "Wireless Nomad was a cooperative based in Toronto. It started providing free Wi-Fi wireless Internet access and music to over a hundred nodes, making it the largest free Wi-Fi network in the country at the time. In 2009, Wireless Nomad shut down all Wi-Fi nodes and turned over its DSL Internet connection to TekSavvy.{{r}}"
+    },
+    {
+        "category": "Wireless ISP",
+        "title": "Project Chapleau",
+        "start": "2005",
+        "end": "2007",
+        "references": ["https://en.wikipedia.org/wiki/Chapleau%2C_Ontario"],
+        "videos": [],
+        "images": [],
+        "content": "Project Chapleau was a Wi-Fi Internet connection that covered the entire town of Chapleau, Ontario, Canada. It was the first of its kind in Canada and began on November 9, 2005.<br>An analysis of the impact of high-speed Internet on the residents and town of Chapleau was published in 2010 by University of Toronto sociologists Jessica Collins and Barry Wellman. The research claimed that broadband use had aided health care, shopping, and information gathering and connected the town to the outside world.<br>In April 2007, Project Chapleau concluded without a reason being given. The Project Chapleau office (The Chapleau Innovation Centre) was converted into a public Internet access point, with job search and community networking facilities{{r}}."
+    },
+    {
+        "category": "Wireless ISP",
+        "title": "Xplore Inc",
+        "start": "2025",
+        "references": [
+            "https://www.xplore.ca/about/news/xplore-launches-new-ultra-fast-wireless-home-internet-for-rural-canada"
+        ],
+        "videos": [],
+        "images": [
+            {
+                "address": "/public/assets/images/history/5g.png",
+                "image_name": "5G Schematic Diagram",
+                "reference": "https://www.shutterstock.com/image-vector/5g-connectivity-high-speed-internet-connection-2297401641"
+            }
+        ],
+        "content": "In 2025, Xplore Inc., a Canadian-based Internet provider, announced the launch of 5G Ultra, a new generation of wireless home Internet. 5G Ultra leverages the latest 5G+ technology to offer speeds up to 500 Mbps to Canadians in small towns and rural communities. This technology works similarly to 5G cellular networks. The signals are transmitted via 5G towers and received by a special modem/router in the home{{r}}."
+    },
+    {
+        "category": "Wireless ISP",
+        "title": "Rogers Wireless",
+        "start": "2002",
+        "references": [
+            "https://en.wikipedia.org/wiki/Rogers_Wireless",
+            "https://en.wikipedia.org/wiki/GPRS",
+            "https://en.wikipedia.org/wiki/EDGE_(telecommunication)"
+        ],
+        "videos": [],
+        "images": [],
+        "content": "Since 2002, Rogers started its DSM network with GPRS (known as 2.5G) and later with EDGE (known as 2.75G), which were mobile phone technologies for packet-switched data transmission[3]. GPRS was limited to 114 kbit/s, and EDGE was limited to 384 kbit/s, which is only about four times the speed of dial-up.<br>In 2006, Rogers became the first Canadian carrier to operate a 3G UMTS/HSPA network, which was upgraded to HSPA+ in 2009. Enhancements included download speeds of up to a theoretical 21 Mbit/s. Further enhancements increased the download speeds to a theoretical 42 Mbit/s. Rogers' UMTS network coverage extended across all Canadian provinces and operated on 850 MHz.<br>In July 2011, Rogers was the first Canadian telecom operator to launch a commercial long-term evolution (LTE) network. Cat-6 LTE-Advanced has been available since January 2015, through carrier aggregation of band 4 and band 7, with a maximum download speed of 225 Mbit/s.<br>Rogers launched its 5G network in January 2020 and uses Block I from the 2500 MHz Frequency Block Plan. The company stated that rollout would expand to use its further-reaching 600 MHz spectrum later in the year for improved 5G coverage{{r}}{{r}}{{r}}."
+    }
 ]
