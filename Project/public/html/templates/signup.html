@@ -1,0 +1,22 @@
+<dialog id="signup-modal">
+    <button type="button" class="dialog-close" aria-label="Close dialog">&times;</button>
+    <form method="dialog" id="signup-form">
+        <input type="text" name="name" placeholder="Enter your name" required />
+
+        <input type="email" name="email" placeholder="Enter your email" required />
+
+        <input type="password" name="password" placeholder="Enter your password" autocomplete="new-password" required />
+
+        <input
+            type="password"
+            name="confirmed-password"
+            placeholder="Confirm your password"
+            autocomplete="new-password"
+            required
+        />
+
+        <button type="submit">Sign Up</button>
+
+        <p id="signup-message" role="status"></p>
+    </form>
+</dialog>

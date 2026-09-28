@@ -1,0 +1,18 @@
+<dialog id="signin-modal">
+    <button type="button" class="dialog-close" aria-label="Close dialog">&times;</button>
+    <form method="dialog" id="signin">
+        <input type="email" name="email" placeholder="Enter your email" autocomplete="email" required />
+        <input
+            type="password"
+            name="password"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+            required
+        />
+
+        <button type="submit">Sign In</button>
+        <button type="button" id="forgot-password">Forgot Password</button>
+
+        <p id="signin-message" role="status"></p>
+    </form>
+</dialog>

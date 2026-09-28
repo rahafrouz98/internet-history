@@ -1,55 +1,57 @@
 <dialog>
+    <button type="button" class="dialog-close" aria-label="Close dialog">&times;</button>
     <form method="dialog" id="form">
-        <div> Domain:<span>*</span>
+        <div>
+            Domain:<span>*</span>
             <select class="domain" name="Domain" required>
                 <option>Technology</option>
                 <option>Legislation</option>
             </select>
         </div>
-        <div>Category:<span>*</span>
-            <input class="category" name="category" required>
+        <div>
+            Category:<span>*</span>
+            <input class="category" name="category" required />
         </div>
-        <div>Title:<span>*</span>
-            <input class="title" name="title" required>
+        <div>
+            Title:<span>*</span>
+            <input class="title" name="title" required />
         </div>
-        <div>Start Year:<span>*</span>
-            <input class="start" type = number min="1950" max="2050" placeholder="YYYY" name="start" required>
+        <div>
+            Start Year:<span>*</span>
+            <input class="start" type="number" min="1950" max="2050" placeholder="YYYY" name="start" required />
         </div>
-        <div>End Year:
-            <input class="end" type = number min="1950" max="2050" placeholder="YYYY" name="end">
+        <div>
+            End Year:
+            <input class="end" type="number" min="1950" max="2050" placeholder="YYYY" name="end" />
         </div>
-        <div>content:<span>*</span>
+        <div>
+            content:<span>*</span>
             <textarea class="content" name="content" required></textarea>
         </div>
-        <div>Content References:<span>Note:use {{r}} in the content for each reference</span>
+        <div>
+            Content References:<span>Note:use {{r}} in the content for each reference</span>
             <ol class="reference">
-                <li><input name="reference" placeholder="https://"></li>
+                <li><input name="reference" placeholder="https://" /></li>
             </ol>
             <button class="reference">Add</button>
         </div>
-        <div>Video Embed URL:
+        <div>
+            Video Embed URL:
             <ol class="video">
-                <li><input name="video" placeholder="https://www.youtube.com/embed/Video ID"></li>
+                <li><input name="video" placeholder="https://www.youtube.com/embed/Video ID" /></li>
             </ol>
             <button class="video">Add</button>
         </div>
-        <div>Image(total size should be under 10Mb):
+        <div>
+            Image(total size should be under 10Mb):
             <ol class="image">
                 <li>
-                    <div>Select File:<input type="file" accept="image/png, image/jpeg" name="image_file"></div>
-                    <div>Image Title:<input name="image_name"></div>
-                    <div>Image Reference:<input name="reference" placeholder="https://"></div>
+                    <div>Select File:<input type="file" accept="image/png, image/jpeg" name="image_file" /></div>
+                    <div>Image Title:<input name="image_name" /></div>
+                    <div>Image Reference:<input name="reference" placeholder="https://" /></div>
                 </li>
             </ol>
             <button class="image">Add</button>
-        </div>
-        <div>
-            <div>Your Name:<span>*</span>
-                <input class="username" name="username" required>
-            </div>
-            <div>Your Email:<span>*</span>
-                <input class="email" name="email" required>
-            </div>
         </div>
         <div>
             <button class="submit" type="submit">Submit</button>
